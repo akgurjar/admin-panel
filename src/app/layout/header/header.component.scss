@@ -1,0 +1,18 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #FFF;
+    height: 64px;
+    border-radius: 2px;
+    font-size: 18px;
+    padding: 0 20px;
+    color: #444;
+}
+.header-link {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}

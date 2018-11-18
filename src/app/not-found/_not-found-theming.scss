@@ -1,0 +1,20 @@
+
+
+@mixin not-found-theming($theme) {
+    $primary: map-get($map: $theme, $key: primary);
+    .not-found-wrapper {
+        &:nth-child(1) {
+            color: mat-color($primary, 500);
+        }
+        &:nth-child(2) {
+            background-color: mat-color($primary, 500);
+            color: #FFF;
+        }
+    }
+    .not-found-button {
+        color: mat-color($primary, 500);
+    }
+    .not-found-svg > path {
+        fill: mat-color($primary, 500);
+    }
+}

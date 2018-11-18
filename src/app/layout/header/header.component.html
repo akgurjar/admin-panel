@@ -1,0 +1,6 @@
+<a href="javascript:void(0)" routerLink="/dashboard" class="header-link">Dashboard</a>
+
+<ng-template ngFor let-step [ngForOf]="routeSteps">
+  <mat-icon style="color: #AAA">chevron_right</mat-icon>
+  <a href="javascript:void(0)" [routerLink]="step.url" class="header-link">{{step.label}}</a>
+</ng-template>

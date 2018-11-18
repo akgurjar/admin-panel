@@ -1,0 +1,18 @@
+
+
+@mixin layout-theming($theme) {
+    $primary: map-get($theme, primary);
+    $primary-color: mat-color($primary, 500);
+    .sidenav__item {
+        color: $primary-color;
+        &:hover:not(.sidenav__item--active) {
+            background-color: rgba($primary-color, .07);
+        }
+        mat-icon {
+            background-color: rgba($primary-color, .1);
+        }
+    }
+    .sidenav__item--active {
+        background-color: $primary-color !important;
+    }
+}

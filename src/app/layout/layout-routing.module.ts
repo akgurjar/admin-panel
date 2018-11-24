@@ -13,6 +13,10 @@ const routes: Routes = [
         redirectTo: '/dashboard'
       },
       {
+        path: 'admin',
+        loadChildren: './admin/admin.module#AdminModule'
+      },
+      {
         path: 'dashboard',
         loadChildren: './dashboard/dashboard.module#DashboardModule'
       },

@@ -1,0 +1,47 @@
+@import '../../styles/admin-core';
+
+:host {
+    color: #666;
+}
+
+.background-image {
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    filter: blur(1px);
+}
+.auth-card__container {
+    position: relative;
+    min-height: 100%;
+    min-width: 100%;
+}
+.auth-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 300px;
+    // padding: 10px;
+    background-color: #FFF;
+}
+.auth-card__item {
+    width: 270px;
+    padding: 0 15px;
+}
+.auth-card__item-separator {
+    margin: 10px 0;
+    width: 1px;
+    background-color: rgba(#000, .15);
+}
+
+@include mobile-device {
+    .auth-card {
+        flex-direction: column;
+    }
+    .auth-card__item-separator {
+        margin: 0 10px;
+        height: 1px;
+        width: auto;
+    }
+}

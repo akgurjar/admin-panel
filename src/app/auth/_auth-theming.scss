@@ -1,0 +1,9 @@
+
+@mixin auth-theming($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    .auth-card__container {
+        background-color: rgba(mat-color($accent, 500), .7);
+    }
+}
+

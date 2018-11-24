@@ -1,0 +1,19 @@
+<h2>Log In</h2>
+<p>Login with correct credentials</p>
+<mat-form-field>
+  <input matInput placeholder="Email" type="email"/>
+  <mat-icon matPrefix class="form-field-icon">email</mat-icon>
+</mat-form-field>
+<mat-form-field>
+  <input matInput placeholder="Password" [type]="isPasswordVisible ? 'text' : 'password'"/>
+  <mat-icon matPrefix class="form-field-icon">vpn_key</mat-icon>
+  <mat-icon matSuffix class="form-field-icon form-field-icon--action" (click)="onPasswordVisibilityHandler($event)">{{isPasswordVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+</mat-form-field>
+<mat-slide-toggle>Remember</mat-slide-toggle>
+<div class="auth-form__actions">
+  <button mat-button mat-stroked-button routerLink="../forgot">Forgot Password</button>
+  <button mat-button mat-raised-button color="primary">
+    <mat-icon>exit_to_app</mat-icon>&nbsp;
+    <span>LOGIN</span>
+  </button>
+</div>

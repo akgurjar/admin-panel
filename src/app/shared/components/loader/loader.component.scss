@@ -1,0 +1,13 @@
+:host {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(#000, .1);
+    visibility: hidden;
+    z-index: 99999999;
+}
+:host-context(.loader--visible) {
+    visibility: visible;
+}

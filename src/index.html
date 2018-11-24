@@ -7,10 +7,95 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      background-color: #F5F5F5;
+      overflow: hidden;
+    }
+    .content--center {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    .loader__container {
+      height: 100%;
+      width: 100%;
+    }
+    .loader__wrapper {
+      display: inline-block;
+      position: relative;
+      width: 64px;
+      height: 64px;
+    }
+    .loader__wrapper div {
+      position: absolute;
+      top: 27px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #03a9f4;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .loader__wrapper div:nth-child(1) {
+      left: 6px;
+      animation: loader__wrapper1 0.6s infinite;
+    }
+    .loader__wrapper div:nth-child(2) {
+      left: 6px;
+      animation: loader__wrapper2 0.6s infinite;
+    }
+    .loader__wrapper div:nth-child(3) {
+      left: 26px;
+      animation: loader__wrapper2 0.6s infinite;
+    }
+    .loader__wrapper div:nth-child(4) {
+      left: 45px;
+      animation: loader__wrapper3 0.6s infinite;
+    }
+    @keyframes loader__wrapper1 {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes loader__wrapper3 {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0);
+      }
+    }
+    @keyframes loader__wrapper2 {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(19px, 0);
+      }
+    }
+  </style>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="loader__container content--center">
+      <div class="loader__wrapper">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </app-root>
 </body>
 </html>

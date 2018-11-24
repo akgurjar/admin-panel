@@ -49,7 +49,11 @@ mat-sidenav {
 }
 mat-sidenav-content {
     background-color: #F5F5F5;
-    box-shadow: 0 0 3px rgba(#000, .05) inset;
+    box-shadow: 0 0 3px rgba(#000, .07) inset, 0 2px 2px rgba(#000, .07) inset;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.sidenav__content {
     padding: 10px;
 }
 .sidenav__wrapper {
@@ -88,9 +92,11 @@ mat-sidenav-content {
 }
 .sidenav__version {
     cursor: default;
-    color: rgba(#000, .7);
+    color: rgba(#000, .5);
     border: 1px solid rgba(#000, .12);
+    font-family: serif;
     mat-icon {
+        color: rgba(#000, .3);
         background-color: rgba(#000, .1);
     }
 }
@@ -121,7 +127,7 @@ mat-sidenav-content {
     mat-sidenav-container {
         height: calc(100% - 64px);
     }
-    mat-sidenav-content {
+    .sidenav__content {
         padding: 20px;
     }
 }

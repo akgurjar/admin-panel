@@ -1,25 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MediaQueryService, DeviceType } from '../shared/services/media-query/media-query.service';
-// import { Subscription } from 'rxjs';
+import { MediaQueryService } from '../shared/services/media-query/media-query.service';
 
-
-const SIDE_MENUS: SideNav[] = [
-  {
-    label: 'Dashboard',
-    icon: 'dashboard',
-    link: '/dashboard'
-  },
-  {
-    label: 'Users',
-    icon: 'group',
-    link: '/users'
-  },
-  {
-    label: 'Products',
-    icon: 'pages',
-    link: '/products'
-  }
-];
+import { SIDE_MENUS } from '@models';
 
 @Component({
   selector: 'app-layout',

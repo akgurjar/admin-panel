@@ -7,8 +7,11 @@ import {
   MatMenuModule,
   MatSidenavModule,
   MatBadgeModule,
-  MatListModule
+  MatCardModule,
+  MatPaginatorModule,
+  MatTableModule
 } from '@angular/material';
+import { TableComponent } from './components/table/table.component';
 
 
 const Modules = [
@@ -18,17 +21,20 @@ const Modules = [
   MatMenuModule,
   MatSidenavModule,
   MatBadgeModule,
-  MatListModule
+  MatCardModule,
+  MatPaginatorModule,
+  MatTableModule
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [TableComponent],
   imports: [
     CommonModule,
     ...Modules
   ],
   exports: [
-    ...Modules
+    ...Modules,
+    TableComponent
   ]
 })
 export class SharedModule { }

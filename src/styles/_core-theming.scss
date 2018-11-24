@@ -1,7 +1,7 @@
 
 @import '../app/auth/auth-theming';
 @import '../app/layout/layout-theming';
-@import '../app/layout/header/header-theming';
+@import '../app/layout/components/header/header-theming';
 @import '../app/not-found/not-found-theming';
 
 @mixin core-theming($theme) {

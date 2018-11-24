@@ -1,3 +1,38 @@
-<p>
-  user-listing works!
-</p>
+<mat-card>
+  <mat-card-title class="card-header">
+    <span>Users Listing</span>
+    <div style="flex: 1"></div>
+    <button mat-button mat-icon-button color="primary" matTooltip="Search">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-button mat-icon-button color="primary" matTooltip="Filter">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+    <button mat-button mat-icon-button color="primary" matTooltip="Refresh">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button mat-button mat-icon-button color="primary" routerLink="create" matTooltip="Create User">
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <button mat-button mat-icon-button color="primary" matTooltip="Actions" [matMenuTriggerFor]="actionMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #actionMenu="matMenu">
+      <button mat-button mat-icon-button color="warn" matTooltip="Block">
+        <mat-icon>block</mat-icon>
+      </button>
+      <button mat-button mat-icon-button color="warn" matTooltip="Archive">
+        <mat-icon>archive</mat-icon>
+      </button>
+      <button mat-button mat-icon-button color="warn" matTooltip="Delete">
+        <mat-icon>remove_circle_outline</mat-icon>
+      </button>
+    </mat-menu>      
+  </mat-card-title>
+  <mat-card-content>
+    <app-table [source]="source"></app-table>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-paginator></mat-paginator>
+  </mat-card-footer>
+</mat-card>

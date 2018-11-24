@@ -2,6 +2,7 @@
 
 @mixin layout-theming($theme) {
     $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
     $primary-color: mat-color($primary, 500);
     .sidenav__item {
         color: $primary-color;

@@ -1,7 +1,10 @@
 
 @mixin header-theming($theme) {
     $primary: map-get($map: $theme, $key: primary);
-    .header-link:hover {
-        color: mat-color($primary, 500) !important;
+    .header-link {
+        color: mat-color($primary, 500);
+    }
+    app-header {
+        border-color: mat-color($primary, 500);
     }
 }

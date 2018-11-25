@@ -1,6 +1,10 @@
-<div class="loader__wrapper">
+<ng-content></ng-content>
+<!-- <div class="loader__wrapper">
   <div></div>
   <div></div>
   <div></div>
   <div></div>
+</div> -->
+<div class="loader__container content--center" [ngClass]="{'loader__container--active': isLoading}">
+  <div class="loader"></div>
 </div>

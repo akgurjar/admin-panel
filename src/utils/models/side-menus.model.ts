@@ -12,7 +12,7 @@ export const SIDE_MENUS: SideNav[] = [
     },
     {
         label: 'Products',
-        icon: 'pages',
+        icon: 'explore',
         link: '/products'
     }
 ];

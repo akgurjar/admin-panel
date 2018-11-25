@@ -1,0 +1,13 @@
+
+@import '../app/shared/components/loader/loader.theme';
+@import '../app/auth/auth.theme';
+@import '../app/layout/layout.theme';
+@import '../app/not-found/not-found.theme';
+
+@mixin core-theming($theme) {
+    @include loader-theming($theme);
+    @include auth-theming($theme);
+    @include layout-theming($theme);
+    @include not-found-theming($theme);
+}
+

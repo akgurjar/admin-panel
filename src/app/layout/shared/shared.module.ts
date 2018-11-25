@@ -9,9 +9,18 @@ import {
   MatBadgeModule,
   MatCardModule,
   MatPaginatorModule,
-  MatTableModule
+  MatTableModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatDialogModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { TableComponent } from './components/table/table.component';
+import { ListingComponent } from './components/listing/listing.component';
+import { ForDirective } from './directives/for.directive';
 
 
 const Modules = [
@@ -23,18 +32,31 @@ const Modules = [
   MatBadgeModule,
   MatCardModule,
   MatPaginatorModule,
-  MatTableModule
+  MatTableModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatDialogModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
-  declarations: [TableComponent],
+  declarations: [
+    TableComponent,
+    ListingComponent,
+    ForDirective
+  ],
   imports: [
     CommonModule,
     ...Modules
   ],
   exports: [
     ...Modules,
-    TableComponent
+    TableComponent,
+    ListingComponent,
+    ForDirective
   ]
 })
 export class SharedModule { }

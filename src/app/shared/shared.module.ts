@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   MatIconModule,
   MatButtonModule,
@@ -21,6 +22,7 @@ const Modules = [
     LoaderComponent
   ],
   imports: [
+    CommonModule,
     ...Modules
   ],
   exports: [

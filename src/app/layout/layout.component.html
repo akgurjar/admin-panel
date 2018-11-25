@@ -43,7 +43,7 @@
       <div style="flex: 1"></div>
       <span class="sidenav__version">
         <mat-icon>info</mat-icon>&nbsp;&nbsp;
-        <span>Version</span>&nbsp;
+        <span>v</span>
         <span style="font-weight: bold">0.0.1</span>
       </span>
     </div>
@@ -51,9 +51,9 @@
   <mat-sidenav-content>
     <main class="sidenav__content">
       <app-header class="mat-elevation-z1 page-header"></app-header>
-      <router-outlet #route="outlet">
-        <span *ngIf="!route.isActivated">loading...</span>
-      </router-outlet>
+      <app-loader [isActivated]="route.isActivated">
+        <router-outlet #route="outlet"></router-outlet>
+      </app-loader>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

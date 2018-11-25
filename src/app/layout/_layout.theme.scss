@@ -1,6 +1,10 @@
-
+@import './components/header/header.theme';
+@import './users/users.theme';
 
 @mixin layout-theming($theme) {
+    @include header-theming($theme);
+    @include users-theming($theme);
+    
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $primary-color: mat-color($primary, 500);

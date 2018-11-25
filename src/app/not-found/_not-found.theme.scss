@@ -2,7 +2,7 @@
 
 @mixin not-found-theming($theme) {
     $primary: map-get($map: $theme, $key: primary);
-    .not-found-wrapper {
+    .not-found__wrapper {
         &:nth-child(1) {
             color: mat-color($primary, 500);
         }
@@ -14,7 +14,7 @@
     .not-found-button {
         color: mat-color($primary, 500);
     }
-    .not-found-svg > path {
+    .not-found__svg > path {
         fill: mat-color($primary, 500);
     }
 }

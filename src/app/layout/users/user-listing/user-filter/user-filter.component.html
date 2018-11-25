@@ -1,0 +1,29 @@
+<span class="filter__title">Filter Users</span>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="fromPicker" placeholder="created from">
+  <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+  <mat-datepicker #fromPicker></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <input matInput [matDatepicker]="toPicker" placeholder="created to">
+  <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+  <mat-datepicker #toPicker></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <mat-select placeholder="Status">
+    <mat-option>InActive</mat-option>
+    <mat-option>Active</mat-option>
+    <mat-option>Blocked</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="filter__actions">
+  <button mat-stroked-button color="default" (click)="onCancelHandler()">
+    Cancel
+  </button>
+  <button mat-raised-button color="primary">
+    <mat-icon>filter_list</mat-icon>&nbsp;
+    <span>Apply</span>
+  </button>
+</div>

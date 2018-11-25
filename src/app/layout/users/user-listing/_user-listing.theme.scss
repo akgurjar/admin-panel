@@ -1,0 +1,9 @@
+
+
+
+@mixin user-listing-theming($theme) {
+    $primary: map-get($map: $theme, $key: primary);
+    .card-title {
+        color: mat-color($primary, 500);
+    }
+}

@@ -21,6 +21,7 @@ import {
 import { TableComponent } from './components/table/table.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { ForDirective } from './directives/for.directive';
+import { InputFilesComponent } from './components/input-files/input-files.component';
 
 
 const Modules = [
@@ -46,7 +47,8 @@ const Modules = [
   declarations: [
     TableComponent,
     ListingComponent,
-    ForDirective
+    ForDirective,
+    InputFilesComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ const Modules = [
     ...Modules,
     TableComponent,
     ListingComponent,
-    ForDirective
+    ForDirective,
+    InputFilesComponent
   ]
 })
 export class SharedModule { }

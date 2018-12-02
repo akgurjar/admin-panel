@@ -6,6 +6,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 
 import { LayoutComponent } from './layout.component';
 import { HeaderComponent } from './components/header/header.component';
+import { HeaderService } from './services/header/header.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,9 @@ import { HeaderComponent } from './components/header/header.component';
     CommonModule,
     LayoutRoutingModule,
     SharedModule
+  ],
+  providers: [
+    HeaderService
   ]
 })
 export class LayoutModule { }

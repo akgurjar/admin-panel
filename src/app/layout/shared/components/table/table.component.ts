@@ -4,7 +4,6 @@ import {
   Input,
   Output,
   ContentChild,
-  TemplateRef,
   ViewChildren,
   QueryList,
   EventEmitter
@@ -16,16 +15,17 @@ import { ForDirective } from '../../directives/for.directive';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  exportAs: 'DataTable'
 })
 export class TableComponent implements OnInit {
-  @Input() source: TableSource<any>;
-  @Output() checkChange: EventEmitter<any> = new EventEmitter();
+  @Input() tableSource: TableSource<any>;
+  @Output() change: EventEmitter<any> = new EventEmitter();
   get dataSource(): MatTableDataSource<any> {
-    return new MatTableDataSource(this.source.data);
+    return new MatTableDataSource(this.tableSource.data);
   }
   get displayedColumns(): string[] {
-    const columns = this.source.columns.map(column => column.name);
+    const columns = this.tableSource.columns.map(column => column.name);
     const selectionColumns = true ? ['selection', ...columns] : columns;
     const actionColumns = true ? [...selectionColumns, 'actions'] : selectionColumns;
     return actionColumns;
@@ -33,10 +33,18 @@ export class TableComponent implements OnInit {
   @ContentChild(ForDirective) actions: ForDirective;
   @ViewChildren(MatCheckbox) checkBoxList: QueryList<MatCheckbox>;
   get checkBoxes(): MatCheckbox[] {
-    return this.checkBoxList.toArray();
+    return this.checkBoxList ? this.checkBoxList.toArray() : [];
   }
   get rowCheckBoxes(): MatCheckbox[] {
     return this.checkBoxes.filter((_, index: number) => index > 0);
+  }
+  get selection() {
+    return this.rowCheckBoxes.reduce((total, checkBox, index) => {
+      if (checkBox.checked) {
+        return [...total, {...this.tableSource.data[index]}];
+      }
+      return total;
+    }, []);
   }
   constructor() {
   }
@@ -49,6 +57,7 @@ export class TableComponent implements OnInit {
         checkBox.toggle();
       }
     });
+    this._emitChangeEvent();
   }
   onSelectionChangeHandler(event: MatCheckboxChange) {
     const someUnChecked = this.rowCheckBoxes.some(checkBox => !checkBox.checked);
@@ -56,8 +65,14 @@ export class TableComponent implements OnInit {
     if ((someUnChecked && this.checkBoxList.first.checked) || (everyChecked && !this.checkBoxList.first.checked)) {
       this.checkBoxList.first.toggle();
     }
+    this._emitChangeEvent();
   }
   private _emitChangeEvent() {
-    this.checkChange.emit(this.rowCheckBoxes.map(checkBox => checkBox.checked));
+    this.change.emit(this.rowCheckBoxes.reduce((total, checkBox, index) => {
+      if (checkBox.checked) {
+        return [...total, {...this.dataSource.data[index]}];
+      }
+      return total;
+    }, []));
   }
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+import { HeaderService } from 'src/app/layout/services/header/header.service';
+
 @Component({
   selector: 'app-user',
   template: `
@@ -10,7 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  constructor(route: ActivatedRoute, hs: HeaderService) {
+    console.log('user component');
+    route.params.subscribe(({user}) => {
+      // console.log()
+      console.log(user);
+      hs.replace(user, 'Ashish Gurjar');
+    });
+  }
 
   ngOnInit() {
   }

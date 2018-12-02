@@ -13,11 +13,20 @@ export class LoaderComponent implements OnInit {
   set isActivated(value) {
     this._isActivated = !!value;
   }
+  get isActivated(): boolean {
+    return this._isActivated;
+  }
   get isLoading(): boolean {
     if (this._isActivated) {
       return this._loading;
     }
     return true;
+  }
+  get styleClass() {
+    return {
+      'loader__container--active': this.isLoading,
+      'loader__container--background': this.isActivated
+    };
   }
   constructor(public route: ActivatedRoute, router: Router) {
     // console.log(route.routeConfig);

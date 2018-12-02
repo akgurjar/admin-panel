@@ -57,6 +57,7 @@ const USERS = [
 export class UserListingComponent implements OnInit {
   list: ListData = new ListData('Users List', {search: true, filter: UserFilterComponent});
   table: TableSource<any> = new TableSource(COLUMNS, USERS);
+  selection: any[] = [];
   constructor() {
   }
 
@@ -64,5 +65,9 @@ export class UserListingComponent implements OnInit {
   }
   onEditHandler(row) {
     console.log(row);
+  }
+  onSelectionHandler(selection) {
+    console.log(selection);
+    this.selection = selection;
   }
 }

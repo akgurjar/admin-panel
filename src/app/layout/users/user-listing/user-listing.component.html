@@ -6,7 +6,7 @@
     <button mat-button mat-icon-button color="primary" routerLink="create" matTooltip="Create User">
       <mat-icon>person_add</mat-icon>
     </button>
-    <button mat-button mat-icon-button color="primary" matTooltip="Actions" [matMenuTriggerFor]="actionMenu">
+    <button mat-button mat-icon-button color="primary" matTooltip="Actions" [matMenuTriggerFor]="actionMenu" [disabled]="selection.length === 0">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #actionMenu="matMenu">
@@ -23,7 +23,7 @@
       &nbsp;
     </mat-menu>
   </ng-template>
-  <app-table [source]="table">
+  <app-table [tableSource]="table" #dataTable="DataTable" (change)="onSelectionHandler($event)">
     <ng-template let-row="row" appFor="table-actions">
         <button mat-button mat-icon-button color="primary" matTooltip="Edit">
           <mat-icon>edit</mat-icon>

@@ -5,13 +5,16 @@
     position: relative;
 }
 .loader__container {
+    min-height: var(--loader-size);
     position: absolute;
     left: 0px;
     top: 0px;
-    background-color: rgba(#000, .1);
     z-index: 999999999999999999;
     visibility: hidden;
 }
 .loader__container--active {
     visibility: visible;
+}
+.loader__container--background {
+    background-color: rgba(#000, .1);
 }

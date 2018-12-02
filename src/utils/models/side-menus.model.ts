@@ -14,6 +14,11 @@ export const SIDE_MENUS: SideNav[] = [
         label: 'Products',
         icon: 'explore',
         link: '/products'
+    },
+    {
+        label: 'Analytics',
+        icon: 'timeline',
+        link: '/analytics'
     }
 ];
 

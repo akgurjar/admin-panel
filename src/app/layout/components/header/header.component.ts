@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { HeaderService } from '../../services/header/header.service';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  private _changes: Map<string, string> = new Map();
   private _baseUrlSteps: string[] = [];
   @Input()
   set baseUrl(url: string) {
@@ -15,11 +17,18 @@ export class HeaderComponent implements OnInit {
   }
   routeSteps: RouteStep[] = [new RouteStep('Products', '/products')];
   private _routeChange: BehaviorSubject<any> = new BehaviorSubject(null);
-  constructor(router: Router, private _route: ActivatedRoute) {
+  constructor(
+    router: Router,
+    private _route: ActivatedRoute,
+    headerService: HeaderService
+  ) {
     router.events.subscribe(this._routeChange.next.bind(this._routeChange));
+    headerService.events.subscribe(({label, target}: any) => {
+      this._changes.set(target, label);
+    });
   }
   ngOnInit() {
-    console.log(this._route.snapshot.params);
+    // console.log(this._route.snapshot.params);
     this._routeChange.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this._route.params.subscribe(console.log);
@@ -30,6 +39,9 @@ export class HeaderComponent implements OnInit {
           }
           if (step !== 'dashboard' && step !== this._baseUrlSteps[index]) {
             const currentUrl = `${data.currentUrl}/${step}`;
+            if (this._changes.has(step)) {
+              step = this._changes.get(step);
+            }
             return {
               currentUrl,
               steps: [...data.steps, new RouteStep(step, currentUrl)]
@@ -46,5 +58,7 @@ export class HeaderComponent implements OnInit {
 }
 
 class RouteStep {
-  constructor(public label: string, public url: string) {}
+  constructor(public label: string, public url: string) {
+    this.label = `${label.substr(0, 1).toUpperCase()}${label.substring(1)}`;
+  }
 }

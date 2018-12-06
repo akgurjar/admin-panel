@@ -3,13 +3,13 @@ import {
   OnInit,
   Input,
   Output,
-  ContentChild,
   ViewChildren,
   QueryList,
-  EventEmitter
+  EventEmitter,
+  ContentChildren
 } from '@angular/core';
 import { MatTableDataSource, MatCheckboxChange, MatCheckbox } from '@angular/material';
-import { TableSource } from '@models';
+import { TableSource, TableColumn } from '@models';
 import { ForDirective } from '../../directives/for.directive';
 
 @Component({
@@ -25,12 +25,10 @@ export class TableComponent implements OnInit {
     return new MatTableDataSource(this.tableSource.data);
   }
   get displayedColumns(): string[] {
-    const columns = this.tableSource.columns.map(column => column.name);
-    const selectionColumns = true ? ['selection', ...columns] : columns;
-    const actionColumns = true ? [...selectionColumns, 'actions'] : selectionColumns;
-    return actionColumns;
+    const columns = this.tableSource.columns.map(column => column.key);
+    return this.tableSource.options && this.tableSource.options.selection ? ['selection', ...columns] : columns;
   }
-  @ContentChild(ForDirective) actions: ForDirective;
+  @ContentChildren(ForDirective) templates: QueryList<ForDirective>;
   @ViewChildren(MatCheckbox) checkBoxList: QueryList<MatCheckbox>;
   get checkBoxes(): MatCheckbox[] {
     return this.checkBoxList ? this.checkBoxList.toArray() : [];
@@ -50,6 +48,13 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  templateOutlet(column: TableColumn<any>) {
+    if (this.templates) {
+      const template = this.templates.find(query => query.name === column.templateBy);
+      return template ? template.ref : null;
+    }
+    return null;
   }
   onHeadSelectionChangeHandler(event: MatCheckboxChange) {
     this.rowCheckBoxes.forEach((checkBox: MatCheckbox) => {

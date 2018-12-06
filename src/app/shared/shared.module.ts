@@ -9,12 +9,14 @@ import {
 import { LoaderComponent } from './components/loader/loader.component';
 import { HttpInterceptorService } from './services/http-interceptor/http-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const Modules = [
   MatIconModule,
   MatButtonModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({

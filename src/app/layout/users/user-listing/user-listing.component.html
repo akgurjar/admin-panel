@@ -24,6 +24,9 @@
     </mat-menu>
   </ng-template>
   <app-table [tableSource]="table" #dataTable="DataTable" (change)="onSelectionHandler($event)">
+    <ng-template let-row="row" appFor="user">
+      <a href="#" class="user-link">{{row.name}}</a>
+    </ng-template>
     <ng-template let-row="row" appFor="table-actions">
         <button mat-button mat-icon-button color="primary" matTooltip="Edit">
           <mat-icon>edit</mat-icon>

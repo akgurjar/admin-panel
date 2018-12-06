@@ -4,7 +4,8 @@ import { Directive, TemplateRef, Input } from '@angular/core';
   selector: '[appFor]'
 })
 export class ForDirective {
-  @Input() appFor: string;
-  constructor(public template: TemplateRef<any>) { }
+  // tslint:disable-next-line:no-input-rename
+  @Input('appFor') name: string;
+  constructor(public ref: TemplateRef<any>) { }
 
 }

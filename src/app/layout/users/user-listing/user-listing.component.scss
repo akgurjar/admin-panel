@@ -1,1 +1,8 @@
 
+.user-link {
+    text-decoration: none;
+    // font-weight: bold;
+    &:hover {
+        text-decoration: underline;
+    }
+}

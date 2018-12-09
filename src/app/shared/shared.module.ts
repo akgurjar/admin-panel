@@ -4,11 +4,12 @@ import {
   MatIconModule,
   MatButtonModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { LoaderComponent } from './components/loader/loader.component';
 import { HttpInterceptorService } from './services/http-interceptor/http-interceptor.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const Modules = [
@@ -16,7 +17,9 @@ const Modules = [
   MatButtonModule,
   MatSnackBarModule,
   MatTooltipModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  HttpClientModule,
+  MatNativeDateModule
 ];
 
 @NgModule({

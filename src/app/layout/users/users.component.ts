@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-users',
-  template: `
-    <app-loader [isActivated]="route.isActivated">
-      <router-outlet #route="outlet"></router-outlet>
-    </app-loader>
-  `
+  template: `<router-outlet></router-outlet>`
 })
 export class UsersComponent implements OnInit {
 

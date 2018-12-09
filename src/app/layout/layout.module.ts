@@ -5,13 +5,13 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutRoutingModule } from './layout-routing.module';
 
 import { LayoutComponent } from './layout.component';
-import { HeaderComponent } from './components/header/header.component';
-import { HeaderService } from './services/header/header.service';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { BreadcrumbService } from './services/breadcrumb/breadcrumb.service';
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    HeaderComponent
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +19,7 @@ import { HeaderService } from './services/header/header.service';
     SharedModule
   ],
   providers: [
-    HeaderService
+    BreadcrumbService
   ]
 })
 export class LayoutModule { }

@@ -7,21 +7,8 @@ import {
   MatMenuModule,
   MatSidenavModule,
   MatBadgeModule,
-  MatCardModule,
-  MatPaginatorModule,
-  MatTableModule,
-  MatCheckboxModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatDialogModule,
-  MatSelectModule,
-  MatDatepickerModule,
-  MatNativeDateModule
+  MatCardModule
 } from '@angular/material';
-import { TableComponent } from './components/table/table.component';
-import { ListingComponent } from './components/listing/listing.component';
-import { ForDirective } from './directives/for.directive';
-import { InputFilesComponent } from './components/input-files/input-files.component';
 
 
 const Modules = [
@@ -31,35 +18,18 @@ const Modules = [
   MatMenuModule,
   MatSidenavModule,
   MatBadgeModule,
-  MatCardModule,
-  MatPaginatorModule,
-  MatTableModule,
-  MatCheckboxModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatDialogModule,
-  MatSelectModule,
-  MatDatepickerModule,
-  MatNativeDateModule
+  MatCardModule
 ];
 
 @NgModule({
   declarations: [
-    TableComponent,
-    ListingComponent,
-    ForDirective,
-    InputFilesComponent
   ],
   imports: [
     CommonModule,
     ...Modules
   ],
   exports: [
-    ...Modules,
-    TableComponent,
-    ListingComponent,
-    ForDirective,
-    InputFilesComponent
+    ...Modules
   ]
 })
 export class SharedModule { }

@@ -1,9 +1,9 @@
-@import './components/header/header.theme';
-@import './users/users.theme';
+@import './components/breadcrumb/breadcrumb.theme';
+@import './common/listing/listing.theme';
 
 @mixin layout-theming($theme) {
-    @include header-theming($theme);
-    @include users-theming($theme);
+    @include breadcrumb-theming($theme);
+    @include listing-theming($theme);
     
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);

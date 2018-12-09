@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
-import { UserViewComponent } from './user-view/user-view.component';
-import { UserUpdateComponent } from './user-update/user-update.component';
-
 
 const routes: Routes = [
   {
@@ -12,11 +9,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: UserViewComponent
+        loadChildren: './user-detail/user-detail.module#UserDetailModule'
       },
       {
         path: 'update',
-        component: UserUpdateComponent
+        loadChildren: './user-update/user-update.module#UserUpdateModule'
       }
     ]
   }

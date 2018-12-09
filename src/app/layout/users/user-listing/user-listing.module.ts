@@ -2,20 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserListingRoutingModule } from './user-listing-routing.module';
-import { SharedModule } from '../shared/shared.module';
 import { UserListingComponent } from './user-listing.component';
-import { UserFilterComponent } from './user-filter/user-filter.component';
+import { UserListModule } from '../common/user-list';
 
 @NgModule({
-  declarations: [
-    UserListingComponent,
-    UserFilterComponent
-  ],
+  declarations: [UserListingComponent],
   imports: [
     CommonModule,
     UserListingRoutingModule,
-    SharedModule
-  ],
-  entryComponents: [UserFilterComponent]
+    UserListModule
+  ]
 })
 export class UserListingModule { }

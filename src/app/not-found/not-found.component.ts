@@ -17,7 +17,6 @@ export class NotFoundComponent implements OnInit, OnDestroy {
   }
   private _calcPath() {
     const round = Math.ceil(window.innerWidth / 60);
-    console.log(round);
     let path = `M0,5`;
     for (let i = 0; i < round; i++) {
       path += ` a20,10 0 0 0 30,0 a20,10 0 0 1 30,0`;

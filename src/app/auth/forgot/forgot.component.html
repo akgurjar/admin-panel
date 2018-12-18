@@ -1,15 +1,17 @@
 <h2>Forgot Password</h2>
-<p>Login with correct credentials</p>
-<mat-form-field>
-  <input matInput placeholder="Email" type="email"/>
-  <mat-icon matPrefix class="form-field-icon">email</mat-icon>
-</mat-form-field>
+<p>forgot your password? Don't Worry. Send us your registered email address and we will send you steps to reset your password.</p>
+<form [formGroup]="forgotForm">
+  <mat-form-field>
+    <input matInput placeholder="Email" type="email" required formControlName="email"/>
+    <mat-icon matPrefix class="form-field-icon">email</mat-icon>
+  </mat-form-field>
+</form>
 <div class="auth-form__actions">
   <button mat-button mat-stroked-button routerLink="../login">
     <mat-icon>arrow_back_ios</mat-icon>
     <span>BACK</span>
   </button>
-  <button mat-button mat-raised-button color="primary">
+  <button mat-button mat-raised-button color="primary" [disabled]="forgotForm.disabled || !forgotForm.valid" (click)="onForgotMailHandler()">
     <mat-icon>send</mat-icon>&nbsp;
     <span>SEND</span>
   </button>

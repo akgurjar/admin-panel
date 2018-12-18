@@ -13,6 +13,8 @@ import {
   MatInputModule,
   MatSlideToggleModule
 } from '@angular/material';
+import { AuthService } from './auth.service';
+import { ButtonLoaderModule } from '../common/button-loader/button-loader.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,11 @@ import {
     SharedModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    ButtonLoaderModule
+  ],
+  providers: [
+    AuthService
   ]
 })
 export class AuthModule { }

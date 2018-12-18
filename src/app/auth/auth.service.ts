@@ -5,37 +5,40 @@ import { Observable, Observer } from 'rxjs';
 export class AuthService {
 
   constructor() { }
-  login(credentials: Auth.LoginCredential): Observable<boolean> {
-    return Observable.create((observer: Observer<boolean>) => {
+  async login(credentials: Auth.LoginCredential): Promise<boolean> {
+    const resp = await new Promise<boolean>((resolve, reject) => {
       setTimeout(() => {
         if (credentials.username === 'admin@test.com' && credentials.password === 'asdfghjkl') {
-          observer.next(true);
+          resolve(true);
         } else {
-          observer.error(new Error('Login Error'));
+          reject(new Error('Login Error'));
         }
       }, 4000);
     });
+    return resp;
   }
-  forgot(email: string): Observable<boolean> {
-    return Observable.create((observer: Observer<boolean>) => {
+  async forgot(email: string): Promise<boolean> {
+    const resp = await new Promise<boolean>((resolve, reject) => {
       setTimeout(() => {
         if (email === 'admin@test.com') {
-          observer.next(true);
+          resolve(true);
         } else {
-          observer.error(new Error('Forgot Password Error'));
+          reject(new Error('Forgot Error'));
         }
       }, 4000);
     });
+    return resp;
   }
-  reset(password: string): Observable<boolean> {
-    return Observable.create((observer: Observer<boolean>) => {
+  async reset(password: string): Promise<boolean> {
+    const resp = await new Promise<boolean>((resolve, reject) => {
       setTimeout(() => {
         if (password === 'asdfghjkl') {
-          observer.next(true);
+          resolve(true);
         } else {
-          observer.error(new Error('Password Reset Error'));
+          reject(new Error('Reset Error'));
         }
       }, 4000);
     });
+    return resp;
   }
 }

@@ -1,0 +1,12 @@
+<form [formGroup]="timeForm" [ngClass]="{'form--show': shouldLabelFloat}">
+  <input type="number" placeholder="HH" maxlength="2" formControlName="hours" #hoursInput/>
+  &nbsp;
+  <span style="color: #000">:</span>
+  &nbsp;
+  <input type="number" placeholder="MM" maxlength="2" formControlName="minutes"/>
+  &nbsp;
+  <button (click)="onToggleTimingHandler()">
+    {{timeForm.controls['timing'].value}}
+  </button>
+  &nbsp;
+</form>

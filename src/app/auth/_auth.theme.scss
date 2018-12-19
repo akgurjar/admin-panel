@@ -5,5 +5,8 @@
     .auth-card__container {
         background-color: rgba(mat-color($accent, 500), .7);
     }
+    .forgot-seccess__title {
+        color: mat-color($primary);
+    }
 }
 

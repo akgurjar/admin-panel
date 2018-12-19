@@ -1,15 +1,7 @@
 import { UserFilterComponent } from './user-filter/user-filter.component';
 
-
-export const LIST_CONFIG: Listing.Config = {
-    label: 'User List',
-    options: {
-        search: true,
-        filter: UserFilterComponent
-    }
-};
-
 export class UserTableSource implements Table.Source<any> {
+    label =  'User List';
     columns: Table.Column<any>[] = [
         {
             title: 'SR NO',
@@ -28,7 +20,10 @@ export class UserTableSource implements Table.Source<any> {
         }
     ];
     options: Table.Options = {
-        selection: true
+        selection: true,
+        index: true,
+        search: 'Search User',
+        filterComponent: UserFilterComponent
     };
     constructor(public data: any[]) {}
 }

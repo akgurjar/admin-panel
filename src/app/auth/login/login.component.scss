@@ -8,17 +8,21 @@
 
 mat-form-field {
     width: 100%;
-    margin: 5px 0;
 }
 mat-slide-toggle {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 .form-field-icon {
     color: rgba(#000, .4);
     vertical-align: bottom;
     transform: translateY(1px);
     margin-right: 2px;
+    user-select: none;
 }
 .form-field-icon--action {
     cursor: pointer;
+    &[data-disabled = true] {
+        color: rgba(#000, .2);
+        cursor: default;
+    }
 }

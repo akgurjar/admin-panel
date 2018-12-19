@@ -1,9 +1,0 @@
-
-@mixin listing-theming($theme) {
-    $primary: map-get($map: $theme, $key: primary);
-    mat-card-title.listing {
-        color: mat-color($primary, 500);
-    }
-}
-
-

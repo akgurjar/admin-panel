@@ -1,21 +1,25 @@
 <h2>Reset Password</h2>
-<p>Login with correct credentials</p>
-<mat-form-field>
-  <input matInput placeholder="Password" [type]="visibility.password ? 'text' : 'password'"/>
-  <mat-icon matPrefix class="form-field-icon">vpn_key</mat-icon>
-  <mat-icon matSuffix class="form-field-icon form-field-icon--action" (click)="onVisibilityHandler($event, 'password')">{{visibility.password ? 'visibility' : 'visibility_off'}}</mat-icon>
-</mat-form-field>
-<mat-form-field>
-  <input matInput placeholder="Confirm Password" [type]="visibility.confirmPassword ? 'text' : 'password'"/>
-  <mat-icon matPrefix class="form-field-icon">vpn_key</mat-icon>
-  <mat-icon matSuffix class="form-field-icon form-field-icon--action" (click)="onVisibilityHandler($event, 'confirmPassword')">{{visibility.confirmPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-</mat-form-field>
+<p>Enter your details below to Reset your password.</p>
+<form [formGroup]="resetForm">
+  <mat-form-field>
+    <input matInput placeholder="New Password" required [type]="visibility.password ? 'text' : 'password'" formControlName="password"/>
+    <mat-icon matPrefix class="form-field-icon">vpn_key</mat-icon>
+    <mat-icon matSuffix class="form-field-icon form-field-icon--action" [attr.data-disabled]="resetForm.controls['password'].disabled" (click)="onVisibilityHandler($event, 'password')">{{visibility.password ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <mat-error>{{matError(resetForm.controls['password'], 'Password')}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Confirm Password" required [type]="visibility.confirmPassword ? 'text' : 'password'" formControlName="confirmPassword"/>
+    <mat-icon matPrefix class="form-field-icon">vpn_key</mat-icon>
+    <mat-icon matSuffix class="form-field-icon form-field-icon--action" [attr.data-disabled]="resetForm.controls['confirmPassword'].disabled" (click)="onVisibilityHandler($event, 'confirmPassword')">{{visibility.confirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <mat-error>{{matError(resetForm.controls['confirmPassword'], 'Confirm Password')}}</mat-error>
+  </mat-form-field>
+</form>
 <div class="auth-form__actions">
   <button mat-button mat-stroked-button routerLink="/auth/login">
     <!-- <mat-icon>cancel</mat-icon>&nbsp; -->
-    <span>CANCEL</span>
+    <span>Cancel</span>
   </button>
-  <button mat-button mat-raised-button color="primary">
+  <button mat-button mat-raised-button color="primary" [disabled]="resetForm.disabled || !resetForm.valid" [appButtonLoader]="resetForm.disabled" (click)="onResetPasswordHandler()">
     <!-- <mat-icon>exit_to_app</mat-icon>&nbsp; -->
     <span>SUBMIT</span>
   </button>

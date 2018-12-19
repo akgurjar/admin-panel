@@ -19,11 +19,9 @@
       "dom"
     ],
     "paths": {
-      "@environment": ["src/environments/environment"],
-      "@utils": ["src/utils/index"],
-      "@models": ["src/utils/models/index"],
-      "@form-field": ["src/utils/form-field/index"],
-      "@store": ["src/utils/store/index"]
+      "@environment": ["src/environments/index"],
+      "@token": ["src/app/shared/services/token/index"],
+      "@form-field": ["src/app/common/form-field/index"]
     }
   }
 }

@@ -1,4 +1,4 @@
-<app-listing [config]="listingConfig">
+<app-table-container [tableSource]="tableSource">
   <ng-template appFor="list-actions">
     <button mat-icon-button color="primary" (click)="onCreateUser()">
       <mat-icon>person_add</mat-icon>
@@ -7,7 +7,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <div style="">
+      <div>
         <button mat-button mat-icon-button color="accent">
           <mat-icon>blocked</mat-icon>
         </button>
@@ -20,5 +20,5 @@
       </div>
     </mat-menu>
   </ng-template>
-  <app-table [tableSource]="tableSource"></app-table>
-</app-listing>
+  <app-table></app-table>
+</app-table-container>

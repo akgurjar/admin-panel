@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserListComponent } from './user-list.component';
 import { UserFilterComponent } from './user-filter/user-filter.component';
-import { ListingModule } from 'src/app/layout/common/listing';
 import { TableModule } from 'src/app/layout/common/table';
 import { UserListService } from './user-list.service';
 import { SharedModule } from 'src/app/layout/shared/shared.module';
@@ -15,7 +14,6 @@ import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModul
   ],
   imports: [
     CommonModule,
-    ListingModule,
     TableModule,
     SharedModule,
     MatFormFieldModule,

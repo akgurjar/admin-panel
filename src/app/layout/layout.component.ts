@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MediaQueryService } from '../shared/services/media-query/media-query.service';
 
-import { SIDE_MENUS } from '@models';
+import { SIDE_MENUS } from './common/models';
 
 @Component({
   selector: 'app-layout',

@@ -9,29 +9,41 @@ import {
   ViewChild,
   AfterViewInit,
   Output,
-  EventEmitter
+  EventEmitter,
+  ContentChild
 } from '@angular/core';
-import { ListData } from '@models';
 import { MatDialog } from '@angular/material';
-import { ForDirective } from '../for';
-import { fromEvent, config } from 'rxjs';
+import { ForDirective } from '../../for';
+import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { TableComponent } from '../table.component';
 
 @Component({
-  selector: 'app-listing',
-  templateUrl: './listing.component.html',
-  styleUrls: ['./listing.component.scss']
+  selector: 'app-table-container',
+  templateUrl: './table-container.component.html',
+  styleUrls: ['./table-container.component.scss']
 })
-export class ListingComponent implements OnInit, AfterViewInit {
-  @Input() config: Listing.Config;
+export class TableContainerComponent implements OnInit, AfterViewInit {
+  private _tableSource: Table.Source<any>;
+  @Input()
+  set tableSource(source: Table.Source<any>) {
+    this._tableSource = source;
+    if (this._table) {
+      this._table.tableSource = source;
+    }
+  }
+  get tableSource() {
+    return this._tableSource;
+  }
   @Output() change: EventEmitter<any> = new EventEmitter();
   get label(): string {
-    return this.config.label;
+    return this.tableSource.label;
   }
   get hasSearch(): boolean {
-    return this.config ? this.config.options.search : false;
+    return this.tableSource && this.tableSource.options && !!this.tableSource.options.search;
   }
   @ContentChildren(ForDirective) templates: QueryList<ForDirective>;
+  @ContentChild(TableComponent) _table: TableComponent;
   get actions(): TemplateRef<any> {
     const actionsTemplate = this.templates && this.templates.find(({name}) => name === 'list-actions');
     return actionsTemplate ? actionsTemplate.ref : null;
@@ -61,10 +73,13 @@ export class ListingComponent implements OnInit, AfterViewInit {
       this._listingData.search = this._searchRef.nativeElement.value;
       this._emitEvent();
     });
+    // if (!this._table.tableSource) {
+    //   this._table.tableSource = this.tableSource;
+    // }
   }
   onFilterHandler() {
-    if (this.config && this.config.options && this.config.options.filter) {
-      const subscription = this._dialog.open(this.config.options.filter, {
+    if (this.tableSource && this.tableSource.options && this.tableSource.options.filterComponent) {
+      const subscription = this._dialog.open(this.tableSource.options.filterComponent, {
         disableClose: true,
         position: {
           right: '20px'

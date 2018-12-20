@@ -15,6 +15,7 @@ export class ResetComponent implements OnInit {
     confirmPassword: false
   };
   resetForm: FormGroup;
+  isResetDone = false;
   constructor(fb: FormBuilder, private _auth: AuthService) {
     this.resetForm = fb.group({
       password: [null, CustomValidators.password],
@@ -39,8 +40,7 @@ export class ResetComponent implements OnInit {
       }).catch((error) => {
         this.resetForm.enable();
         console.log(error);
-      })
+      });
     }
-    
   }
 }

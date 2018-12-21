@@ -9,10 +9,12 @@ import {
   MatBadgeModule,
   MatCardModule
 } from '@angular/material';
+import { ConfirmModule } from '../common/confirm';
 
 
 const Modules = [
   RootSharedModule,
+  ConfirmModule,
   MatToolbarModule,
   MatRippleModule,
   MatMenuModule,

@@ -33,9 +33,9 @@ export class AuthGuard implements CanActivate, CanLoad {
       const verified = await this._token.verify();
       if (verified) {
         this._router.navigateByUrl('/');
-        this._snackBar.open('You are already logined.', null,  {
-          duration: 3000
-        });
+        // this._snackBar.open('You are already logined.', null,  {
+        //   duration: 3000
+        // });
         return false;
       } else {
         this._token.reset();
@@ -43,9 +43,9 @@ export class AuthGuard implements CanActivate, CanLoad {
     } else if (route.path === '' && !await this._token.verify()) { // When admin trying to access dashboard without login
       this._token.reset();
       this._router.navigateByUrl('/auth');
-      this._snackBar.open('Please Login to access dashboard.', null,  {
-        duration: 3000
-      });
+      // this._snackBar.open('Please Login to access dashboard.', null,  {
+      //   duration: 3000
+      // });
       return false;
     }
     if (route.path === '' && this._token.isOneTimeToken) {

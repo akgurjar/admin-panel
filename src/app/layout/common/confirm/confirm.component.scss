@@ -1,0 +1,26 @@
+:host {
+    display: block;
+    text-align: center;
+    width: 280px;
+}
+.confirm__title {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFF;
+    margin: -24px;
+    margin-bottom: 15px;
+    width: calc(100% + 48px);
+    background-color: #ffab40;
+    height: 52px;
+    line-height: 52px;
+}
+.confirm__message {
+    font-size: 18px;
+}
+.confirm__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 28px;
+}

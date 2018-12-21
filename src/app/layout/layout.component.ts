@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MediaQueryService } from '../shared/services/media-query/media-query.service';
 
 import { SIDE_MENUS } from './common/models';
+import { ConfirmService } from './common/confirm';
 
 @Component({
   selector: 'app-layout',
@@ -21,7 +22,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     return this.mediaQuery.getDevice === 'COMPUTER';
   }
   constructor(
-    public mediaQuery: MediaQueryService
+    public mediaQuery: MediaQueryService,
+    private _confirm: ConfirmService
   ) {
   }
   ngOnInit() {
@@ -35,4 +37,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy() {}
+  onLogoutHandler() {
+    this._confirm.popup({
+      title: 'Confirm Logout',
+      message: 'Are you sure you want to logout?'});
+  }
 }

@@ -1,41 +1,26 @@
-<mat-toolbar color="primary">
-  <button mat-button mat-icon-button (click)="onSideNavToggleHandler()">
-    <mat-icon>menu</mat-icon>
-  </button>&nbsp;
-  <span>Admin Panel</span>
-  <div style="flex: 1"></div>
-  <button mat-button mat-icon-button>
-    <mat-icon matBadge="2" matBadgeColor="accent">messages</mat-icon>
-  </button>
-  <button mat-button mat-icon-button>
-    <mat-icon matBadge="7" matBadgeColor="accent">notifications</mat-icon>
-  </button>
-  <button class="account__button" matRipple matRippleColor="rgba(255, 255, 255, .2)" [matMenuTriggerFor]="adminMenu">
-    <div class="account__photo content--center">
-      <mat-icon>person_outline</mat-icon>
-    </div>
-    <ng-template [ngIf]="!isMobileDevice">
-      &nbsp;
-      <span class="truncate" style="max-width: 100px">Guest Admin</span>
-      <mat-icon>arrow_drop_down</mat-icon>
-      &nbsp;
-    </ng-template>
-  </button>
-  <mat-menu #adminMenu="matMenu">
-    <button mat-button color="primary" class="admin-menu__button" routerLink="/admin">
-      <mat-icon>person</mat-icon>&nbsp;&nbsp;
-      <span>Profile</span>
-    </button>
-    <button mat-button color="primary" class="admin-menu__button">
-      <mat-icon>exit_to_app</mat-icon>&nbsp;&nbsp;
-      <span>Logout</span>
-    </button>
-  </mat-menu>
-</mat-toolbar>
-
 <mat-sidenav-container>
-  <mat-sidenav [mode]="sideNavMode" [opened]="isSideNavOpened" (openedChange)="onSideNavOpenedChangeHandler($event)">
+  <mat-sidenav style="border: none" [mode]="sideNavMode" [opened]="isSideNavOpened" (openedChange)="onSideNavOpenedChangeHandler($event)">
     <div class="sidenav__wrapper">
+      <div class="mat-elevation-z1 content--center" style="height: 64px;margin-bottom: 2px;">
+        <button class="account__button" matRipple matRippleColor="rgba(0, 0, 0, .1)" [matMenuTriggerFor]="adminMenu">
+          <div class="account__photo content--center">
+            <mat-icon>person_outline</mat-icon>
+          </div>
+          <span class="truncate" style="flex: 1">Ashish Singh Gurjar Gurjar</span>
+          <mat-icon>arrow_drop_down</mat-icon>
+          &nbsp;
+        </button>
+        <mat-menu #adminMenu="matMenu">
+          <button mat-button color="primary" class="admin-menu__button" routerLink="/admin">
+            <mat-icon>person</mat-icon>&nbsp;&nbsp;
+            <span>Profile</span>
+          </button>
+          <button mat-button color="primary" class="admin-menu__button" (click)="onLogoutHandler()">
+            <mat-icon>exit_to_app</mat-icon>&nbsp;&nbsp;
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
       <a class="sidenav__item" [routerLink]="menu.link" routerLinkActive="sidenav__item--active" *ngFor="let menu of sideMenus">
         <mat-icon>{{menu.icon}}</mat-icon>&nbsp;&nbsp;
         <span>{{menu.label}}</span>
@@ -49,8 +34,24 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
+    <mat-toolbar class="mat-elevation-z1">
+      <button mat-button mat-icon-button (click)="onSideNavToggleHandler()" color="primary">
+        <mat-icon>menu</mat-icon>
+      </button>&nbsp;
+      <span class="toolbar-title">Admin Panel</span>
+      <div style="flex: 1"></div>
+      <button mat-icon-button color="primary">
+        <mat-icon matBadge="2" matBadgeColor="accent">messages</mat-icon>
+      </button>
+      <button mat-icon-button color="primary">
+        <mat-icon matBadge="7" matBadgeColor="accent">notifications</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onLogoutHandler()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </mat-toolbar>        
     <main class="sidenav__content">
-      <app-breadcrumb class="mat-elevation-z1 page-header"></app-breadcrumb>
+      <app-breadcrumb class="page-header"></app-breadcrumb>
       <app-loader [isActivated]="route.isActivated">
         <router-outlet #route="outlet"></router-outlet>
       </app-loader>

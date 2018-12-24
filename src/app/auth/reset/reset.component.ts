@@ -36,6 +36,7 @@ export class ResetComponent implements OnInit {
       const { password } = this.resetForm.value;
       this.resetForm.disable();
       this._auth.reset(password).then(() => {
+        this.isResetDone = true;
         this.resetForm.enable();
       }).catch((error) => {
         this.resetForm.enable();

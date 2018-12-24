@@ -21,7 +21,8 @@
     "paths": {
       "@environment": ["src/environments/index"],
       "@token": ["src/app/shared/services/token/index"],
-      "@form-field": ["src/app/common/form-field/index"]
+      "@form-field": ["src/app/common/form-field/index"],
+      "@popup": ["src/app/common/popup/index"]
     }
   }
 }

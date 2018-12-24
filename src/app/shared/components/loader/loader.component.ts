@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Routes, ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Routes, ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
 @Component({
   selector: 'app-loader',
@@ -35,7 +35,7 @@ export class LoaderComponent implements OnInit {
         if (event instanceof NavigationStart) {
           this._loading = true;
         }
-        if (event instanceof NavigationEnd) {
+        if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
           this._loading = false;
         }
       }

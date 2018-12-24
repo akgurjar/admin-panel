@@ -31,7 +31,8 @@ import { TableContainerComponent } from './table-container/table-container.compo
   ],
   exports: [
     TableComponent,
-    TableContainerComponent
+    TableContainerComponent,
+    ForModule
   ]
 })
 export class TableModule { }

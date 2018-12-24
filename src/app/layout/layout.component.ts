@@ -3,6 +3,8 @@ import { MediaQueryService } from '../shared/services/media-query/media-query.se
 
 import { SIDE_MENUS } from './common/models';
 import { ConfirmService } from './common/confirm';
+import { Token } from '@token';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -23,7 +25,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
   constructor(
     public mediaQuery: MediaQueryService,
-    private _confirm: ConfirmService
+    private _confirm: ConfirmService,
+    private _token: Token,
+    private _router: Router
   ) {
   }
   ngOnInit() {
@@ -40,6 +44,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
   onLogoutHandler() {
     this._confirm.popup({
       title: 'Confirm Logout',
-      message: 'Are you sure you want to logout?'});
+      message: 'Are you sure you want to logout?'
+    }).subscribe((status) => {
+      if (status) {
+        this._token.reset();
+        this._router.navigateByUrl(this._router.url);
+      }
+    });
   }
 }

@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    align-items: center;
+    background-color: #FFF;
+    margin: -14px -16px;
+    height: 100%;
+    border-radius: 2px;
+    padding: 14px;
+}
+:host-context(.success-snack) {
+    background-color: #2ecc71;
+    color: #FFF;
+}
+:host-context(.error-snack) {
+    background-color: #e74c3c;
+    color: #FFF;
+}
+:host-context(.default-snack) {
+    background-color: #FFF;
+    color: #444;
+}
+
+.action-button {
+    cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { routes } from './app-routing.module';
+import { Router, NavigationError } from '@angular/router';
+import { PopupService } from '@popup';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,15 @@ import { routes } from './app-routing.module';
   `
 })
 export class AppComponent {
-  routes = routes;
+  constructor(router: Router, popup: PopupService) {
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationError) {
+        if (event.error['type'] === 'error') {
+          popup.open('Server is not responding !', 'ERROR', {
+            duration: 5000
+          });
+        }
+      }
+    });
+  }
 }

@@ -12,8 +12,28 @@ export class UserListService {
     this._subject.next([
       {
         sn: 1,
-        name: 'User 1',
-        email: 'user@email.com'
+        name: 'Ashish Gurjar',
+        email: 'gurjar@email.com'
+      },
+      {
+        sn: 2,
+        name: 'Ashish Jain',
+        email: 'jain@email.com'
+      },
+      {
+        sn: 3,
+        name: 'Kamal Dobhal',
+        email: 'kamal@email.com'
+      },
+      {
+        sn: 4,
+        name: 'Kamal Dobhal',
+        email: 'kamal@email.com'
+      },
+      {
+        sn: 5,
+        name: 'Kamal Dobhal',
+        email: 'kamal@email.com'
       }
     ]);
   }

@@ -1,7 +1,7 @@
 import { UserFilterComponent } from './user-filter/user-filter.component';
 
 export class UserTableSource implements Table.Source<any> {
-    label =  'User List';
+    label =  'User\'s List';
     columns: Table.Column<any>[] = [
         {
             title: 'SR NO',
@@ -17,6 +17,11 @@ export class UserTableSource implements Table.Source<any> {
             title: 'EMAIL',
             id: 'email',
             resolve: (row: any) => row['email']
+        },
+        {
+            title: 'Actions',
+            id: 'actions',
+            templateBy: 'actions'
         }
     ];
     options: Table.Options = {

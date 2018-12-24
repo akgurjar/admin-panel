@@ -20,5 +20,17 @@
       </div>
     </mat-menu>
   </ng-template>
-  <app-table></app-table>
+  <app-table>
+    <ng-template appFor="actions">
+      <button mat-button mat-icon-button color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button mat-icon-button color="warn">
+        <mat-icon>blocked</mat-icon>
+      </button>
+      <button mat-button mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-template>
+  </app-table>
 </app-table-container>

@@ -1,7 +1,7 @@
 <div *ngIf="isResetDone;else formTemplate" class="reset-seccess__container">
   <h2 class="auth-seccess__title">Success</h2>
   <p>Your password has been reset successfully.</p>
-  <button mat-raised-button color="primary">
+  <button mat-raised-button color="primary" routerLink="../../login">
     Login Now
   </button>
 </div>

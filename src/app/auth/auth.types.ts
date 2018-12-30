@@ -6,6 +6,9 @@ namespace Auth {
         password: string;
         remember?: boolean;
     }
+    export interface LoginResult {
+        token: string;
+    }
 }
 
 

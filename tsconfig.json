@@ -11,8 +11,7 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types",
-      "src/typings/index.d.ts"
+      "node_modules/@types"
     ],
     "lib": [
       "es2018",
@@ -22,7 +21,8 @@
       "@environment": ["src/environments/index"],
       "@token": ["src/app/shared/services/token/index"],
       "@form-field": ["src/app/common/form-field/index"],
-      "@popup": ["src/app/common/popup/index"]
+      "@popup": ["src/app/common/popup/index"],
+      "@confirm": ["src/app/layout/common/confirm/index"]
     }
   }
 }

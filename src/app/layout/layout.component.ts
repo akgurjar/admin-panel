@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MediaQueryService } from '../shared/services/media-query/media-query.service';
 
 import { SIDE_MENUS } from './common/models';
-import { ConfirmService } from './common/confirm';
-import { Token } from '@token';
-import { Router } from '@angular/router';
+import { RequestLoaderService } from './shared/services/request-loader/request-loader.service';
+import { LayoutService } from './shared/services/layout/layout.service';
 
 @Component({
   selector: 'app-layout',
@@ -13,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   sideMenus = SIDE_MENUS;
+  isLoading = false;
   isSideNavOpened: boolean = this.isDesktopDevice;
   get sideNavMode(): 'over' | 'side' {
     return this.isDesktopDevice ? 'side' : 'over';
@@ -25,10 +25,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
   constructor(
     public mediaQuery: MediaQueryService,
-    private _confirm: ConfirmService,
-    private _token: Token,
-    private _router: Router
+    private _layout: LayoutService,
+    reqLoader: RequestLoaderService
   ) {
+    reqLoader.changes.subscribe(isLoading => this.isLoading = isLoading);
   }
   ngOnInit() {
   }
@@ -42,14 +42,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {}
   onLogoutHandler() {
-    this._confirm.popup({
-      title: 'Confirm Logout',
-      message: 'Are you sure you want to logout?'
-    }).subscribe((status) => {
-      if (status) {
-        this._token.reset();
-        this._router.navigateByUrl(this._router.url);
-      }
-    });
+    this._layout.logout();
   }
 }

@@ -49,7 +49,8 @@
       <button mat-icon-button color="warn" (click)="onLogoutHandler()">
         <mat-icon>exit_to_app</mat-icon>
       </button>
-    </mat-toolbar>        
+      <mat-progress-bar mode="indeterminate" [attr.data-loading]="isLoading" color="primary"></mat-progress-bar>
+    </mat-toolbar>
     <main class="sidenav__content">
       <app-breadcrumb class="page-header"></app-breadcrumb>
       <app-loader [isActivated]="route.isActivated">

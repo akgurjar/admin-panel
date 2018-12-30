@@ -7,9 +7,15 @@ import {
   MatMenuModule,
   MatSidenavModule,
   MatBadgeModule,
-  MatCardModule
+  MatCardModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { ConfirmModule } from '../common/confirm';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LayoutInterceptor } from './services/layout-interceptor/layout-interceptor.service';
+import { BreadcrumbService } from './services/breadcrumb';
+import { LayoutService } from './services/layout/layout.service';
+import { RequestLoaderService } from './services/request-loader/request-loader.service';
 
 
 const Modules = [
@@ -20,7 +26,8 @@ const Modules = [
   MatMenuModule,
   MatSidenavModule,
   MatBadgeModule,
-  MatCardModule
+  MatCardModule,
+  MatProgressBarModule
 ];
 
 @NgModule({
@@ -32,6 +39,12 @@ const Modules = [
   ],
   exports: [
     ...Modules
+  ],
+  providers: [
+    LayoutService,
+    BreadcrumbService,
+    RequestLoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LayoutInterceptor, multi: true }
   ]
 })
 export class SharedModule { }

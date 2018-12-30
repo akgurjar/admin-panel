@@ -1,5 +1,5 @@
 /// <reference path="sidenav.d.ts"/>
-/// <reference path="admin.d.ts"/>
+/// <reference path="api.ts"/>
 
 
 declare interface TableSourceOptions {
@@ -12,3 +12,12 @@ declare interface ListOptions {
     search?: boolean;
     filter?: any;
 }
+
+declare interface ApiResponse<Result> {
+    errorCode?: number;
+    message: string;
+    result: Result;
+}
+
+
+

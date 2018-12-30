@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth/auth.guard';
+import { DashboardGuard } from './shared/guards/dashboard/dashboard.guard';
 
 export const routes: Routes = [
   {
@@ -10,7 +11,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    canLoad: [AuthGuard],
+    canLoad: [DashboardGuard],
     loadChildren: './layout/layout.module#LayoutModule'
   },
   {

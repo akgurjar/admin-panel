@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   constructor(fb: FormBuilder, private _auth: AuthService, private _router: Router) {
     this.loginForm = fb.group({
-      username: [null, [Validators.required, ...CustomValidators.email]],
-      password: [null, CustomValidators.password],
+      username: ['admin@gmail.com', [Validators.required, ...CustomValidators.email]],
+      password: ['asdfghjkl', CustomValidators.password],
       remember: [false, Validators.required]
     });
   }
@@ -32,10 +32,11 @@ export class LoginComponent implements OnInit {
   onLoginHandler() {
     if (this.loginForm.valid && this.loginForm.enabled) {
       const { username, password, remember } = this.loginForm.value;
-      console.log(username, password, remember);
+      // console.log(username, password, remember);
       this.loginForm.disable();
       this._auth.login({username, password}, remember)
       .then((status) => {
+        console.log(status);
         if (status) {
           this._router.navigateByUrl('/');
         } else {

@@ -1,7 +1,7 @@
+import { BehaviorSubject } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { BreadcrumbService } from '../../services/breadcrumb/breadcrumb.service';
+import { BreadcrumbService } from '../../shared/services/breadcrumb/breadcrumb.service';
 
 @Component({
   selector: 'app-breadcrumb',

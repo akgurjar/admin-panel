@@ -1,35 +1,48 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from '@environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  constructor(private _http: HttpClient) { }
+  constructor(
+    private _http: HttpClient
+  ) {
+    console.log(this.value);
+  }
   get isOneTimeToken(): boolean {
-    return !localStorage.getItem(environment.tokenRememberKey);
+    const remember = localStorage.getItem(environment.tokenRememberKey);
+    return ![true, 'true'].some(value => remember === value);
   }
   get value() {
+    if (this.isOneTimeToken && document.cookie.indexOf('checkClose') === -1) {
+      this.reset();
+      return null;
+    }
     return localStorage.getItem(environment.tokenKey);
   }
   set value(token: string) {
+    if (this.isOneTimeToken) {
+      document.cookie = `checkClose=true;`;
+    }
     localStorage.setItem(environment.tokenKey, token);
   }
   get hasValue(): boolean {
     return !!this.value;
   }
-  async verify(): Promise<boolean> {
-    // this._http.head()
-    const resp = await new Promise<boolean>((resolve, reject) => {
-      if (this.value === 'asdfghjkl') {
+  verify(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      const headers = new HttpHeaders({
+        'Authorization': this.header
+      });
+      this._http.head(environment.apiBasePath, {headers}).subscribe(() => {
         resolve(true);
-      } else {
+      }, () => {
         resolve(false);
-      }
+      });
     });
-    return resp;
   }
   rememberToken(status: boolean) {
     localStorage.setItem(environment.tokenRememberKey, `${status}`);
@@ -43,5 +56,8 @@ export class TokenService {
   reset() {
     this.remove();
     this.forgetToken();
+  }
+  get header() {
+    return `Bearer ${this.value}`;
   }
 }

@@ -6,6 +6,7 @@ import { TableModule } from 'src/app/layout/common/table';
 import { UserListService } from './user-list.service';
 import { SharedModule } from 'src/app/layout/shared/shared.module';
 import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule } from '@angular/material';
+import { ConfirmModule } from '@confirm';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModul
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    ConfirmModule
   ],
   exports: [
     UserListComponent

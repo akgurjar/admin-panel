@@ -11,8 +11,28 @@
     @include not-found-theming($theme);
 
     $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
     .button-loader {
         color: mat-color($primary);
+    }
+    .text--primary {
+        color: mat-color($primary);
+    }
+    .text--accent {
+        color: mat-color($accent);
+    }
+    .text--warn {
+        color: mat-color($warn);
+    }
+    .fill--primary {
+        background-color: mat-color($primary);
+    }
+    .fill--accent {
+        background-color: mat-color($accent);
+    }
+    .fill--warn {
+        background-color: mat-color($warn);
     }
 }
 

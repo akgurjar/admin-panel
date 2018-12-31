@@ -6,9 +6,11 @@ import {
   ViewChildren,
   QueryList,
   EventEmitter,
-  ContentChildren
+  ContentChildren,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
-import { MatTableDataSource, MatCheckboxChange, MatCheckbox } from '@angular/material';
+import { MatTableDataSource, MatCheckboxChange, MatCheckbox, MatDialog } from '@angular/material';
 import { ForDirective } from '../for';
 
 @Component({
@@ -19,16 +21,23 @@ import { ForDirective } from '../for';
 })
 export class TableComponent implements OnInit {
   @Input() tableSource: Table.Source<any>;
-  @Output() change: EventEmitter<any> = new EventEmitter();
+  @Input() disabled = false;
+  @Output() selectChange: EventEmitter<any> = new EventEmitter();
+  @Output() optionChange: EventEmitter<any> = new EventEmitter();
   get dataSource(): MatTableDataSource<any> {
-    return new MatTableDataSource(this.tableSource.data);
+    return new MatTableDataSource(this.tableSource.data.rows);
   }
   get displayedColumns(): string[] {
-    const columns = this.tableSource.columns.map(column => column.id);
-    return this.tableSource.options && this.tableSource.options.selection ? ['selection', ...columns] : columns;
+    if (this.tableSource) {
+      const columns = this.tableSource.columns.map(column => column.id);
+      const indexedColumns = this.tableSource.options && this.tableSource.options.index ? ['index', ...columns] : columns;
+      return this.tableSource.options && this.tableSource.options.selection ? ['selection', ...indexedColumns] : indexedColumns;
+    }
+    return [];
   }
   @ContentChildren(ForDirective) templates: QueryList<ForDirective>;
   @ViewChildren(MatCheckbox) checkBoxList: QueryList<MatCheckbox>;
+  @ViewChild('searchInput') searchRef: ElementRef<HTMLInputElement>;
   get checkBoxes(): MatCheckbox[] {
     return this.checkBoxList ? this.checkBoxList.toArray() : [];
   }
@@ -43,7 +52,30 @@ export class TableComponent implements OnInit {
       return total;
     }, []);
   }
-  constructor() {
+  get length(): number {
+    return this.tableSource ? this.tableSource.data.length : 0;
+  }
+  get pageSize(): number {
+    return this.tableSource ? this.tableSource.data.pageSize : 10;
+  }
+  get pageIndex(): number {
+    return this.tableSource ? this.tableSource.data.pageIndex : 0;
+  }
+  // search handler
+  isSearchError = false;
+  get searchHint(): string {
+    return this.isSearchError ? 'Search length should be greater than 3.' : 'Please tap enter to search.';
+  }
+  optionEvent: Table.OptionEvent = {
+    type: null,
+    data: {
+      pageIndex: 0,
+      pageSize: 10,
+      searchText: null,
+      filterData: null
+    }
+  };
+  constructor(private _dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -61,7 +93,7 @@ export class TableComponent implements OnInit {
         checkBox.toggle();
       }
     });
-    this._emitChangeEvent();
+    this._emitSelectEvent();
   }
   onSelectionChangeHandler(event: MatCheckboxChange) {
     const someUnChecked = this.rowCheckBoxes.some(checkBox => !checkBox.checked);
@@ -69,14 +101,81 @@ export class TableComponent implements OnInit {
     if ((someUnChecked && this.checkBoxList.first.checked) || (everyChecked && !this.checkBoxList.first.checked)) {
       this.checkBoxList.first.toggle();
     }
-    this._emitChangeEvent();
+    this._emitSelectEvent();
   }
-  private _emitChangeEvent() {
-    this.change.emit(this.rowCheckBoxes.reduce((total, checkBox, index) => {
+  private _emitSelectEvent() {
+    this.selectChange.emit(this.rowCheckBoxes.reduce((total, checkBox, index) => {
       if (checkBox.checked) {
         return [...total, {...this.dataSource.data[index]}];
       }
       return total;
     }, []));
+  }
+
+
+  // filter option
+  onFilterHandler() {
+    if (this.tableSource && this.tableSource.options && this.tableSource.options.filterComponent) {
+      const subscription = this._dialog.open(this.tableSource.options.filterComponent, {
+        disableClose: true,
+        position: {
+          right: '20px'
+        },
+        autoFocus: false,
+        data: this.optionEvent.data.filterData
+      }).afterClosed().subscribe((filterData) => {
+        if (filterData !== undefined) {
+          this.optionEvent = {
+            type: 'FILTER',
+            data: {
+              ...this.optionEvent.data,
+              filterData
+            }
+          };
+          this._emitOptionEvent();
+        }
+        subscription.unsubscribe();
+      });
+    }
+  }
+
+
+  // search handler
+  onFormFieldClickHandler(event: MouseEvent) {
+    event.stopPropagation();
+  }
+  onSearchHandler({code, key, currentTarget}: KeyboardEvent) {
+    this.isSearchError = false;
+    if ((code || key) === 'Enter') {
+      const value = (currentTarget as HTMLInputElement).value;
+      if (value.length >= 3) {
+        this.optionEvent = {
+          type: 'SEARCH',
+          data: {
+            ...this.optionEvent.data,
+            searchText: value
+          }
+        };
+        this._emitOptionEvent();
+      } else {
+        this.isSearchError = true;
+      }
+    }
+  }
+  // pagination handle
+  onPageHandler(event) {
+    // const page =
+    this.optionEvent = {
+      type: 'PAGINATION',
+      data: {
+        ...this.optionEvent.data,
+        pageIndex: event.pageIndex,
+        pageSize: event.pageSize
+      }
+    };
+    this._emitOptionEvent();
+  }
+  private _emitOptionEvent() {
+    this.optionChange.emit(this.optionEvent);
   }
 }

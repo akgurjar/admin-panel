@@ -14,14 +14,14 @@ export const SIDE_MENUS: SideNav[] = [
         link: '/users'
     },
     {
-        label: 'Products',
-        icon: 'explore',
-        link: '/products'
+        label: 'Reports',
+        icon: 'insert_chart',
+        link: '/reports'
     },
     {
-        label: 'Analytics',
-        icon: 'timeline',
-        link: '/analytics'
+        label: 'Manage Content',
+        icon: 'ballot',
+        link: '/content'
     }
 ];
 

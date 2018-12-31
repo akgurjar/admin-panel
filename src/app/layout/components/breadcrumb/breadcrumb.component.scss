@@ -18,3 +18,7 @@
         text-decoration: underline;
     }
 }
+.disabled {
+    color: inherit;
+    pointer-events: none;
+}

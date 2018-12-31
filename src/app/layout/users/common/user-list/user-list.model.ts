@@ -4,17 +4,12 @@ export class UserTableSource implements Table.Source<any> {
     label =  'User\'s List';
     columns: Table.Column<any>[] = [
         {
-            title: 'SR NO',
-            id: 'sn',
-            resolve: (row: any) => row['sn']
-        },
-        {
-            title: 'NAME',
+            title: 'Name',
             id: 'name',
             resolve: (row: any) => row['name']
         },
         {
-            title: 'EMAIL',
+            title: 'Email',
             id: 'email',
             resolve: (row: any) => row['email']
         },
@@ -30,5 +25,11 @@ export class UserTableSource implements Table.Source<any> {
         search: 'Search User',
         filterComponent: UserFilterComponent
     };
-    constructor(public data: any[]) {}
+    data: Table.Data<any>;
+    constructor(rows: any[], optionData = {pageIndex: 0, pageSize: 10, length: 0}) {
+        this.data = {
+            ...optionData,
+            rows
+        };
+    }
 }

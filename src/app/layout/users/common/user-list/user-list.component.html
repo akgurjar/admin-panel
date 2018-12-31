@@ -1,36 +1,16 @@
-<app-table-container [tableSource]="tableSource">
-  <ng-template appFor="list-actions">
-    <button mat-icon-button color="primary" (click)="onCreateUser()">
-      <mat-icon>person_add</mat-icon>
-    </button>
-    <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <div>
-        <button mat-button mat-icon-button color="accent">
-          <mat-icon>blocked</mat-icon>
+<app-table [tableSource]="tableSource" class="mat-elevation-z1">
+    <ng-template appFor="actions" let-user="row">
+        <button mat-icon-button color="primary" matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
         </button>
-        <button mat-button mat-icon-button color="accent">
-          <mat-icon>blocked</mat-icon>
+        <button mat-icon-button [color]="user.status === 2 ? 'primary' : 'warn'" [disabled]="user.status !== 1 && user.status !== 2" [matTooltip]="user.status === 2 ? 'Unblock' : 'Block'">
+            <mat-icon>{{ user.status === 2 ? 'restore' : 'block' }}</mat-icon>
         </button>
-        <button mat-button mat-icon-button color="accent">
-          <mat-icon>blocked</mat-icon>
+        <button mat-icon-button color="warn" matTooltip="Archive">
+            <mat-icon>archive</mat-icon>
         </button>
-      </div>
-    </mat-menu>
-  </ng-template>
-  <app-table>
-    <ng-template appFor="actions">
-      <button mat-button mat-icon-button color="primary">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-button mat-icon-button color="warn">
-        <mat-icon>blocked</mat-icon>
-      </button>
-      <button mat-button mat-icon-button color="warn">
-        <mat-icon>delete</mat-icon>
-      </button>
+        <button mat-icon-button color="warn" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+        </button>
     </ng-template>
-  </app-table>
-</app-table-container>
+</app-table>

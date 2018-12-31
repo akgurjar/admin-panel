@@ -13,27 +13,32 @@ export class UserListService {
       {
         sn: 1,
         name: 'Ashish Gurjar',
-        email: 'gurjar@email.com'
+        email: 'gurjar@email.com',
+        status: 1
       },
       {
         sn: 2,
         name: 'Ashish Jain',
-        email: 'jain@email.com'
+        email: 'jain@email.com',
+        status: 2
       },
       {
         sn: 3,
         name: 'Kamal Dobhal',
-        email: 'kamal@email.com'
+        email: 'kamal@email.com',
+        status: 3
       },
       {
         sn: 4,
         name: 'Kamal Dobhal',
-        email: 'kamal@email.com'
+        email: 'kamal@email.com',
+        status: 2
       },
       {
         sn: 5,
         name: 'Kamal Dobhal',
-        email: 'kamal@email.com'
+        email: 'kamal@email.com',
+        status: 1
       }
     ]);
   }

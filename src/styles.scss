@@ -41,3 +41,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.mat-menu-panel {
+    max-width: none !important;
+}

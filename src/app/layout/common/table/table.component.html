@@ -1,27 +1,49 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z1" *ngIf="!!tableSource">
-  <ng-container matColumnDef="selection">
-    <th mat-header-cell *matHeaderCellDef class="table-header">
-        <mat-checkbox (change)="onHeadSelectionChangeHandler($event)" color="primary"></mat-checkbox>
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <mat-checkbox (change)="onSelectionChangeHandler($event)" color="primary"></mat-checkbox>
-    </td>
-  </ng-container>
-  <ng-container [matColumnDef]="column.id" *ngFor="let column of tableSource.columns">
-    <th mat-header-cell *matHeaderCellDef class="table-header">{{column.title}}</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-container [ngTemplateOutlet]="templateOutlet(column) || columnTemplate" [ngTemplateOutletContext]="{row: element}"></ng-container>
-      <ng-template #columnTemplate>
-        {{ column.resolve && column.resolve(element) }}
-      </ng-template>
-    </td>
-  </ng-container>
-  <!-- <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
-    <td mat-cell *matCellDef="let element">
-      <ng-template [ngTemplateOutlet]="actions ? actions.template : null" [ngTemplateOutletContext]="{row: element}"></ng-template>
-    </td>
-  </ng-container> -->
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<div class="table-box__header">
+  <span class="primary-text">User's List</span>
+  <div style="flex: 1"></div>
+  <button mat-icon-button color="primary" matTooltip="Search" [disabled]="disabled" [matMenuTriggerFor]="searchMenu" (click)="searchInput.focus()">
+    <mat-icon>search</mat-icon>
+  </button>
+  <mat-menu #searchMenu="matMenu">
+    <mat-form-field (click)="onFormFieldClickHandler($event)">
+      <input matInput placeholder="Search by name and email" type="search" [disabled]="disabled" #searchInput (keydown)="onSearchHandler($event)"/>
+      <mat-hint>{{ searchHint }}</mat-hint>
+      <mat-icon class="search-clear" [ngClass]="{'search-clear--disabled': disabled}" matTooltip="clear" matSuffix (click)="searchInput.value = ''">close</mat-icon>
+    </mat-form-field>
+  </mat-menu>
+  <button mat-icon-button color="primary" matTooltip="Filter" [disabled]="disabled" (click)="onFilterHandler()">
+    <mat-icon>filter_list</mat-icon>
+  </button>
+</div>
+
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" *ngIf="!!tableSource">
+    <ng-container matColumnDef="selection">
+      <th mat-header-cell *matHeaderCellDef class="table-header">
+          <mat-checkbox (change)="onHeadSelectionChangeHandler($event)" color="primary"></mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox (change)="onSelectionChangeHandler($event)" color="primary"></mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef class="table-header">Sr. No.</th>
+      <td mat-cell *matCellDef="let element;let i = index"> {{ pageIndex * pageSize + i + 1 }} </td>
+    </ng-container>
+    <ng-container [matColumnDef]="column.id" *ngFor="let column of tableSource.columns">
+      <th mat-header-cell *matHeaderCellDef class="table-header">{{column.title}}</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container [ngTemplateOutlet]="templateOutlet(column) || columnTemplate" [ngTemplateOutletContext]="{row: element}"></ng-container>
+        <ng-template #columnTemplate>
+          {{ column.resolve && column.resolve(element) }}
+        </ng-template>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+
+<mat-paginator [disabled]="disabled" *ngIf="length > 0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageHandler($event)"></mat-paginator>
+

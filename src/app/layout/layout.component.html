@@ -11,9 +11,9 @@
           &nbsp;
         </button>
         <mat-menu #adminMenu="matMenu">
-          <button mat-button color="primary" class="admin-menu__button" routerLink="/admin">
+          <button mat-button color="primary" class="admin-menu__button" routerLink="/account">
             <mat-icon>person</mat-icon>&nbsp;&nbsp;
-            <span>Profile</span>
+            <span>Account</span>
           </button>
           <button mat-button color="primary" class="admin-menu__button" (click)="onLogoutHandler()">
             <mat-icon>exit_to_app</mat-icon>&nbsp;&nbsp;
@@ -40,13 +40,13 @@
       </button>&nbsp;
       <span class="toolbar-title">Admin Panel</span>
       <div style="flex: 1"></div>
-      <button mat-icon-button color="primary">
+      <button mat-icon-button color="primary" matTooltip="Messages">
         <mat-icon matBadge="2" matBadgeColor="accent">messages</mat-icon>
       </button>
-      <button mat-icon-button color="primary">
+      <button mat-icon-button color="primary" matTooltip="Notifications">
         <mat-icon matBadge="7" matBadgeColor="accent">notifications</mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="onLogoutHandler()">
+      <button mat-icon-button color="warn" (click)="onLogoutHandler()" matTooltip="Logout">
         <mat-icon>exit_to_app</mat-icon>
       </button>
       <mat-progress-bar mode="indeterminate" [attr.data-loading]="isLoading" color="primary"></mat-progress-bar>

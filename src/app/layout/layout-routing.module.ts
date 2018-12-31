@@ -13,8 +13,8 @@ export const routes: Routes = [
         redirectTo: '/dashboard'
       },
       {
-        path: 'admin',
-        loadChildren: './admin/admin.module#AdminModule'
+        path: 'account',
+        loadChildren: './account/account.module#AccountModule'
       },
       {
         path: 'dashboard',
@@ -25,8 +25,12 @@ export const routes: Routes = [
         loadChildren: './users/users.module#UsersModule'
       },
       {
-        path: 'products',
-        loadChildren: './products/products.module#ProductsModule'
+        path: 'reports',
+        loadChildren: './reports/reports.module#ReportsModule'
+      },
+      {
+        path: 'content',
+        loadChildren: './content/content.module#ContentModule'
       }
     ]
   }

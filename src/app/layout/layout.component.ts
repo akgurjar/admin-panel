@@ -23,12 +23,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
   get isDesktopDevice(): boolean {
     return this.mediaQuery.getDevice === 'COMPUTER';
   }
+  admin: any = null;
+  get adminName() {
+    return this.admin ? this.admin.name : 'loading...';
+  }
   constructor(
     public mediaQuery: MediaQueryService,
     private _layout: LayoutService,
     reqLoader: RequestLoaderService
   ) {
     reqLoader.changes.subscribe(isLoading => this.isLoading = isLoading);
+    _layout.admin.subscribe(admin => {
+      this.admin = admin;
+    });
   }
   ngOnInit() {
   }

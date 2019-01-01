@@ -15,6 +15,10 @@ export class PopupComponent implements OnInit {
   get isError() {
     return this._data.type === 'ERROR';
   }
+  @HostBinding('class.warn-snack')
+  get isWarning() {
+    return this._data.type === 'WARNING';
+  }
   @HostBinding('class.default-snack')
   get isDefault() {
     return this._data.type === 'DEFAULT';
@@ -24,11 +28,13 @@ export class PopupComponent implements OnInit {
   }
   get icon(): string {
     if (this.isError) {
-      return 'warning';
+      return 'error';
     } else if (this.isSucccess) {
       return 'check';
+    } else if (this.isWarning) {
+      return 'warning';
     } else {
-      return '';
+      return 'priority_high';
     }
   }
   constructor(

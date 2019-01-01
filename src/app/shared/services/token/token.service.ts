@@ -10,7 +10,7 @@ export class TokenService {
   constructor(
     private _http: HttpClient
   ) {
-    console.log(this.value);
+    // console.log(this.value);
   }
   get isOneTimeToken(): boolean {
     const remember = localStorage.getItem(environment.tokenRememberKey);

@@ -6,14 +6,14 @@
           <div class="account__photo content--center">
             <mat-icon>person_outline</mat-icon>
           </div>
-          <span class="truncate" style="flex: 1">Ashish Singh Gurjar Gurjar</span>
+          <span class="truncate" style="flex: 1;text-align: left">{{adminName}}</span>
           <mat-icon>arrow_drop_down</mat-icon>
           &nbsp;
         </button>
         <mat-menu #adminMenu="matMenu">
-          <button mat-button color="primary" class="admin-menu__button" routerLink="/account">
+          <button mat-button color="primary" class="admin-menu__button" routerLink="/profile">
             <mat-icon>person</mat-icon>&nbsp;&nbsp;
-            <span>Account</span>
+            <span>Profile</span>
           </button>
           <button mat-button color="primary" class="admin-menu__button" (click)="onLogoutHandler()">
             <mat-icon>exit_to_app</mat-icon>&nbsp;&nbsp;

@@ -4,22 +4,23 @@ import { Observable } from 'rxjs';
 
 import { Token } from '@token';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+// import { MatSnackBar } from '@angular/material';
 import { tap } from 'rxjs/operators';
 import { RequestLoaderService } from '../request-loader/request-loader.service';
+import { PopupService } from '@popup';
 
 @Injectable()
 export class LayoutInterceptor implements HttpInterceptor {
   constructor(
     private _token: Token,
     private _router: Router,
-    private _snackBar: MatSnackBar,
+    private _popup: PopupService,
     private _reqLoader: RequestLoaderService
   ) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this._token.hasValue) {
       const authRequest =  req.clone({
-        headers: req.headers.set('jwtauthorization', `Bearer ${this._token.value}`)
+        headers: req.headers.set('Authorization', `Bearer ${this._token.value}`)
       });
       this._reqLoader.markAsLoading();
       return next.handle(authRequest).pipe(tap(event => {
@@ -32,7 +33,7 @@ export class LayoutInterceptor implements HttpInterceptor {
         }
       }));
     } else {
-      this._snackBar.open('Your session is expired, Please login again.');
+      this._popup.open('Your session is expired, Please login again.', 'ERROR');
       this._router.navigateByUrl('/auth');
     }
   }

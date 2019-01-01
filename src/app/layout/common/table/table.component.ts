@@ -64,7 +64,7 @@ export class TableComponent implements OnInit {
   // search handler
   isSearchError = false;
   get searchHint(): string {
-    return this.isSearchError ? 'Search length should be greater than 3.' : 'Please tap enter to search.';
+    return this.isSearchError ? 'At least 3 charactor required to search.' : 'Please tap enter to search.';
   }
   optionEvent: Table.OptionEvent = {
     type: null,

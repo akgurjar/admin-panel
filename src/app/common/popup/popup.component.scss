@@ -6,17 +6,18 @@
     height: 100%;
     border-radius: 2px;
     padding: 14px;
+    background-color: #FFF;
 }
 :host-context(.success-snack) {
-    background-color: #2ecc71;
-    color: #FFF;
+    color: #2ecc71;
 }
 :host-context(.error-snack) {
-    background-color: #e74c3c;
-    color: #FFF;
+    color: #e74c3c;
+}
+:host-context(.warn-snack) {
+    color: #ffab40;
 }
 :host-context(.default-snack) {
-    background-color: #FFF;
     color: #444;
 }
 

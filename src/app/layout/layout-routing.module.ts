@@ -13,8 +13,8 @@ export const routes: Routes = [
         redirectTo: '/dashboard'
       },
       {
-        path: 'account',
-        loadChildren: './account/account.module#AccountModule'
+        path: 'profile',
+        loadChildren: './profile/profile.module#ProfileModule'
       },
       {
         path: 'dashboard',

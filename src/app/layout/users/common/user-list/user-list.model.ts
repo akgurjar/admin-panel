@@ -14,6 +14,21 @@ export class UserTableSource implements Table.Source<any> {
             resolve: (row: any) => row['email']
         },
         {
+            title: 'DOB',
+            id: 'dob',
+            templateBy: 'dob'
+        },
+        {
+            title: 'Created On',
+            id: 'createdOn',
+            templateBy: 'createdOn'
+        },
+        {
+            title: 'Updated On',
+            id: 'updatedOn',
+            templateBy: 'updatedOn'
+        },
+        {
             title: 'Actions',
             id: 'actions',
             templateBy: 'actions'

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserTableSource } from './user-list.model';
 import { UserListService } from './user-list.service';
 import { Router } from '@angular/router';
@@ -11,14 +11,16 @@ import { Router } from '@angular/router';
 })
 export class UserListComponent implements OnInit {
   tableSource: Table.Source<any> = new UserTableSource([]);
-  constructor(private _userList: UserListService, private _router: Router) {
-    _userList.changes.subscribe((data: any[]) => {
-      this.tableSource = new UserTableSource(data, {
-        length: data.length,
-        pageIndex: 0,
-        pageSize: 10
-      });
+  @Input('result')
+  set _data({data, length, pageIndex, pageSize}: ListingResult<any>) {
+    this.tableSource = new UserTableSource(data, {
+      length,
+      pageIndex,
+      pageSize
     });
+  }
+  constructor(private _userList: UserListService, private _router: Router) {
+
   }
 
   ngOnInit() {

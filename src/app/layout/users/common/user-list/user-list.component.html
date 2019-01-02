@@ -13,4 +13,13 @@
             <mat-icon>delete</mat-icon>
         </button>
     </ng-template>
+    <ng-template appFor="dob" let-row="row">
+        {{ row.dob | date : 'mediumDate' }}
+    </ng-template>
+    <ng-template appFor="createdOn" let-row="row">
+        {{ row.createdOn | date : 'mediumDate' }}
+    </ng-template>
+    <ng-template appFor="updatedOn" let-row="row">
+        {{ row.updatedOn | date : 'mediumDate' }}
+    </ng-template>
 </app-table>

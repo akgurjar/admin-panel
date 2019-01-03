@@ -4,6 +4,7 @@ import { MediaQueryService } from '../shared/services/media-query/media-query.se
 import { SIDE_MENUS } from './common/models';
 import { RequestLoaderService } from './shared/services/request-loader/request-loader.service';
 import { LayoutService } from './shared/services/layout/layout.service';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-layout',
@@ -23,6 +24,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   get isDesktopDevice(): boolean {
     return this.mediaQuery.getDevice === 'COMPUTER';
   }
+  readonly appVersion = environment.appVersion;
   admin: any = null;
   get adminName() {
     return this.admin ? this.admin.name : 'loading...';

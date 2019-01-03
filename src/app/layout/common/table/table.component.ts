@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { MatTableDataSource, MatCheckboxChange, MatCheckbox, MatDialog } from '@angular/material';
 import { ForDirective } from '../for';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-table',
@@ -20,8 +21,20 @@ import { ForDirective } from '../for';
   exportAs: 'DataTable'
 })
 export class TableComponent implements OnInit {
+  private _disabled = false;
+  @Input()
+  set disabled(state: boolean) {
+    this._disabled = coerceBooleanProperty(state);
+    if (!this._disabled && this.searchRef) {
+      setTimeout(() => {
+        this.searchRef.nativeElement.focus();
+      });
+    }
+  }
+  get disabled(): boolean {
+    return this._disabled;
+  }
   @Input() tableSource: Table.Source<any>;
-  @Input() disabled = false;
   @Output() selectChange: EventEmitter<any> = new EventEmitter();
   @Output() optionChange: EventEmitter<any> = new EventEmitter();
   get dataSource(): MatTableDataSource<any> {
@@ -62,9 +75,36 @@ export class TableComponent implements OnInit {
     return this.tableSource ? this.tableSource.data.pageIndex : 0;
   }
   // search handler
+  private _searchHintType: Table.SearchHintType = 'DEFAULT';
   isSearchError = false;
   get searchHint(): string {
-    return this.isSearchError ? 'At least 3 charactor required to search.' : 'Please tap enter to search.';
+    let hint: string;
+    switch (this._searchHintType) {
+      case 'SEARCHED': {
+        hint = 'Search is already done.';
+        break;
+      }
+      case 'INVALID': {
+        hint = 'At least 3 charactor required to search.';
+        break;
+      }
+      case 'DEFAULT':
+      default: {
+        hint = 'Please tap enter to search.';
+        break;
+      }
+    }
+    return hint;
+  }
+  get placeholder() {
+    const search = this.tableSource && this.tableSource.options && this.tableSource.options.search;
+    if (search && typeof search === 'string') {
+      return search;
+    }
+    return 'Search';
+  }
+  get hasSorting(): boolean {
+    return this.tableSource && this.tableSource.options && this.tableSource.options.sorting;
   }
   optionEvent: Table.OptionEvent = {
     type: null,
@@ -144,23 +184,42 @@ export class TableComponent implements OnInit {
   onFormFieldClickHandler(event: MouseEvent) {
     event.stopPropagation();
   }
-  onSearchHandler({code, key, currentTarget}: KeyboardEvent) {
+  onSearchHandler(event: KeyboardEvent) {
     this.isSearchError = false;
-    if ((code || key) === 'Enter') {
-      const value = (currentTarget as HTMLInputElement).value;
-      if (value.length >= 3) {
-        this.optionEvent = {
-          type: 'SEARCH',
-          data: {
-            ...this.optionEvent.data,
-            searchText: value
-          }
-        };
-        this._emitOptionEvent();
+    this._searchHintType = 'DEFAULT';
+    const target: HTMLInputElement = event.currentTarget as HTMLInputElement;
+    const key = event.code || event.key;
+    if (key === 'Enter') {
+      const value = target.value.trim();
+      if (value.length >= 3 || (value.length === 0 && this.optionEvent.data.searchText)) {
+        if (value !== this.optionEvent.data.searchText) {
+          this.optionEvent = {
+            type: 'SEARCH',
+            data: {
+              ...this.optionEvent.data,
+              searchText: value || null
+            }
+          };
+          this._emitOptionEvent();
+        } else {
+          this._searchHintType = 'SEARCHED';
+        }
       } else {
+        this._searchHintType = 'INVALID';
         this.isSearchError = true;
       }
+    } else if (key === 'Space' && !target.selectionStart) {
+      event.preventDefault();
+      // const value = (currentTarget as HTMLInputElement).value;
+      // if (value !== value.trimLeft()) {
+      //   preventDefault();
+      // }
+
     }
+  }
+  onPasteHandler({target}: KeyboardEvent) {
+    const input = target as HTMLInputElement;
+    input.value = input.value.trim();
   }
   // pagination handle
   onPageHandler(event) {

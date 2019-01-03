@@ -6,7 +6,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatPaginatorModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSortModule
 } from '@angular/material';
 import { SharedModule } from '../../shared/shared.module';
 import { TableComponent } from './table.component';
@@ -19,10 +20,11 @@ import { ForModule } from '../for';
   imports: [
     CommonModule,
     SharedModule,
+    MatSortModule,
     MatTableModule,
+    MatInputModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatInputModule,
     MatPaginatorModule,
     MatDialogModule,
     ForModule

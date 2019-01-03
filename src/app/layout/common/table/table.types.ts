@@ -4,6 +4,7 @@ namespace Table {
     export interface Column<T> {
         title: string;
         id: string;
+        sorting?: boolean;
         templateBy?: string;
         resolve?: (row: T) => string;
     }
@@ -11,6 +12,7 @@ namespace Table {
         selection?: boolean;
         index?: boolean;
         search?: boolean | string;
+        sorting?: boolean;
         filterComponent?: any;
     }
     export interface Data<T> {
@@ -36,5 +38,6 @@ namespace Table {
         type: OptionType;
         data: OptionData;
     }
+    export type SearchHintType = 'DEFAULT' | 'SEARCHED' | 'INVALID';
 }
 

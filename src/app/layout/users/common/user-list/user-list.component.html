@@ -1,4 +1,4 @@
-<app-table [tableSource]="tableSource" class="mat-elevation-z1">
+<app-table [tableSource]="tableSource" (optionChange)="onChangeHandler($event)" class="mat-elevation-z1" [disabled]="isLoading">
     <ng-template appFor="actions" let-user="row">
         <button mat-icon-button color="primary" matTooltip="Edit">
             <mat-icon>edit</mat-icon>

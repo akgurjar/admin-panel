@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserTableSource } from './user-list.model';
-import { UserListService } from './user-list.service';
 import { Router } from '@angular/router';
+import { UsersService } from '../../users.service';
 
 
 @Component({
@@ -13,13 +13,15 @@ export class UserListComponent implements OnInit {
   tableSource: Table.Source<any> = new UserTableSource([]);
   @Input('result')
   set _data({data, length, pageIndex, pageSize}: ListingResult<any>) {
+    this.isLoading = false;
     this.tableSource = new UserTableSource(data, {
       length,
       pageIndex,
       pageSize
     });
   }
-  constructor(private _userList: UserListService, private _router: Router) {
+  isLoading = false;
+  constructor(private _users: UsersService, private _router: Router) {
 
   }
 
@@ -31,4 +33,25 @@ export class UserListComponent implements OnInit {
   onArchiveHandler(id: string) {}
   onDeleteHandler(id: string) {}
   onBlockChangeHandler(id: string, status: number) {}
+  onChangeHandler({data}: Table.OptionEvent) {
+    this.isLoading = true;
+    const params: any = {
+      pageIndex: data.pageIndex,
+      pageSize: data.pageSize
+    };
+    if (data.searchText) {
+      params['searchText'] = data.searchText;
+    }
+    if (data.filterData) {
+      Object.keys(data.filterData).forEach((key) => {
+        if (data.filterData[key]) {
+          params[key] = data.filterData[key];
+        }
+      });
+    }
+    this._users.fetch(params);
+    // setTimeout(() => {
+    //   this.isLoading = false;
+    // }, 5000);
+  }
 }

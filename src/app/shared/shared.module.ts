@@ -8,7 +8,7 @@ import {
   MatNativeDateModule
 } from '@angular/material';
 import { LoaderComponent } from './components/loader/loader.component';
-import { HttpInterceptorService } from './services/http-interceptor/http-interceptor.service';
+import { InterceptorService } from './services/interceptor/interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -35,7 +35,7 @@ const Modules = [
     LoaderComponent
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ]
 })
 export class SharedModule { }

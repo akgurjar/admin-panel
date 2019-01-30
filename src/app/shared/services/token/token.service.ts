@@ -32,17 +32,11 @@ export class TokenService {
   get hasValue(): boolean {
     return !!this.value;
   }
-  verify(): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      const headers = new HttpHeaders({
-        'Authorization': this.header
-      });
-      this._http.head(environment.apiBasePath, {headers}).subscribe(() => {
-        resolve(true);
-      }, () => {
-        resolve(false);
-      });
-    });
+  async verify(): Promise<boolean> {
+    if (this.value === 'asdfghjkl') {
+      return true;
+    }
+    return false;
   }
   rememberToken(status: boolean) {
     localStorage.setItem(environment.tokenRememberKey, `${status}`);

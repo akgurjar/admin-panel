@@ -3,8 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 
 let loadingCount = 0;
 
-@Injectable()
-export class RequestLoaderService {
+@Injectable({
+  providedIn: 'root'
+})
+export class LoaderService {
   private _state: BehaviorSubject<boolean> = new BehaviorSubject(false);
   get changes() {
     return this._state.asObservable();

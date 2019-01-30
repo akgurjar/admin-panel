@@ -12,10 +12,12 @@ import {
 import { SharedModule } from '../../shared/shared.module';
 import { TableComponent } from './table.component';
 import { ForModule } from '../for';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
-    TableComponent
+    TableComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,11 @@ import { ForModule } from '../for';
   ],
   exports: [
     TableComponent,
+    FilterComponent,
     ForModule
+  ],
+  entryComponents: [
+    FilterComponent
   ]
 })
 export class TableModule { }

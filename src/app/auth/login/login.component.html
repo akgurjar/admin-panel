@@ -15,8 +15,8 @@
   <mat-slide-toggle color="primary" formControlName="remember">Remember</mat-slide-toggle>
 </form>
 <div class="auth-form__actions">
-  <button mat-button mat-stroked-button routerLink="../forgot">Forgot Password</button>
-  <button mat-button mat-raised-button color="primary" (click)="onLoginHandler()" [appButtonLoader]="loginForm.disabled" [disabled]="loginForm.disabled || !loginForm.valid">
+  <button mat-button mat-stroked-button (click)="onForgotPasswordHandler()" [disabled]="this.loginForm.disabled">Forgot Password</button>
+  <button mat-button mat-raised-button color="primary" (click)="onLoginHandler()" [disabled]="loginForm.disabled || !loginForm.valid">
     <mat-icon>exit_to_app</mat-icon>&nbsp;
     <span>LOGIN</span>
   </button>

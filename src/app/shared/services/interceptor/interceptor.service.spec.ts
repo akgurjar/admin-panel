@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RequestLoaderService } from './request-loader.service';
+import { InterceptorService } from './interceptor.service';
 
-describe('RequestLoaderService', () => {
+describe('InterceptorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: RequestLoaderService = TestBed.get(RequestLoaderService);
+    const service: InterceptorService = TestBed.get(InterceptorService);
     expect(service).toBeTruthy();
   });
 });

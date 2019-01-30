@@ -1,36 +1,24 @@
-<span class="filter-title">User Filter</span>
 
-<button mat-icon-button color="warn" class="dialog-button" (click)="onCancelHandler()">
-  <mat-icon>close</mat-icon>
-</button>
-
-<form [formGroup]="filterForm">
-  <mat-form-field>
-    <input matInput [matDatepicker]="createdFromPicker" formControlName="createdFrom" placeholder="Created From" readonly (click)="createdFromPicker.open()">
-    <mat-datepicker-toggle matSuffix [for]="createdFromPicker"></mat-datepicker-toggle>
-    <mat-datepicker #createdFromPicker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="createdToPicker" formControlName="createdTo" placeholder="Created To" readonly (click)="createdToPicker.open()">
-    <mat-datepicker-toggle matSuffix [for]="createdToPicker"></mat-datepicker-toggle>
-    <mat-datepicker #createdToPicker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="User Status"  formControlName="status">
-      <mat-option value="0">InActive</mat-option>
-      <mat-option value="1">Active</mat-option>
-      <mat-option value="2">Blocked</mat-option>
-      <mat-option value="3">Archived</mat-option>
-      <mat-option value="4">Deleted</mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
-<div class="filter-actions">
-  <button mat-stroked-button (click)="onResetHandler()">
-    Reset
-  </button>
-  <button mat-raised-button color="primary" (click)="onApplyHandler()">
-    <mat-icon>filter_list</mat-icon>&nbsp;
-    Apply
-  </button>
-</div>
+<app-filter (reset)="onResetHandler()" (apply)="onApplyHandler()">
+  <form [formGroup]="filterForm">
+    <mat-form-field>
+      <input matInput [matDatepicker]="createdFromPicker" formControlName="createdFrom" placeholder="Created From" readonly (click)="createdFromPicker.open()">
+      <mat-datepicker-toggle matSuffix [for]="createdFromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #createdFromPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="createdToPicker" formControlName="createdTo" placeholder="Created To" readonly (click)="createdToPicker.open()">
+      <mat-datepicker-toggle matSuffix [for]="createdToPicker"></mat-datepicker-toggle>
+      <mat-datepicker #createdToPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="User Status"  formControlName="status">
+        <mat-option value="0">Unverified</mat-option>
+        <mat-option value="1">Active</mat-option>
+        <mat-option value="2">Blocked</mat-option>
+        <mat-option value="3">Archived</mat-option>
+        <mat-option value="4">Deleted</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</app-filter>

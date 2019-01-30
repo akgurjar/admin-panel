@@ -6,10 +6,9 @@
 .confirm__title {
     display: block;
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 500;
     color: #FFF;
-    margin: -24px;
-    margin-bottom: 15px;
+    margin: -24px 0 24px -24px;
     width: calc(100% + 48px);
     background-color: #ffab40;
     height: 52px;
@@ -21,6 +20,11 @@
 .confirm__actions {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin-top: 28px;
+    align-items: center;
+    justify-content: space-around;
+    margin: 24px 0 -24px -24px;
+    background-color: rgba(#000, .07);
+    height: 52px;
+    width: calc(100% + 48px);
+    box-shadow: 0 3px 2px -2px rgba(#000, 0.25) inset;
 }

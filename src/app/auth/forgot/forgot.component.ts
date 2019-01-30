@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../shared/auth.service';
 import { MAT_ERROR, CustomValidators } from '@form-field';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot',
@@ -12,7 +13,11 @@ export class ForgotComponent implements OnInit {
   matError = MAT_ERROR;
   forgotForm: FormGroup;
   mailSentTo: string = null;
-  constructor(fb: FormBuilder, private _auth: AuthService) {
+  constructor(
+    fb: FormBuilder,
+    private _auth: AuthService,
+    private _router: Router
+  ) {
     this.forgotForm = fb.group({
       email: [null, [Validators.required, ...CustomValidators.email]]
     });
@@ -32,5 +37,9 @@ export class ForgotComponent implements OnInit {
         // this
       });
     }
+  }
+  onBackToLoginHandler() {
+    const url = this._router.url;
+    this._router.navigate([url.substr(0, url.lastIndexOf('/')), 'login']);
   }
 }

@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MediaQueryService } from '../shared/services/media-query/media-query.service';
 
 import { SIDE_MENUS } from './common/models';
-import { RequestLoaderService } from './shared/services/request-loader/request-loader.service';
 import { LayoutService } from './shared/services/layout/layout.service';
 import { environment } from '@environment';
+import { LoaderService } from '@loader';
 
 @Component({
   selector: 'app-layout',
@@ -32,9 +32,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
   constructor(
     public mediaQuery: MediaQueryService,
     private _layout: LayoutService,
-    reqLoader: RequestLoaderService
+    loader: LoaderService
   ) {
-    reqLoader.changes.subscribe(isLoading => this.isLoading = isLoading);
+    loader.changes.subscribe(isLoading => this.isLoading = isLoading);
     _layout.admin.subscribe(admin => {
       this.admin = admin;
     });

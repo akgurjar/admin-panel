@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { MAT_ERROR, CustomValidators } from '@form-field';
 
@@ -47,5 +47,9 @@ export class LoginComponent implements OnInit {
         console.log(error);
       });
     }
+  }
+  onForgotPasswordHandler() {
+    const url = this._router.url;
+    this._router.navigate([url.substr(0, url.lastIndexOf('/')), 'forgot']);
   }
 }

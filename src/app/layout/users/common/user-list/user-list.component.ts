@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserTableSource } from './user-list.model';
 import { Router } from '@angular/router';
-import { UsersService } from '../../users.service';
+import { UserListService } from './user-list.service';
 
 
 @Component({
@@ -11,18 +11,13 @@ import { UsersService } from '../../users.service';
 })
 export class UserListComponent implements OnInit {
   tableSource: Table.Source<any> = new UserTableSource([]);
-  @Input('result')
-  set _data({data, length, pageIndex, pageSize}: ListingResult<any>) {
-    this.isLoading = false;
-    this.tableSource = new UserTableSource(data, {
-      length,
-      pageIndex,
-      pageSize
-    });
-  }
   isLoading = false;
-  constructor(private _users: UsersService, private _router: Router) {
-
+  constructor(private _userList: UserListService, private _router: Router) {
+    this._userList.changes.subscribe((data) => {
+      if (data) {
+        this.tableSource = new UserTableSource(data)
+      }
+    });
   }
 
   ngOnInit() {
@@ -49,7 +44,7 @@ export class UserListComponent implements OnInit {
         }
       });
     }
-    this._users.fetch(params);
+    // this._users.fetch(params);
     // setTimeout(() => {
     //   this.isLoading = false;
     // }, 5000);

@@ -16,7 +16,7 @@ export class AuthService {
 
     const resp = await new Promise<boolean>((resolve, reject) => {
       setTimeout(() => {
-        if (username === 'admin@test.com' && password === 'asdfghjkl') {
+        if (username === 'admin@gmail.com' && password === 'asdfghjkl') {
           this._popup.open('Login successful', 'SUCCESS', {
             duration: 4000
           });

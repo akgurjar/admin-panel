@@ -4,15 +4,15 @@ export class UserTableSource implements Table.Source<any> {
     label =  'User\'s List';
     columns: Table.Column<any>[] = [
         {
-            title: 'Name',
-            id: 'name',
-            resolve: (row: any) => row['name']
+            title: 'Display Name',
+            id: 'displayName',
+            resolve: (row: any) => row['displayName']
         },
         {
-            title: 'DOB',
-            id: 'dob',
-            templateBy: 'dob',
-            sorting: true
+            title: 'Age',
+            id: 'age',
+            sorting: true,
+            resolve: (row) => `${row['age']} Years`
         },
         {
             title: 'Email',

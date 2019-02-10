@@ -16,10 +16,10 @@
     <ng-template appFor="dob" let-row="row">
         {{ row.dob | date : 'mediumDate' }}
     </ng-template>
-    <ng-template appFor="createdOn" let-row="row">
-        {{ row.createdOn | date : 'mediumDate' }}
+    <ng-template appFor="createdAt" let-row="row">
+        {{ row.createdAt | date : 'mediumDate' }}
     </ng-template>
-    <ng-template appFor="updatedOn" let-row="row">
-        {{ row.updatedOn | date : 'mediumDate' }}
+    <ng-template appFor="updatedAt" let-row="row">
+        {{ row.updatedAt | date : 'mediumDate' }}
     </ng-template>
 </app-table>

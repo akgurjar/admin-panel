@@ -27,7 +27,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   readonly appVersion = environment.appVersion;
   admin: any = null;
   get adminName() {
-    return this.admin ? this.admin.name : 'loading...';
+    return this.admin ? this.admin.displayName : 'loading...';
   }
   constructor(
     public mediaQuery: MediaQueryService,

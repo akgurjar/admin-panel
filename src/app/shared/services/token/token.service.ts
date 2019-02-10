@@ -18,25 +18,34 @@ export class TokenService {
   }
   get value() {
     if (this.isOneTimeToken && document.cookie.indexOf('checkClose') === -1) {
+      document.cookie = `checkClose=true;`;
       this.reset();
       return null;
     }
     return localStorage.getItem(environment.tokenKey);
   }
   set value(token: string) {
-    if (this.isOneTimeToken) {
-      document.cookie = `checkClose=true;`;
-    }
     localStorage.setItem(environment.tokenKey, token);
   }
   get hasValue(): boolean {
     return !!this.value;
   }
-  async verify(): Promise<boolean> {
-    if (this.value === 'asdfghjkl') {
-      return true;
-    }
-    return false;
+  verify(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      if (this.value) {
+        const headers = new HttpHeaders({
+          Authorization: `Bearer ${this.value}`
+        });
+        this._http.head(`${environment.apiBaseUrl}/token`, {headers})
+        .subscribe(() => {
+          resolve(true);
+        }, () => {
+          resolve(false);
+        });
+      } else {
+        resolve(false);
+      }
+    });
   }
   rememberToken(status: boolean) {
     localStorage.setItem(environment.tokenRememberKey, `${status}`);

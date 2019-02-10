@@ -7,10 +7,10 @@ import { UsersService } from '../users.service';
   styleUrls: ['./user-listing.component.scss']
 })
 export class UserListingComponent implements OnInit {
-  result: ListingResult<any> = {
+  result: Api.ListResult<any> = {
     pageIndex: 0,
     pageSize: 10,
-    length: 0,
+    total: 0,
     data: []
   };
   constructor(

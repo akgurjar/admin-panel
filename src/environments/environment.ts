@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiBasePath: 'http://localhost:3000',
+  apiBaseUrl: '/api/v1',
   appVersion: '0.0.1-beta1',
-  tokenKey: `${location.origin}/TOKEN_KEY`,
-  tokenRememberKey: `${location.origin}/TOKEN_REMEMBER_KEY`
+  tokenKey: `${location.origin}/RCC_TOKEN_KEY`,
+  tokenRememberKey: `${location.origin}/RCC_TOKEN_REMEMBER_KEY`
 };
 
 /*

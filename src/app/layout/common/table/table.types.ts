@@ -5,6 +5,7 @@ namespace Table {
         title: string;
         id: string;
         sorting?: boolean;
+        centered?: boolean;
         templateBy?: string;
         resolve?: (row: T) => string;
     }
@@ -16,7 +17,7 @@ namespace Table {
         filterComponent?: any;
     }
     export interface Data<T> {
-        length: number;
+        total: number;
         pageSize: number;
         pageIndex: number;
         rows: T[];

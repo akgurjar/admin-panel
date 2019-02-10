@@ -22,9 +22,10 @@ export class LayoutService {
     this.refreshAdmin();
   }
   refreshAdmin() {
-    const url = `${environment.apiBasePath}/`;
-    this._http.get<ApiResponse<any>>(url).subscribe((resp) => {
+    const url = `${environment.apiBaseUrl}/admin/details`;
+    this._http.get<Api.Response<any>>(url).subscribe((resp) => {
       this._admin.next(resp.result);
+      console.log(resp.result);
     });
   }
   logout() {

@@ -53,9 +53,7 @@
     </mat-toolbar>
     <main class="sidenav__content">
       <app-breadcrumb class="page-header"></app-breadcrumb>
-      <app-loader [isActivated]="route.isActivated">
-        <router-outlet #route="outlet"></router-outlet>
-      </app-loader>
+      <router-outlet #route="outlet"></router-outlet>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -66,13 +66,22 @@ export class TableComponent implements OnInit {
     }, []);
   }
   get length(): number {
-    return this.tableSource ? this.tableSource.data.length : 0;
+    return (this.tableSource && this.tableSource.data && this.tableSource.data.total) || 0;
   }
   get pageSize(): number {
-    return this.tableSource ? this.tableSource.data.pageSize : 10;
+    return this.tableSource ? this.tableSource.data && this.tableSource.data.pageSize : 10;
   }
   get pageIndex(): number {
     return this.tableSource ? this.tableSource.data.pageIndex : 0;
+  }
+  get isEmpty(): boolean {
+    if (this.tableSource && this.tableSource.data && this.tableSource.data.rows) {
+      return !this.tableSource.data.rows.length;
+    }
+    return false;
+  }
+  get isLoaded(): boolean {
+    return !!this.tableSource.data.rows;
   }
   // search handler
   private _searchHintType: Table.SearchHintType = 'DEFAULT';

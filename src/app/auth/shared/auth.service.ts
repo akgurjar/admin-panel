@@ -10,33 +10,17 @@ export class AuthService {
 
   constructor(
     private _token: Token,
-    private _popup: PopupService
+    private _popup: PopupService,
+    private _http: HttpClient
   ) { }
   async login({username, password}: Auth.LoginCredential, remember: boolean = false): Promise<boolean> {
-
-    const resp = await new Promise<boolean>((resolve, reject) => {
-      setTimeout(() => {
-        if (username === 'admin@gmail.com' && password === 'asdfghjkl') {
-          this._popup.open('Login successful', 'SUCCESS', {
-            duration: 4000
-          });
-          this._token.value = 'asdfghjkl';
-          this._token.rememberToken(remember);
-          resolve(true);
-        } else if (username === 'admin@test.com') {
-          this._popup.open('Invalid credentials.', 'ERROR', {
-            duration: 4000
-          });
-          reject(new Error('Invalid credentials!'));
-        } else {
-          this._popup.open('Account doesn\'t exists.', 'ERROR', {
-            duration: 4000
-          });
-          reject(new Error('Forgot Error'));
-        }
-      }, 4000);
-    });
-    return resp;
+    const url = `${environment.apiBaseUrl}/admin/authenticate`;
+    const resp = await this._http.post<Api.Response<string>>(url, {email: username, password}).toPromise();
+    if (resp.result) {
+      this._token.rememberToken(remember);
+      this._token.value = resp.result;
+    }
+    return resp.result && !!resp.result;
   }
   async forgot(email: string): Promise<boolean> {
     const resp = await new Promise<boolean>((resolve, reject) => {

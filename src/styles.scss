@@ -45,3 +45,10 @@
 .mat-menu-panel {
     max-width: none !important;
 }
+
+th[data-centered=true]>.mat-sort-header-container {
+    justify-content: center;
+    button {
+        margin-left: 18px;
+    }
+}

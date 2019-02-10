@@ -10,12 +10,14 @@ import { UserListService } from './user-list.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  tableSource: Table.Source<any> = new UserTableSource([]);
+  tableSource: Table.Source<any> = new UserTableSource(null);
   isLoading = false;
   constructor(private _userList: UserListService, private _router: Router) {
-    this._userList.changes.subscribe((data) => {
-      if (data) {
-        this.tableSource = new UserTableSource(data)
+    this._userList.changes.subscribe((result) => {
+      if (result) {
+        const {data, ...options} = result;
+        this.isLoading = false;
+        this.tableSource = new UserTableSource(data, options);
       }
     });
   }
@@ -44,9 +46,6 @@ export class UserListComponent implements OnInit {
         }
       });
     }
-    // this._users.fetch(params);
-    // setTimeout(() => {
-    //   this.isLoading = false;
-    // }, 5000);
+    this._userList.next(params);
   }
 }

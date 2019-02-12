@@ -10,7 +10,7 @@
   <p style="text-align: center">forgot your password? Don't Worry. Send us your registered email address and we will send you steps to reset your password.</p>
   <form [formGroup]="forgotForm">
     <mat-form-field>
-      <input matInput placeholder="Email" type="email" required formControlName="email" autocomplete="off"/>
+      <input matInput placeholder="Email" type="email" required formControlName="email" autocomplete="off" spellcheck="false"/>
       <mat-icon matPrefix class="form-field-icon">email</mat-icon>
       <mat-error>{{matError(forgotForm.controls['email'], 'Email')}}</mat-error>
     </mat-form-field>

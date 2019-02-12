@@ -21,7 +21,7 @@
           </button>
         </mat-menu>
       </div>
-      <a class="sidenav__item" [routerLink]="menu.link" routerLinkActive="sidenav__item--active" *ngFor="let menu of sideMenus">
+      <a class="sidenav__item" matRipple matRippleColor="rgba(255, 255, 255, .1)" [routerLink]="menu.link" routerLinkActive="sidenav__item--active" *ngFor="let menu of sideMenus">
         <mat-icon>{{menu.icon}}</mat-icon>&nbsp;&nbsp;
         <span>{{menu.label}}</span>
       </a>
@@ -53,9 +53,7 @@
     </mat-toolbar>
     <main class="sidenav__content">
       <app-breadcrumb class="page-header"></app-breadcrumb>
-      <app-loader [isActivated]="route.isActivated">
-        <router-outlet #route="outlet"></router-outlet>
-      </app-loader>
+      <router-outlet #route="outlet"></router-outlet>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

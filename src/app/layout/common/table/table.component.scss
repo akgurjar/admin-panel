@@ -40,4 +40,13 @@ table {
 }
 .table-header {
     color: #FFF;
+    font-size: 16px;
+}
+.align--center {
+    text-align: center;
+}
+.table__placeholder {
+    height: 220px;
+    font-size: 36px;
+    color: rgba(#000, .5);
 }

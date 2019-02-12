@@ -8,32 +8,33 @@ export class UserTableSource implements Table.Source<any> {
             id: 'displayName',
             resolve: (row: any) => row['displayName']
         },
-        {
-            title: 'Age',
-            id: 'age',
-            sorting: true,
-            resolve: (row) => `${row['age']} Years`
-        },
+        // {
+        //     title: 'Age',
+        //     id: 'age',
+        //     sorting: true,
+        //     resolve: (row) => `${row['age']} Years`
+        // },
         {
             title: 'Email',
             id: 'email',
             resolve: (row: any) => row['email']
         },
         {
-            title: 'Created On',
-            id: 'createdOn',
-            templateBy: 'createdOn',
+            title: 'Created At',
+            id: 'createdAt',
+            templateBy: 'createdAt',
             sorting: true
         },
         {
-            title: 'Updated On',
-            id: 'updatedOn',
-            templateBy: 'updatedOn',
+            title: 'Updated At',
+            id: 'updatedAt',
+            templateBy: 'updatedAt',
             sorting: true
         },
         {
             title: 'Actions',
             id: 'actions',
+            centered: true,
             templateBy: 'actions'
         }
     ];
@@ -45,7 +46,7 @@ export class UserTableSource implements Table.Source<any> {
         filterComponent: UserFilterComponent,
     };
     data: Table.Data<any>;
-    constructor(rows: any[], optionData = {pageIndex: 0, pageSize: 10, length: 0}) {
+    constructor(rows: any[], optionData = {pageIndex: 0, pageSize: 10, total: 0}) {
         this.data = {
             ...optionData,
             rows

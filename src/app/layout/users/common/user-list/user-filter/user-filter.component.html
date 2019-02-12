@@ -2,12 +2,12 @@
 <app-filter (reset)="onResetHandler()" (apply)="onApplyHandler()">
   <form [formGroup]="filterForm">
     <mat-form-field>
-      <input matInput [matDatepicker]="createdFromPicker" formControlName="createdFrom" placeholder="Created From" readonly (click)="createdFromPicker.open()">
+      <input matInput [matDatepicker]="createdFromPicker" [max]="filterForm.controls['createdTo'].value || now" formControlName="createdFrom" placeholder="Created From" readonly (click)="createdFromPicker.open()">
       <mat-datepicker-toggle matSuffix [for]="createdFromPicker"></mat-datepicker-toggle>
       <mat-datepicker #createdFromPicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput [matDatepicker]="createdToPicker" formControlName="createdTo" placeholder="Created To" readonly (click)="createdToPicker.open()">
+      <input matInput [matDatepicker]="createdToPicker" [min]="filterForm.controls['createdFrom'].value" [max]="now" formControlName="createdTo" placeholder="Created To" readonly (click)="createdToPicker.open()">
       <mat-datepicker-toggle matSuffix [for]="createdToPicker"></mat-datepicker-toggle>
       <mat-datepicker #createdToPicker></mat-datepicker>
     </mat-form-field>

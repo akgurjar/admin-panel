@@ -36,6 +36,7 @@ button {
     align-items: center;
     border-radius: 22px;
     font-size: 16px;
+    font-weight: 500;
     background-color: #FFF;
     overflow: hidden;
     // box-shadow: 0 0 2px rgba(#000, .12);
@@ -68,12 +69,14 @@ mat-sidenav {
 }
 mat-sidenav-content {
     background-color: #EEE;
-    // box-shadow: 0 0 0 1px rgba(#000, .07) inset, 0 2px 2px rgba(#000, .07) inset;
-    overflow-x: hidden;
-    overflow-y: auto;
+    height: 100%;
+    overflow: hidden;
 }
 .sidenav__content {
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 10px;
+    height: calc(100% - 76px);
 }
 .sidenav__wrapper {
     display: flex;
@@ -99,16 +102,24 @@ mat-sidenav-content {
     color: inherit;
     border-top: 1px solid rgba(#FFF, .1);
     border-bottom: 1px solid rgba(#000, .1);
+    transition: background-color .5s linear;
     mat-icon {
         margin: 0 5px;
     }
-    // &:hover {
-    //     background-color: rgba(#000, .05);
-    // }
+    &:hover {
+        font-weight: 500;
+        mat-icon {
+            transform: scale(1.2);
+        }
+    }
 }
 
 .sidenav__item--active {
     background-color: rgba(#FFF, 1);
+    font-weight: 500;
+    mat-icon {
+        transform: scale(1.2);
+    }
 }
 .sidenav__version {
     cursor: default;
@@ -127,6 +138,7 @@ mat-sidenav-content {
 @include mobile-device(false) {
     .sidenav__content {
         padding: 20px;
+        height: calc(100% - 104px);
     }
     .page-header {
         margin-bottom: 20px;

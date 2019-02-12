@@ -1,17 +1,17 @@
 <div class="table-box__header">
   <span class="text--primary">User's List</span>
   <div style="flex: 1"></div>
-  <button mat-icon-button color="primary" matTooltip="Search" [disabled]="disabled" [matMenuTriggerFor]="searchMenu" (click)="searchInput.focus()">
+  <button mat-icon-button color="primary" matTooltip="Search" [disabled]="!isSearchApplied && isInactive" [matMenuTriggerFor]="searchMenu" (click)="searchInput.focus()">
     <mat-icon>search</mat-icon>
   </button>
   <mat-menu #searchMenu="matMenu">
     <mat-form-field (click)="onFormFieldClickHandler($event)">
-      <input matInput [placeholder]="placeholder" type="search" [disabled]="disabled" #searchInput (paste)="onPasteHandler($event)" (keydown)="onSearchHandler($event)" autocomplete="off"/>
+      <input matInput [placeholder]="placeholder" type="search" [disabled]="!isSearchApplied && isInactive" #searchInput (paste)="onPasteHandler($event)" (keydown)="onSearchHandler($event)" autocomplete="off"/>
       <mat-hint [ngClass]="{'search-error': isSearchError}">{{ searchHint }}</mat-hint>
       <mat-icon class="search-clear" [ngClass]="{'search-clear--disabled': disabled}" matTooltip="clear" matSuffix (click)="searchInput.value = ''">close</mat-icon>
     </mat-form-field>
   </mat-menu>
-  <button mat-icon-button color="primary" matTooltip="Filter" [disabled]="disabled" (click)="onFilterHandler()">
+  <button mat-icon-button color="primary" matTooltip="Filter" [disabled]="!isFilterApplied && isInactive" (click)="onFilterHandler()">
     <mat-icon>filter_list</mat-icon>
   </button>
 </div>
@@ -27,12 +27,12 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="index">
-      <th mat-header-cell *matHeaderCellDef class="table-header">Sr. No.</th>
-      <td mat-cell *matCellDef="let element;let i = index"> {{ pageIndex * pageSize + i + 1 }} </td>
+      <th mat-header-cell *matHeaderCellDef class="table-header align--center">Sr. No.</th>
+      <td mat-cell *matCellDef="let element;let i = index" class="align--center"> {{ pageIndex * pageSize + i + 1 }} </td>
     </ng-container>
     <ng-container [matColumnDef]="column.id" *ngFor="let column of tableSource.columns">
-      <th mat-header-cell *matHeaderCellDef class="table-header" mat-sort-header [disabled]="!column.sorting">{{column.title}}</th>
-      <td mat-cell *matCellDef="let element">
+      <th mat-header-cell *matHeaderCellDef class="table-header" mat-sort-header [disabled]="!column.sorting" [attr.data-centered]="column.centered">{{column.title}}</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'align--center': column.centered}">
         <ng-container [ngTemplateOutlet]="templateOutlet(column) || columnTemplate" [ngTemplateOutletContext]="{row: element}"></ng-container>
         <ng-template #columnTemplate>
           {{ column.resolve && column.resolve(element) }}
@@ -44,6 +44,11 @@
   </table>
 </div>
 
+<mat-paginator *ngIf="!isEmpty" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageHandler($event)"></mat-paginator>
 
-<mat-paginator [disabled]="disabled" *ngIf="length > 0" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="onPageHandler($event)"></mat-paginator>
-
+<span class="table__placeholder content--center" *ngIf="!isLoaded">
+  Loading Data ...
+</span>
+<span class="table__placeholder content--center" *ngIf="isLoaded && !length">
+  No Data Found
+</span>

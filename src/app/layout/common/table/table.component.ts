@@ -10,7 +10,7 @@ import {
   ViewChild,
   ElementRef
 } from '@angular/core';
-import { MatTableDataSource, MatCheckboxChange, MatCheckbox, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatCheckboxChange, MatCheckbox, MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { ForDirective } from '../for';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
@@ -34,12 +34,27 @@ export class TableComponent implements OnInit {
   get disabled(): boolean {
     return this._disabled;
   }
-  @Input() tableSource: Table.Source<any>;
+  private _tableSource: Table.Source<any>;
+  @Input()
+  set tableSource(source: Table.Source<any>) {
+    if (source) {
+      this._tableSource = source;
+      this.dataSource = new MatTableDataSource(source.data.rows || []);
+      if (this.paginator) {
+        this.paginator.pageIndex = source.data.pageIndex;
+        this.paginator.pageSize = source.data.pageSize;
+      }
+      // if (this.sort) {
+      //   this.dataSource.sort = this.sort;
+      // }
+    }
+  }
+  get tableSource() {
+    return this._tableSource;
+  }
+  dataSource: MatTableDataSource<any> = new MatTableDataSource([]);
   @Output() selectChange: EventEmitter<any> = new EventEmitter();
   @Output() optionChange: EventEmitter<any> = new EventEmitter();
-  get dataSource(): MatTableDataSource<any> {
-    return new MatTableDataSource(this.tableSource.data.rows);
-  }
   get displayedColumns(): string[] {
     if (this.tableSource) {
       const columns = this.tableSource.columns.map(column => column.id);
@@ -49,6 +64,8 @@ export class TableComponent implements OnInit {
     return [];
   }
   @ContentChildren(ForDirective) templates: QueryList<ForDirective>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChildren(MatCheckbox) checkBoxList: QueryList<MatCheckbox>;
   @ViewChild('searchInput') searchRef: ElementRef<HTMLInputElement>;
   get checkBoxes(): MatCheckbox[] {
@@ -66,13 +83,41 @@ export class TableComponent implements OnInit {
     }, []);
   }
   get length(): number {
-    return this.tableSource ? this.tableSource.data.length : 0;
+    if (this.tableSource && this.tableSource.data) {
+      return this.tableSource.data.total || 0;
+    }
+    return 0;
   }
-  get pageSize(): number {
-    return this.tableSource ? this.tableSource.data.pageSize : 10;
+  readonly pageSize = 10;
+  readonly pageIndex = 0;
+  get isEmpty(): boolean {
+    if (this.tableSource && this.tableSource.data && this.tableSource.data.rows) {
+      return !this.tableSource.data.rows.length;
+    }
+    return true;
   }
-  get pageIndex(): number {
-    return this.tableSource ? this.tableSource.data.pageIndex : 0;
+  get isLoaded(): boolean {
+    return !!this.tableSource.data.rows;
+  }
+  get isInactive(): boolean {
+    return this.length === 0 || !this.isLoaded || this.disabled;
+  }
+  get isSearchApplied(): boolean {
+    return this.optionEvent.data.searchText && this.optionEvent.data.searchText.length > 0;
+  }
+  get isFilterApplied(): boolean {
+    const filterData = this.optionEvent.data.filterData;
+    return (function recursiveCheck(value: any): boolean {
+      if (value) {
+        if (typeof value === 'object' && !Array.isArray(value) && value !instanceof Date) {
+          return Object.keys(value).some(key => {
+            return recursiveCheck(value[key]);
+          });
+        }
+        return true;
+      }
+      return false;
+    })(filterData);
   }
   // search handler
   private _searchHintType: Table.SearchHintType = 'DEFAULT';
@@ -155,6 +200,7 @@ export class TableComponent implements OnInit {
 
   // filter option
   onFilterHandler() {
+    console.log(!this.isFilterApplied && this.isInactive);
     if (this.tableSource && this.tableSource.options && this.tableSource.options.filterComponent) {
       const subscription = this._dialog.open(this.tableSource.options.filterComponent, {
         disableClose: true,

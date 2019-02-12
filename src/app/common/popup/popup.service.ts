@@ -7,6 +7,7 @@ export class PopupService {
 
   constructor(private _snackBar: MatSnackBar) { }
   open(message: string, type: 'WARNING' | 'ERROR' | 'SUCCESS' | 'DEFAULT' = 'DEFAULT', config: MatSnackBarConfig = {}) {
+    console.log(message);
     this._snackBar.openFromComponent(PopupComponent, {
       verticalPosition: 'top',
       horizontalPosition: 'right',

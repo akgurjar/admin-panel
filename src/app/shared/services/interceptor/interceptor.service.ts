@@ -5,13 +5,15 @@ import { tap } from 'rxjs/operators';
 import { PopupService } from '@popup';
 import { Token } from '@token';
 import { LoaderService } from '@loader';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
   constructor(
     private _loader: LoaderService,
     private _popup: PopupService,
-    private _token: Token
+    private _token: Token,
+    private _router: Router
   ) {}
   // intercept all http requests
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -31,10 +33,12 @@ export class InterceptorService implements HttpInterceptor {
       }, event => {
         if (event instanceof HttpErrorResponse) {
           this._loader.completeLoading();
-          // console.log('Session expired');
           if (event.status === 401 && this._token.hasValue) {
             this._token.reset();
+            this._router.navigateByUrl("/auth");
             this._popup.open('Token is expired, please login again.', 'ERROR', {duration: 3000});
+          } else {
+            this._popup.open(event.error.message, 'ERROR', {duration: 3000});
           }
         }
       })

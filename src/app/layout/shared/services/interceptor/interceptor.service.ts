@@ -36,7 +36,7 @@ export class InterceptorService implements HttpInterceptor {
         }
       }));
     } else {
-      this._popup.open('Your session is expired, Please login again.', 'ERROR');
+      this._popup.open('Your session is expired, Please login again.', 'ERROR', {duration: 300});
       this._router.navigateByUrl('/auth');
     }
   }

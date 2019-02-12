@@ -1,0 +1,10 @@
+<span class="confirm__title mat-elevation-z1">{{title}}</span>
+<p class="confirm__message">{{message}}</p>
+<div class="confirm__actions">
+  <button mat-stroked-button (click)="onCancelHandler()">
+    Cancel
+  </button>
+  <button mat-raised-button color="primary" (click)="onConfirmHandler()">
+    Confirm
+  </button>
+</div>

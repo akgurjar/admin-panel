@@ -1,0 +1,26 @@
+
+.filter__header {
+    height: 52px;
+    width: calc(100% + 48px);
+    margin: -24px 0 10px -24px;
+    display: flex;
+    align-items: center;
+    color: #FFF;
+    button {
+        margin: 0 7px;
+    }
+}
+.filter__title {
+    font-size: 19px;
+    font-weight: 500;
+}
+.filter__actions {
+    height: 56px;
+    width: calc(100% + 48px);
+    margin: 10px 0 -24px -24px;
+    background-color: rgba(#000, .07);
+    box-shadow: 0 3px 2px -2px rgba(#000, 0.25) inset;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

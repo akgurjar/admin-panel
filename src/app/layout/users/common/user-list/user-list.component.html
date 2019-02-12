@@ -1,24 +1,25 @@
-<app-listing [config]="listingConfig">
-  <ng-template appFor="list-actions">
-    <button mat-icon-button color="primary" (click)="onCreateUser()">
-      <mat-icon>person_add</mat-icon>
-    </button>
-    <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <div style="">
-        <button mat-button mat-icon-button color="accent">
-          <mat-icon>blocked</mat-icon>
+<app-table [tableSource]="tableSource" (optionChange)="onChangeHandler($event)" class="mat-elevation-z1" [disabled]="isLoading">
+    <ng-template appFor="actions" let-user="row">
+        <button mat-icon-button color="primary" matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
         </button>
-        <button mat-button mat-icon-button color="accent">
-          <mat-icon>blocked</mat-icon>
+        <button mat-icon-button [color]="user.status === 2 ? 'primary' : 'warn'" [disabled]="user.status !== 1 && user.status !== 2" [matTooltip]="user.status === 2 ? 'Unblock' : 'Block'">
+            <mat-icon>{{ user.status === 2 ? 'restore' : 'block' }}</mat-icon>
         </button>
-        <button mat-button mat-icon-button color="accent">
-          <mat-icon>blocked</mat-icon>
+        <button mat-icon-button color="warn" matTooltip="Archive">
+            <mat-icon>archive</mat-icon>
         </button>
-      </div>
-    </mat-menu>
-  </ng-template>
-  <app-table [tableSource]="tableSource"></app-table>
-</app-listing>
+        <button mat-icon-button color="warn" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </ng-template>
+    <ng-template appFor="dob" let-row="row">
+        {{ row.dob | date : 'mediumDate' }}
+    </ng-template>
+    <ng-template appFor="createdAt" let-row="row">
+        {{ row.createdAt | date : 'mediumDate' }}
+    </ng-template>
+    <ng-template appFor="updatedAt" let-row="row">
+        {{ row.updatedAt | date : 'mediumDate' }}
+    </ng-template>
+</app-table>

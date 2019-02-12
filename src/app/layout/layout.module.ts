@@ -6,7 +6,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 
 import { LayoutComponent } from './layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { BreadcrumbService } from './services/breadcrumb/breadcrumb.service';
+
 
 @NgModule({
   declarations: [
@@ -17,9 +17,6 @@ import { BreadcrumbService } from './services/breadcrumb/breadcrumb.service';
     CommonModule,
     LayoutRoutingModule,
     SharedModule
-  ],
-  providers: [
-    BreadcrumbService
   ]
 })
 export class LayoutModule { }

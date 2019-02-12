@@ -3,7 +3,10 @@
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     .auth-card__container {
-        background-color: rgba(mat-color($accent, 500), .7);
+        background-color: rgba(mat-color($primary), .7);
+    }
+    .auth-seccess__title {
+        color: mat-color($primary);
     }
 }
 

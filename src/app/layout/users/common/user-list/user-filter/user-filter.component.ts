@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class UserFilterComponent implements OnInit {
   filterForm: FormGroup;
+  readonly now: Date = new Date();
   constructor(
     fb: FormBuilder,
     private _dialogRef: MatDialogRef<UserFilterComponent>,

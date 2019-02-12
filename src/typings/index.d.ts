@@ -1,14 +1,5 @@
 /// <reference path="sidenav.d.ts"/>
-/// <reference path="admin.d.ts"/>
+/// <reference path="api.d.ts"/>
 
 
-declare interface TableSourceOptions {
-    sort?: boolean;
-    actions?: boolean;
-    selection?: boolean;
-}
 
-declare interface ListOptions {
-    search?: boolean;
-    filter?: any;
-}

@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './auth.component';
-import { LoginComponent } from './login/login.component';
-import { ForgotComponent } from './forgot/forgot.component';
-import { ResetComponent } from './reset/reset.component';
+import { AuthComponent } from './components/auth.component';
 
 const routes: Routes = [
   {
@@ -17,15 +14,15 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent
+        loadChildren: './login/login.module#LoginModule'
       },
       {
         path: 'forgot',
-        component: ForgotComponent
+        loadChildren: './forgot/forgot.module#ForgotModule'
       },
       {
         path: 'reset/:token',
-        component: ResetComponent
+        loadChildren: './reset/reset.module#ResetModule'
       }
     ]
   }

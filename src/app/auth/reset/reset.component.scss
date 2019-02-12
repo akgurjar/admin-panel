@@ -14,7 +14,16 @@ mat-form-field {
     vertical-align: bottom;
     transform: translateY(1px);
     margin-right: 2px;
+    user-select: none;
 }
 .form-field-icon--action {
     cursor: pointer;
+    &[data-disabled = true] {
+        color: rgba(#000, .2);
+        cursor: default;
+    }
+}
+.reset-seccess__container {
+    text-align: center;
+    margin: 50px 0;
 }

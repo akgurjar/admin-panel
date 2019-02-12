@@ -11,19 +11,19 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types",
-      "src/typings/index.d.ts"
+      "node_modules/@types"
     ],
     "lib": [
       "es2018",
       "dom"
     ],
     "paths": {
-      "@environment": ["src/environments/environment"],
-      "@utils": ["src/utils/index"],
-      "@models": ["src/utils/models/index"],
-      "@form-field": ["src/utils/form-field/index"],
-      "@store": ["src/utils/store/index"]
+      "@environment": ["src/environments/index"],
+      "@token": ["src/app/shared/services/token/index"],
+      "@form-field": ["src/app/common/form-field/index"],
+      "@popup": ["src/app/common/popup/index"],
+      "@confirm": ["src/app/layout/common/confirm/index"],
+      "@loader": ["src/app/shared/services/loader/loader.service"]
     }
   }
 }

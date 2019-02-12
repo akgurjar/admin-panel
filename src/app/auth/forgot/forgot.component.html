@@ -1,16 +1,28 @@
-<h2>Forgot Password</h2>
-<p>Login with correct credentials</p>
-<mat-form-field>
-  <input matInput placeholder="Email" type="email"/>
-  <mat-icon matPrefix class="form-field-icon">email</mat-icon>
-</mat-form-field>
-<div class="auth-form__actions">
-  <button mat-button mat-stroked-button routerLink="../login">
-    <mat-icon>arrow_back_ios</mat-icon>
-    <span>BACK</span>
-  </button>
-  <button mat-button mat-raised-button color="primary">
-    <mat-icon>send</mat-icon>&nbsp;
-    <span>SEND</span>
-  </button>
+<div *ngIf="!!mailSentTo;else formTemplate" class="forgot-seccess__container">
+  <h2 class="auth-seccess__title">Mail Sent</h2>
+  <p>Please check your inbox, password reset link has been sent successfully to your email <b>{{mailSentTo}}</b>.</p>
+  <button mat-raised-button color="primary" (click)="onBackToLoginHandler()">Back to login</button>
 </div>
+
+
+<ng-template #formTemplate>
+  <h2>Forgot Password</h2>
+  <p style="text-align: center">forgot your password? Don't Worry. Send us your registered email address and we will send you steps to reset your password.</p>
+  <form [formGroup]="forgotForm">
+    <mat-form-field>
+      <input matInput placeholder="Email" type="email" required formControlName="email" autocomplete="off" spellcheck="false"/>
+      <mat-icon matPrefix class="form-field-icon">email</mat-icon>
+      <mat-error>{{matError(forgotForm.controls['email'], 'Email')}}</mat-error>
+    </mat-form-field>
+  </form>
+  <div class="auth-form__actions">
+    <button mat-button mat-stroked-button (click)="onBackToLoginHandler()" [disabled]="forgotForm.disabled">
+      <!-- <mat-icon>arrow_back_ios</mat-icon> -->
+      <span>Back to login</span>
+    </button>
+    <button mat-button mat-raised-button color="primary" [disabled]="forgotForm.disabled || !forgotForm.valid" (click)="onForgotMailHandler()">
+      <mat-icon>send</mat-icon>&nbsp;
+      <span>Send</span>
+    </button>
+  </div>
+</ng-template>

@@ -6,6 +6,7 @@ import { PopupService } from '@popup';
 import { Token } from '@token';
 import { LoaderService } from '@loader';
 import { Router } from '@angular/router';
+import { environment } from '@environment';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
@@ -17,13 +18,15 @@ export class InterceptorService implements HttpInterceptor {
   ) {}
   // intercept all http requests
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    //check internet connectivity
-    if (navigator.onLine) {
-      this._popup.open("You are offline, please connect to internet and retry.", "ERROR", {duration: 4000});
+    // check internet connectivity
+    if (!navigator.onLine) {
+      this._popup.open('You are offline, please connect to internet and retry.', 'ERROR', {duration: 4000});
       return EMPTY;
     }
     this._loader.markAsLoading();
-    return next.handle(req).pipe(
+    return next.handle(req.clone({
+      url: `${environment.apiBaseUrl}${req.url}` // add base url
+    })).pipe(
       tap(event => {
         if (event instanceof HttpResponse) {
           this._loader.completeLoading();
@@ -35,7 +38,7 @@ export class InterceptorService implements HttpInterceptor {
           this._loader.completeLoading();
           if (event.status === 401 && this._token.hasValue) {
             this._token.reset();
-            this._router.navigateByUrl("/auth");
+            this._router.navigateByUrl('/auth');
             this._popup.open('Token is expired, please login again.', 'ERROR', {duration: 3000});
           } else {
             this._popup.open(event.error.message, 'ERROR', {duration: 3000});

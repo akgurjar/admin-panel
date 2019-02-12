@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from '@environment';
 
 @Injectable()
 export class UserListService {
@@ -10,7 +9,7 @@ export class UserListService {
   constructor(private _http: HttpClient) {
   }
   async next(params: any = {pageIndex: 0, pageSize: 10}) {
-    const url = `${environment.apiBaseUrl}/users`;
+    const url = '/users';
     const resp = await this._http.get<Api.ListResponse<any>>(url, {params}).toPromise();
     this._subject.next(resp.result);
     return;

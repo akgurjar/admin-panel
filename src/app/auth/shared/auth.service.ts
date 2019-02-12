@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 // import { Observable, Observer } from 'rxjs';
 import { Token } from '@token';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@environment';
 import { PopupService } from '@popup';
 
 @Injectable()
@@ -14,7 +13,7 @@ export class AuthService {
     private _http: HttpClient
   ) { }
   async login({username, password}: Auth.LoginCredential, remember: boolean = false): Promise<boolean> {
-    const url = `${environment.apiBaseUrl}/admins/authenticate`;
+    const url = '/admins/authenticate';
     const resp = await this._http.post<Api.Response<string>>(url, {email: username, password}).toPromise();
     if (resp.result) {
       this._token.rememberToken(remember);

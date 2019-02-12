@@ -7,10 +7,12 @@ export const routes: Routes = [
   {
     path: 'auth',
     canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: './auth/auth.module#AuthModule'
   },
   {
     path: '',
+    canActivate: [DashboardGuard],
     canLoad: [DashboardGuard],
     loadChildren: './layout/layout.module#LayoutModule'
   },

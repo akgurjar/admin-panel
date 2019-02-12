@@ -36,12 +36,8 @@ export class TokenService {
         const headers = new HttpHeaders({
           Authorization: `Bearer ${this.value}`
         });
-        this._http.head(`${environment.apiBaseUrl}/token`, {headers})
-        .subscribe(() => {
-          resolve(true);
-        }, () => {
-          resolve(false);
-        });
+        this._http.head('/token', {headers})
+        .subscribe(() => resolve(true), () => resolve(false));
       } else {
         resolve(false);
       }

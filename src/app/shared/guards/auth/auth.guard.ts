@@ -12,15 +12,14 @@ export class AuthGuard implements CanLoad, CanActivate {
     private _router: Router
   ) {}
   async canLoad(route: Route, segments: UrlSegment[]): Promise<boolean> {
-    console.log(segments);
-    return await this._handler(segments);
+    return await this._handler(segments.map(segment => segment.path));
   }
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return await this._handler([]);
+    return await this._handler(state.url.split('/').filter(path => path));
   }
-  private async _handler(segments: UrlSegment[]): Promise<boolean> {
+  private async _handler(paths: string[]): Promise<boolean> {
     if (this._token.value && await this._token.verify()) {
-      if (segments.length === 3) {
+      if (paths.length === 3) {
         this._token.reset();
         return true;
       }

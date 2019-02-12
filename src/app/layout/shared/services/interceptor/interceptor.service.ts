@@ -23,10 +23,9 @@ export class InterceptorService implements HttpInterceptor {
   ) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this._token.hasValue) {
-      const authRequest =  req.clone({
+      return next.handle(req.clone({
         headers: req.headers.set('Authorization', `Bearer ${this._token.value}`)
-      });
-      return next.handle(authRequest).pipe(tap(event => {
+      })).pipe(tap(event => {
         if (event instanceof HttpResponse) {
           //
         }

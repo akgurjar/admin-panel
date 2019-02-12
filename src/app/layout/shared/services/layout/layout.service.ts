@@ -5,7 +5,6 @@ import { ConfirmService } from '@confirm';
 import { Token } from '@token';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@environment';
 
 @Injectable()
 export class LayoutService {
@@ -22,7 +21,7 @@ export class LayoutService {
     this.refreshAdmin();
   }
   refreshAdmin() {
-    const url = `${environment.apiBaseUrl}/admins/profile`;
+    const url = '/admins/profile';
     this._http.get<Api.Response<any>>(url).subscribe((resp) => {
       this._admin.next(resp.result);
       console.log(resp.result);

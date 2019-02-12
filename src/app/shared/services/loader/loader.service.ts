@@ -39,11 +39,11 @@ export class LoaderService {
         this.completeLoading();
       }
       if (event instanceof NavigationError) {
-        let message = "You are offline, please connect to internet and retry.";
+        let message = 'You are offline, please connect to internet and retry.';
         if (navigator.onLine) {
-          message = "Internal server error !";
+          message = 'Internal server error !';
         }
-        this._popup.open(message, "ERROR", {duration: 5000});
+        this._popup.open(message, 'ERROR', {duration: 5000});
       }
     });
   }

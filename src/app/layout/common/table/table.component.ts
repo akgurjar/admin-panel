@@ -8,7 +8,8 @@ import {
   EventEmitter,
   ContentChildren,
   ViewChild,
-  ElementRef
+  ElementRef,
+  TemplateRef
 } from '@angular/core';
 import { MatTableDataSource, MatCheckboxChange, MatCheckbox, MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { ForDirective } from '../for';
@@ -64,6 +65,15 @@ export class TableComponent implements OnInit {
     return [];
   }
   @ContentChildren(ForDirective) templates: QueryList<ForDirective>;
+  get headerTemplate(): TemplateRef<any> {
+    if (this.templates) {
+      const header = this.templates.find((template: ForDirective) => template.name === 'header');
+      if (header) {
+        return header.ref;
+      }
+    }
+    return null;
+  }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChildren(MatCheckbox) checkBoxList: QueryList<MatCheckbox>;
@@ -140,6 +150,9 @@ export class TableComponent implements OnInit {
       }
     }
     return hint;
+  }
+  get label(): string {
+    return this._tableSource ? this._tableSource.label : 'Data List';
   }
   get placeholder() {
     const search = this.tableSource && this.tableSource.options && this.tableSource.options.search;

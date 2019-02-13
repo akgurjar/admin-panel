@@ -40,6 +40,8 @@ export class InterceptorService implements HttpInterceptor {
             this._token.reset();
             this._router.navigateByUrl('/auth');
             this._popup.open('Token is expired, please login again.', 'ERROR', {duration: 3000});
+          } else if (event.status === 504) {
+            this._popup.open('API Server not working!', 'ERROR', {duration: 3000});
           } else {
             this._popup.open(event.error.message, 'ERROR', {duration: 3000});
           }

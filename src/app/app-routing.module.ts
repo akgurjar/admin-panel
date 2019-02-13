@@ -5,13 +5,18 @@ import { DashboardGuard } from './shared/guards/dashboard/dashboard.guard';
 
 export const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'dashboard'
+  },
+  {
     path: 'auth',
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
     loadChildren: './auth/auth.module#AuthModule'
   },
   {
-    path: '',
+    path: 'dashboard',
     canActivate: [DashboardGuard],
     canLoad: [DashboardGuard],
     loadChildren: './layout/layout.module#LayoutModule'

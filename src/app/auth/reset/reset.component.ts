@@ -31,7 +31,7 @@ export class ResetComponent implements OnInit {
         } else {
           this.resetState = null;
         }
-      }, 4000);
+      }, 100000);
     });
   }
 

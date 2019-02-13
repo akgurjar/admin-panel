@@ -48,7 +48,7 @@ export class BreadcrumbComponent implements OnInit {
             };
           }
           return data;
-        }, {currentUrl: '/', steps: []}).steps;
+        }, {currentUrl: '/dashboard', steps: []}).steps;
       }
     });
   }

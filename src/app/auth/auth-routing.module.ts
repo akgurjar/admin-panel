@@ -21,7 +21,7 @@ const routes: Routes = [
         loadChildren: './forgot/forgot.module#ForgotModule'
       },
       {
-        path: 'reset/:token',
+        path: 'reset',
         loadChildren: './reset/reset.module#ResetModule'
       }
     ]

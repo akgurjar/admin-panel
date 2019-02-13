@@ -21,7 +21,7 @@
           </button>
         </mat-menu>
       </div>
-      <a class="sidenav__item" matRipple matRippleColor="rgba(255, 255, 255, .1)" [routerLink]="menu.link" routerLinkActive="sidenav__item--active" *ngFor="let menu of sideMenus">
+      <a class="sidenav__item" matRipple matRippleColor="rgba(255, 255, 255, .1)" [routerLink]="menu.link" routerLinkActive="sidenav__item--active" [routerLinkActiveOptions]="{exact: menu.exact}" *ngFor="let menu of sideMenus">
         <mat-icon>{{menu.icon}}</mat-icon>&nbsp;&nbsp;
         <span>{{menu.label}}</span>
       </a>

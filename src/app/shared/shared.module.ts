@@ -5,18 +5,21 @@ import {
   MatButtonModule,
   MatSnackBarModule,
   MatTooltipModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatDialogModule
 } from '@angular/material';
 import { LoaderComponent } from './components/loader/loader.component';
 import { InterceptorService } from './services/interceptor/interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmResetComponent } from './components/confirm-reset/confirm-reset.component';
 
 const Modules = [
   MatIconModule,
   MatButtonModule,
   MatSnackBarModule,
   MatTooltipModule,
+  MatDialogModule,
   ReactiveFormsModule,
   HttpClientModule,
   MatNativeDateModule
@@ -24,7 +27,8 @@ const Modules = [
 
 @NgModule({
   declarations: [
-    LoaderComponent
+    LoaderComponent,
+    ConfirmResetComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,9 @@ const Modules = [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+  ],
+  entryComponents: [
+    ConfirmResetComponent
   ]
 })
 export class SharedModule { }

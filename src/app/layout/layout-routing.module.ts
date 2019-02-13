@@ -10,15 +10,11 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/dashboard'
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'profile',
         loadChildren: './profile/profile.module#ProfileModule'
-      },
-      {
-        path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'users',

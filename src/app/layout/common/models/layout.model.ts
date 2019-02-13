@@ -6,22 +6,23 @@ export const SIDE_MENUS: SideNav[] = [
     {
         label: 'Dashboard',
         icon: 'dashboard',
-        link: '/dashboard'
+        link: '',
+        exact: true
     },
     {
         label: 'Users',
         icon: 'group',
-        link: '/users'
+        link: 'users'
     },
     {
         label: 'Reports',
         icon: 'insert_chart',
-        link: '/reports'
+        link: 'reports'
     },
     {
         label: 'Manage Content',
         icon: 'ballot',
-        link: '/content'
+        link: 'content'
     }
 ];
 

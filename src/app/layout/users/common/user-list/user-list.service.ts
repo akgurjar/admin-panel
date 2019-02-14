@@ -11,7 +11,9 @@ export class UserListService {
   async next(params: any = {pageIndex: 0, pageSize: 10}) {
     const url = '/users';
     const resp = await this._http.get<Api.ListResponse<any>>(url, {params}).toPromise();
-    this._subject.next(resp.result);
+    if (resp) {
+      this._subject.next(resp.result);
+    }
     return;
   }
 }

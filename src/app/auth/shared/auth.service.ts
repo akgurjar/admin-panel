@@ -15,11 +15,11 @@ export class AuthService {
   async login({username, password}: Auth.LoginCredential, remember: boolean = false): Promise<boolean> {
     const url = '/admins/authenticate';
     const resp = await this._http.post<Api.Response<string>>(url, {email: username, password}).toPromise();
-    if (resp.result) {
+    if (resp && resp.result) {
       this._token.rememberToken(remember);
       this._token.value = resp.result;
     }
-    return resp.result && !!resp.result;
+    return resp && resp.result && !!resp.result;
   }
   async forgot(email: string): Promise<boolean> {
     const resp = await new Promise<boolean>((resolve, reject) => {

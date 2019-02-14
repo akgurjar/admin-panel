@@ -23,8 +23,10 @@ export class LayoutService {
   refreshAdmin() {
     const url = '/admins/profile';
     this._http.get<Api.Response<any>>(url).subscribe((resp) => {
-      this._admin.next(resp.result);
-      console.log(resp.result);
+      if (resp) {
+        this._admin.next(resp.result);
+        // console.log(resp.result);
+      }
     });
   }
   logout() {

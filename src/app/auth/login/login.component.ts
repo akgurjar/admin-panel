@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.disable();
       this._auth.login({username, password}, remember)
       .then((status) => {
-        console.log(status);
+        // console.log(status);
         if (status) {
           this._router.navigateByUrl('/');
         } else {

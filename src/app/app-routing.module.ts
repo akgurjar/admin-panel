@@ -1,29 +1,29 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './shared/guards/auth/auth.guard';
-import { DashboardGuard } from './shared/guards/dashboard/dashboard.guard';
+import { PUBLIC_ROUTE, LAYOUT_ROUTE } from './constants';
+import { PublicGuard, LayoutGuard } from './guards';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'dashboard'
+    redirectTo: PUBLIC_ROUTE.path
   },
   {
-    path: 'auth',
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
-    loadChildren: './auth/auth.module#AuthModule'
+    path: PUBLIC_ROUTE.path,
+    canLoad: [PublicGuard],
+    canActivate: [PublicGuard],
+    loadChildren: () => import('./pages/public/public.module').then(modules => modules.PublicModule)
   },
   {
-    path: 'dashboard',
-    canActivate: [DashboardGuard],
-    canLoad: [DashboardGuard],
-    loadChildren: './layout/layout.module#LayoutModule'
+    path: LAYOUT_ROUTE.path,
+    canLoad: [LayoutGuard],
+    canActivate: [LayoutGuard],
+    loadChildren: () => import('./pages/layout/layout.module').then(modules => modules.LayoutModule)
   },
   {
     path: '**',
-    loadChildren: './not-found/not-found.module#NotFoundModule'
+    loadChildren: () => import('./pages/not-found/not-found.module').then(modules => modules.NotFoundModule)
   }
 ];
 

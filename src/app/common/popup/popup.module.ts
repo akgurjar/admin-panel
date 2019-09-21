@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PopupComponent } from './popup.component';
-import { PopupService } from './popup.service';
+import { PopupComponent } from './view/popup.component';
+import { PopupService } from './services/popup.service';
 import { MatIconModule, MatSnackBarModule } from '@angular/material';
 
 @NgModule({

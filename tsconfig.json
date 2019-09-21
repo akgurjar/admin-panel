@@ -5,11 +5,12 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -19,11 +20,16 @@
     ],
     "paths": {
       "@environment": ["src/environments/index"],
-      "@token": ["src/app/shared/services/token/index"],
-      "@form-field": ["src/app/common/form-field/index"],
+      "@token": ["src/app/services/token/index"],
+      "@form-field": ["src/app/pages/common/form-field/index"],
       "@popup": ["src/app/common/popup/index"],
-      "@confirm": ["src/app/layout/common/confirm/index"],
-      "@loader": ["src/app/shared/services/loader/loader.service"]
+      "@confirm": ["src/app/pages/layout/common/confirm/index"],
+      "@profile": ["src/app/services/profile/profile.service"],
+      "@loader": ["src/app/services/loader/loader.service"]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }

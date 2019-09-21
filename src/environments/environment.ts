@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: '/api/v1',
+  apiBaseUrl: 'http://localhost:3000/api/v1',
   appVersion: '0.0.1-beta1',
   tokenKey: `${location.origin}/RCC_TOKEN_KEY`,
   tokenRememberKey: `${location.origin}/RCC_TOKEN_REMEMBER_KEY`

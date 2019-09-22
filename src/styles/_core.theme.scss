@@ -1,7 +1,7 @@
 
 @import 'common/shared/components/loader/loader.theme';
 @import 'pages/public/view/public.theme';
-@import 'pages/layout/layout.theme';
+@import 'pages/layout/view/layout.theme';
 @import 'pages/not-found/view/not-found.theme';
 
 @mixin core-theming($theme) {

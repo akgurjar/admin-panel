@@ -1,3 +1,3 @@
 
 export * from './confirm.module';
-export * from './confirm.service';
+export * from './services/confirm.service';

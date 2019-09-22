@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsersRoutingModule } from './users-routing.module';
-import { UsersComponent } from './users.component';
-import { SharedModule } from '../../shared/shared.module';
-import { UsersService } from './users.service';
+import { UsersComponent } from './view/users.component';
+import { LayoutSharedModule } from '../../common/layout-shared';
+import { UsersService } from './services/users.service';
 
 @NgModule({
   declarations: [UsersComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
-    SharedModule
+    LayoutSharedModule
   ],
   providers: [
     UsersService

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from './view/profile.component';
 
 const routes: Routes = [
   {
@@ -14,15 +14,15 @@ const routes: Routes = [
       },
       {
         path: 'details',
-        loadChildren: './profile-details/profile-details.module#ProfileDetailsModule'
+        loadChildren: () => import('./pages/profile-details/profile-details.module').then(modules => modules.ProfileDetailsModule)
       },
       {
         path: 'update',
-        loadChildren: './profile-update/profile-update.module#ProfileUpdateModule'
+        loadChildren: () => import('./pages/profile-update/profile-update.module').then(modules => modules.ProfileUpdateModule)
       },
       {
         path: 'password',
-        loadChildren: './profile-password/profile-password.module#ProfilePasswordModule'
+        loadChildren: () => import('./pages/profile-password/profile-password.module').then(modules => modules.ProfilePasswordModule)
       }
     ]
   }

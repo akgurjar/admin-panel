@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MediaQueryService } from '../../../services/media-query/media-query.service';
 
-import { SIDE_MENUS } from '../common/models';
+import { SIDE_MENUS } from '../constants';
 import { ProfileService } from '@profile';
 import { environment } from '@environment';
 import { LoaderService } from '@loader';

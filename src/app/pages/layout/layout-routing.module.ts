@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './view/layout.component';
+import { PROFILE_ROUTE, USERS_ROUTE, REPORTS_ROUTE, CONTENTS_ROUTE } from './constants';
 
 export const routes: Routes = [
   {
@@ -10,23 +11,23 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        loadChildren: () => import('./pages/dashboard/dashboard.module').then(modules => modules.DashboardModule)
       },
       {
-        path: 'profile',
-        loadChildren: './profile/profile.module#ProfileModule'
+        path: PROFILE_ROUTE.path,
+        loadChildren: () => import('./pages/profile/profile.module').then(modules => modules.ProfileModule)
       },
       {
-        path: 'users',
-        loadChildren: './users/users.module#UsersModule'
+        path: USERS_ROUTE.path,
+        loadChildren: () => import('./pages/users/users.module').then(modules => modules.UsersModule)
       },
       {
-        path: 'reports',
-        loadChildren: './reports/reports.module#ReportsModule'
+        path: REPORTS_ROUTE.path,
+        loadChildren: () => import('./pages/reports/reports.module').then(modules => modules.ReportsModule)
       },
       {
-        path: 'content',
-        loadChildren: './content/content.module#ContentModule'
+        path: CONTENTS_ROUTE.path,
+        loadChildren: () => import('./pages/content/content.module').then(modules => modules.ContentModule)
       }
     ]
   }

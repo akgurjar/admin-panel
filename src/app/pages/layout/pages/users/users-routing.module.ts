@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UsersComponent } from './users.component';
+import { UsersComponent } from './view/users.component';
 
 const routes: Routes = [
   {
@@ -9,15 +9,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './user-listing/user-listing.module#UserListingModule'
+        loadChildren: () => import('./pages/user-listing/user-listing.module').then(modules => modules.UserListingModule)
       },
       {
         path: 'create',
-        loadChildren: './user-create/user-create.module#UserCreateModule'
+        loadChildren: () => import('./pages/user-create/user-create.module').then(modules => modules.UserCreateModule)
       },
       {
         path: ':user',
-        loadChildren: './user/user.module#UserModule'
+        loadChildren: () => import('./pages/user/user.module').then(modules => modules.UserModule)
       }
     ]
   }

@@ -1,5 +1,5 @@
-@import './components/breadcrumb/breadcrumb.theme';
-@import './common/table/table.theme';
+@import '../components/breadcrumb/breadcrumb.theme';
+@import '../common/table/view/table.theme';
 
 @mixin layout-theming($theme) {
     @include breadcrumb-theming($theme);

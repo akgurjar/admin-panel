@@ -34,10 +34,10 @@ export class BreadcrumbComponent implements OnInit {
         this.$route.params.subscribe(console.log);
         const steps = this._createSteps(event.urlAfterRedirects);
         this.routeSteps = steps.reduce<{[key: string]: any}>((data, step, index, arr) => {
-          if (step === 'dashboard') {
+          if (step === 'layout') {
             return data;
           }
-          if (step !== 'dashboard' && step !== this.$baseUrlSteps[index]) {
+          if (step !== 'layout' && step !== this.$baseUrlSteps[index]) {
             const currentUrl = `${data.currentUrl}/${step}`;
             if (this.$changes.has(step)) {
               step = this.$changes.get(step);
@@ -48,7 +48,7 @@ export class BreadcrumbComponent implements OnInit {
             };
           }
           return data;
-        }, {currentUrl: '/dashboard', steps: []}).steps;
+        }, {currentUrl: '/layout', steps: []}).steps;
       }
     });
   }

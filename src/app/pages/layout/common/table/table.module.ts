@@ -9,10 +9,10 @@ import {
   MatDialogModule,
   MatSortModule
 } from '@angular/material';
-import { SharedModule } from '../../shared/shared.module';
-import { TableComponent } from './table.component';
-import { ForModule } from '../for';
-import { FilterComponent } from './filter/filter.component';
+import { LayoutSharedModule } from '../layout-shared';
+import { TableComponent } from './view/table.component';
+import { ForModule } from '../../directives/for';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { FilterComponent } from './filter/filter.component';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    LayoutSharedModule,
     MatSortModule,
     MatTableModule,
     MatInputModule,

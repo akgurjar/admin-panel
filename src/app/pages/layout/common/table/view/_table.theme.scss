@@ -1,0 +1,15 @@
+
+
+
+@mixin table-theming($theme) {
+    $primary: map-get($map: $theme, $key: primary);
+    $accent: map-get($map: $theme, $key: accent);
+    $warn: map-get($map: $theme, $key: warn);
+
+    .table-title {
+        color: mat-color($primary);
+    }
+    .search-error {
+        color: mat-color($warn) !important;
+    }
+}

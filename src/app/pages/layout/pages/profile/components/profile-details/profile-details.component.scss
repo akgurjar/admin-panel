@@ -1,0 +1,16 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 280px;
+    // background-color: rgba(#000, .1);
+    color: #444;
+}
+.info-row {
+    display: flex;
+    align-items: center;
+    margin: 3px 0;
+    mat-icon {
+        color: inherit;
+    }
+}

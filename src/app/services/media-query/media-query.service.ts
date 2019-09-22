@@ -10,15 +10,13 @@ export type DeviceType = 'MOBILE' | 'TABLET' | 'COMPUTER';
   providedIn: 'root'
 })
 export class MediaQueryService implements OnDestroy {
-  private $subject: BehaviorSubject<DeviceType> = new BehaviorSubject(this.getDevice);
+  private $subject: BehaviorSubject<DeviceType> = new BehaviorSubject(this.device);
   private $resizeHandler = this._onResizeHandler.bind(this);
-  get change(): Observable<DeviceType> {
-    return this.$subject.asObservable();
-  }
+  readonly change: Observable<DeviceType> = this.$subject.asObservable();
   constructor() {
     window.addEventListener('resize', this.$resizeHandler, false);
   }
-  get getDevice(): DeviceType {
+  get device(): DeviceType {
     const width = window.innerWidth;
     // Mobile
     if (width < MT_BREAKPOINT) {
@@ -31,8 +29,17 @@ export class MediaQueryService implements OnDestroy {
     // Tablet
     return 'TABLET';
   }
+  get isMobile(): boolean {
+    return this.device === 'MOBILE';
+  }
+  get isTablet(): boolean {
+    return this.device === 'TABLET';
+  }
+  get isComputer(): boolean {
+    return this.device === 'COMPUTER';
+  }
   private _onResizeHandler() {
-    this.$subject.next(this.getDevice);
+    this.$subject.next(this.device);
   }
   ngOnDestroy() {
     window.removeEventListener('resize', this.$resizeHandler, false);

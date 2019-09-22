@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PublicService } from '../../../services/public.service';
 import { CustomValidators } from 'src/app/constants/validation.constants';
+import { LOGIN_ROUTE } from '../../../constants';
 
 @Component({
   selector: 'app-forgot',
@@ -10,35 +11,28 @@ import { CustomValidators } from 'src/app/constants/validation.constants';
   styleUrls: ['./forgot.component.scss']
 })
 export class ForgotComponent implements OnInit {
-  forgotForm: FormGroup;
+  formControl: FormControl = new FormControl(null, [Validators.required, ...CustomValidators.email]);
   mailSentTo: string = null;
   constructor(
-    fb: FormBuilder,
     private $public: PublicService,
     private $router: Router
-  ) {
-    this.forgotForm = fb.group({
-      email: [null, [Validators.required, ...CustomValidators.email]]
-    });
-  }
+  ) {}
 
   ngOnInit() {
   }
   onForgotMailHandler() {
-    if (this.forgotForm.valid && this.forgotForm.enabled) {
-      const { email } = this.forgotForm.value;
-      this.forgotForm.disable();
+    if (this.formControl.valid && this.formControl.enabled) {
+      const email = this.formControl.value;
+      this.formControl.disable();
       this.$public.forgot(email).then(() => {
         this.mailSentTo = email;
-        this.forgotForm.enable();
       }).catch((error) => {
-        this.forgotForm.enable();
+        this.formControl.enable();
         // this
       });
     }
   }
   onBackToLoginHandler() {
-    const url = this.$router.url;
-    this.$router.navigate([url.substr(0, url.lastIndexOf('/')), 'login']);
+    this.$router.navigateByUrl(LOGIN_ROUTE.url);
   }
 }

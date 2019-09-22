@@ -21,11 +21,7 @@ export class ProfileService {
       //   this.isProfileLoaded = true;
       //   observer.complete();
       // });
-      this.$profile.next({
-        displayName: 'Guest Admin',
-        imageUrl: 'null',
-        email: 'test@yopmail.com'
-      });
+      this.$profile.next(null);
       this.isProfileLoaded = true;
       observer.next(this.$profile.getValue());
     });

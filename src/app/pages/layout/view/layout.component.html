@@ -11,7 +11,7 @@
           &nbsp;
         </button>
         <mat-menu #adminMenu="matMenu">
-          <button mat-button color="primary" class="admin-menu__button" routerLink="/profile">
+          <button mat-button color="primary" class="admin-menu__button" [routerLink]="profileUrl">
             <mat-icon>person</mat-icon>&nbsp;&nbsp;
             <span>Profile</span>
           </button>

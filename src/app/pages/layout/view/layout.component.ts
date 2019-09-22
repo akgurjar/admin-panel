@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MediaQueryService } from '../../../services/media-query/media-query.service';
+import { MediaQueryService } from 'src/app/services/media-query';
 
-import { SIDE_MENUS } from '../constants';
+import { SIDE_MENUS, PROFILE_ROUTE } from '../constants';
 import { ProfileService } from '@profile';
 import { environment } from '@environment';
 import { LoaderService } from '@loader';
+import { ConfirmService } from '@confirm';
 
 @Component({
   selector: 'app-layout',
@@ -19,20 +20,24 @@ export class LayoutComponent implements OnInit, OnDestroy {
     return this.isDesktopDevice ? 'side' : 'over';
   }
   get isMobileDevice(): boolean {
-    return this.mediaQuery.getDevice === 'MOBILE';
+    return this.mediaQuery.isMobile;
   }
   get isDesktopDevice(): boolean {
-    return this.mediaQuery.getDevice === 'COMPUTER';
+    return this.mediaQuery.isComputer;
   }
   readonly appVersion = environment.appVersion;
   admin: any = null;
   get adminName() {
     return this.admin ? this.admin.displayName : 'loading...';
   }
+  get profileUrl(): string {
+    return PROFILE_ROUTE.url;
+  }
   constructor(
     loader: LoaderService,
     private $profile: ProfileService,
     public mediaQuery: MediaQueryService,
+    private $confirm: ConfirmService
   ) {
     loader.changes.subscribe(isLoading => this.isLoading = isLoading);
     $profile.changes.subscribe(admin => {
@@ -51,6 +56,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {}
   onLogoutHandler() {
-    this.$profile.logout();
+    this.$confirm.popup({
+      title: 'Confirm Logout',
+      message: 'Are you sure you want to logout?'
+    }).subscribe(result => {
+      if (result) {
+        this.$profile.logout();
+      }
+    });
   }
 }

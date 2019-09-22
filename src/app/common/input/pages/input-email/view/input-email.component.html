@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline">
+    <mat-label>{{ placeholder }}</mat-label>
+    <input matInput type="email" placeholder="Enter" autocomplete="off" spellcheck="false"/>
+    <mat-error>{{ control | validationError : fieldName }}</mat-error>
+</mat-form-field>

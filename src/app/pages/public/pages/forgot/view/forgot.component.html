@@ -8,19 +8,13 @@
 <ng-template #formTemplate>
     <h2>Forgot Password</h2>
     <p style="text-align: center">forgot your password? Don't Worry. Send us your registered email address and we will send you steps to reset your password.</p>
-    <form [formGroup]="forgotForm">
-        <mat-form-field>
-            <input matInput placeholder="Email" type="email" required formControlName="email" autocomplete="off" spellcheck="false"/>
-            <mat-icon matPrefix class="form-field-icon">email</mat-icon>
-            <mat-error>{{forgotForm.controls['email'] | validationError : 'Email'}}</mat-error>
-        </mat-form-field>
-    </form>
+    <app-input-email [control]="formControl"></app-input-email>
     <div class="auth-form__actions">
-        <button mat-button mat-stroked-button (click)="onBackToLoginHandler()" [disabled]="forgotForm.disabled">
+        <button mat-button mat-stroked-button (click)="onBackToLoginHandler()" [disabled]="formControl.disabled">
             <!-- <mat-icon>arrow_back_ios</mat-icon> -->
             <span>Back to login</span>
         </button>
-        <button mat-button mat-raised-button color="primary" [disabled]="forgotForm.disabled || !forgotForm.valid" (click)="onForgotMailHandler()">
+        <button mat-button mat-raised-button color="primary" [disabled]="formControl.disabled" (click)="onForgotMailHandler()">
             <mat-icon>send</mat-icon>&nbsp;
             <span>Send</span>
         </button>

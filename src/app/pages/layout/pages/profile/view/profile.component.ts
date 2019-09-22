@@ -7,8 +7,6 @@ import { ProfileService } from '@profile';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  @HostBinding('class.mat-elevation-z1')
-  readonly elevation = true;
   profileName = 'loading...';
   constructor(profileService: ProfileService) {
     profileService.changes.subscribe((data) => {

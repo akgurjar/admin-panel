@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PublicService } from '../../../services/public.service';
 import { Router } from '@angular/router';
 import { CustomValidators } from 'src/app/constants/validation.constants';
+import { FORGOT_ROUTE } from '../../../constants';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,6 @@ import { CustomValidators } from 'src/app/constants/validation.constants';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  isPasswordVisible = false;
   loginForm: FormGroup;
   constructor(
     fb: FormBuilder,
@@ -19,18 +19,12 @@ export class LoginComponent implements OnInit {
   ) {
     this.loginForm = fb.group({
       email: ['admin@gmail.com', [Validators.required, ...CustomValidators.email]],
-      password: ['asdfghjkl', CustomValidators.password],
+      password: ['asdfghjkl', [Validators.required, ...CustomValidators.password]],
       remember: [false, Validators.required]
     });
   }
 
   ngOnInit() {
-  }
-  onPasswordVisibilityHandler(event: MouseEvent) {
-    event.stopPropagation();
-    if (this.loginForm.enabled) {
-      this.isPasswordVisible = !this.isPasswordVisible;
-    }
   }
   onLoginHandler() {
     if (this.loginForm.valid && this.loginForm.enabled) {
@@ -52,7 +46,6 @@ export class LoginComponent implements OnInit {
     }
   }
   onForgotPasswordHandler() {
-    const url = this.$router.url;
-    this.$router.navigate([url.substr(0, url.lastIndexOf('/')), 'forgot']);
+    this.$router.navigateByUrl(FORGOT_ROUTE.url);
   }
 }

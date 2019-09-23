@@ -10,7 +10,7 @@ export class InputPasswordComponent implements OnInit {
   @Input() control = new FormControl(null);
   @Input() placeholder = 'Password';
   @Input() fieldName = 'Password';
-  isPasswordVisible = true;
+  isPasswordVisible = false;
   get inputType(): 'text' | 'password' {
     return this.isPasswordVisible ? 'text' : 'password';
   }

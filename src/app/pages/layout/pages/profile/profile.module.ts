@@ -11,6 +11,7 @@ import {
   ProfileFormComponent,
   ProfilePasswordComponent,
 } from './components';
+import { InputNameModule } from 'src/app/common/input';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {
     ProfileRoutingModule,
     LayoutSharedModule,
     InputPasswordModule,
+    InputNameModule,
     MatTabsModule,
   ]
 })

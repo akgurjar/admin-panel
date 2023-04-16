@@ -1,0 +1,10 @@
+
+@mixin breadcrumb-theming($theme) {
+    $primary: map-get($map: $theme, $key: primary);
+    .header-link {
+        color: mat-color($primary, 500);
+    }
+    app-breadcrumb {
+        border-color: mat-color($primary, 500);
+    }
+}

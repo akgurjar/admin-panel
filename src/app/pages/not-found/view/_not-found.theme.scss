@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin not-found-theming($theme) {
+    $color-config: mat.get-color-config($theme);
+    $primary: map.get($color-config, 'primary');
+
+    .not-found__wrapper {
+        &:nth-child(1) {
+            color: mat.get-color-from-palette($primary);
+        }
+
+        &:nth-child(2) {
+            background-color: mat.get-color-from-palette($primary);
+            color: #FFF;
+        }
+    }
+
+    .not-found-button {
+        color: mat.get-color-from-palette($primary);
+    }
+
+    .not-found__svg>path {
+        fill: mat.get-color-from-palette($primary);
+    }
+}

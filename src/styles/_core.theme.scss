@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+// @import 'common/shared/components/loader/loader.theme';
+// @import 'pages/public/view/public.theme';
+// @import 'pages/layout/layout.theme';
+@import 'pages/not-found/view/not-found.theme';
+
+@mixin core-theming($theme) {
+    // @include loader-theming($theme);
+    // @include public-theming($theme);
+    // @include layout-theming($theme);
+    @include not-found-theming($theme);
+    $color-config: mat.get-color-config($theme);
+    $primary: map.get($color-config, 'primary');
+    $accent: map.get($color-config, 'accent');
+    $warn: map.get($color-config, 'warn');
+
+    .button-loader {
+        color: mat.get-color-from-palette($primary);
+    }
+
+    .text--primary {
+        color: mat.get-color-from-palette($primary);
+    }
+
+    .text--accent {
+        color: mat.get-color-from-palette($accent);
+    }
+
+    .text--warn {
+        color: mat.get-color-from-palette($warn);
+    }
+
+    .fill--primary {
+        background-color: mat.get-color-from-palette($primary);
+    }
+
+    .fill--accent {
+        background-color: mat.get-color-from-palette($accent);
+    }
+
+    .fill--warn {
+        background-color: mat.get-color-from-palette($warn);
+    }
+}

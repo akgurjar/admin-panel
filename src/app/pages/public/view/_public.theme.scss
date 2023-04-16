@@ -1,0 +1,12 @@
+
+@mixin public-theming($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    .auth-card__container {
+        background-color: rgba(mat-color($primary), .7);
+    }
+    .auth-seccess__title {
+        color: mat-color($primary);
+    }
+}
+

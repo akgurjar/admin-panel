@@ -1,0 +1,15 @@
+<img src="assets/auth-background.jpg" class="background-image"/>
+<div class="auth-card__container content--center">
+  <div class="auth-card mat-elevation-z1">
+    <mat-progress-bar [ngStyle]="{visibility: isLoading ? 'visible' : 'hidden'}" mode="indeterminate"></mat-progress-bar>
+    <div class="auth-card__item content--center" style="padding: 20px 0;">
+      <img src="assets/images/logo.png"/>
+    </div>
+    <div class="auth-card__item-separator"></div>
+    <div class="auth-card__item">
+      <!-- <app-loader isActivated="outlet.isActivated"> -->
+        <router-outlet #route="outlet"></router-outlet>
+      <!-- </app-loader> -->
+    </div>
+  </div>
+</div>

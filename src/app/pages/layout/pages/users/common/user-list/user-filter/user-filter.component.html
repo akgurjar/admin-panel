@@ -1,0 +1,24 @@
+
+<app-filter (reset)="onResetHandler()" (apply)="onApplyHandler()">
+  <form [formGroup]="filterForm">
+    <mat-form-field>
+      <input matInput [matDatepicker]="createdFromPicker" [max]="filterForm.controls['createdTo'].value || now" formControlName="createdFrom" placeholder="Created From" readonly (click)="createdFromPicker.open()">
+      <mat-datepicker-toggle matSuffix [for]="createdFromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #createdFromPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="createdToPicker" [min]="filterForm.controls['createdFrom'].value" [max]="now" formControlName="createdTo" placeholder="Created To" readonly (click)="createdToPicker.open()">
+      <mat-datepicker-toggle matSuffix [for]="createdToPicker"></mat-datepicker-toggle>
+      <mat-datepicker #createdToPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="User Status"  formControlName="status">
+        <mat-option value="0">Unverified</mat-option>
+        <mat-option value="1">Active</mat-option>
+        <mat-option value="2">Blocked</mat-option>
+        <mat-option value="3">Archived</mat-option>
+        <mat-option value="4">Deleted</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</app-filter>

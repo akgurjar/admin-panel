@@ -1,12 +1,16 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
 
 @mixin public-theming($theme) {
-    $primary: map-get($theme, primary);
-    $accent: map-get($theme, accent);
+    $color-config: mat.get-color-config($theme);
+    $primary: map.get($color-config, 'primary');
+    $accent: map.get($color-config, 'accent');
+
     .auth-card__container {
-        background-color: rgba(mat-color($primary), .7);
+        background-color: rgba(mat.get-color-from-palette($primary), .7);
     }
+
     .auth-seccess__title {
-        color: mat-color($primary);
+        color: mat.get-color-from-palette($primary);
     }
 }
-

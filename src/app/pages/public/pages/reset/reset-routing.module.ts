@@ -2,16 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ResetComponent } from './view/reset.component';
 
-
 const routes: Routes = [
   {
-    path: '',
-    component: ResetComponent
-  }
+    path: ':token',
+    component: ResetComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ResetRoutingModule { }
+export class ResetRoutingModule {}

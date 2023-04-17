@@ -31,13 +31,14 @@ export class ResetComponent implements OnInit {
       ],
     });
     route.params.subscribe(({ token }) => {
+      console.info(token);
       setTimeout(() => {
         if (token === 'asdfghjkl') {
           this.resetState = 'FORM';
         } else {
           this.resetState = 'FORM';
         }
-      }, 100000);
+      }, 1000);
     });
   }
 

@@ -3,6 +3,7 @@
     width: 260px;
     position: relative;
 }
+
 .filter-title {
     display: block;
     text-align: center;
@@ -11,14 +12,16 @@
     font-weight: bold;
     color: #666;
 }
+
 .dialog-button {
     position: absolute;
     top: -24px;
     right: -24px;
 }
-mat-form-field {
-    width: 100%;
-}
+
+// mat-form-field {
+//     width: 100%;
+// }
 .filter-actions {
     display: flex;
     flex-direction: row;
@@ -26,4 +29,3 @@ mat-form-field {
     justify-content: space-between;
     margin-top: 20px;
 }
-

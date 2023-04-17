@@ -3,6 +3,7 @@
     padding: 16px;
     background-color: #FFF;
 }
+
 .table-box__header {
     height: 40px;
     display: flex;
@@ -11,10 +12,11 @@
     font-weight: 500;
     margin-bottom: 8px;
 }
-mat-form-field {
-    width: 280px;
-    padding: 5px 15px;
-}
+
+// mat-form-field {
+//     width: 280px;
+//     padding: 5px 15px;
+// }
 .search-clear {
     font-size: 22px;
     height: 22px;
@@ -23,28 +25,34 @@ mat-form-field {
     transform: translateY(5px);
     color: #444;
 }
+
 .search-clear--disabled {
     pointer-events: none;
     color: #AAA;
     cursor: default;
 }
+
 .table-container {
     width: 100%;
     overflow-y: hidden;
     overflow-x: auto;
 }
+
 table {
     margin: 2px;
     width: calc(100% - 4px);
     min-width: 760px;
 }
+
 .table-header {
     color: #FFF;
     font-size: 16px;
 }
+
 .align--center {
     text-align: center;
 }
+
 .table__placeholder {
     height: 220px;
     font-size: 36px;

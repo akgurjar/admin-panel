@@ -1,28 +1,31 @@
-
 .auth-form__actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 20px 0 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 0 30px;
 }
 
 mat-form-field {
-    width: 100%;
+  width: 100%;
 }
+
 mat-slide-toggle {
-    margin: 5px 0;
+  margin: 5px 0;
 }
+
 .form-field-icon {
-    color: rgba(#000, .4);
-    vertical-align: bottom;
-    transform: translateY(1px);
-    margin-right: 2px;
-    user-select: none;
+  color: rgba(#000, .4);
+  vertical-align: bottom;
+  transform: translateY(1px);
+  margin-right: 2px;
+  user-select: none;
 }
+
 .form-field-icon--action {
-    cursor: pointer;
-    &[data-disabled = true] {
-        color: rgba(#000, .2);
-        cursor: default;
-    }
+  cursor: pointer;
+
+  &[data-disabled=true] {
+    color: rgba(#000, .2);
+    cursor: default;
+  }
 }

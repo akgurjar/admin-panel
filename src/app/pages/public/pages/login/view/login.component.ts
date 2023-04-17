@@ -7,7 +7,7 @@ import { CustomValidators } from 'src/app/constants/validation.constants';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   isPasswordVisible = false;
@@ -18,14 +18,13 @@ export class LoginComponent implements OnInit {
     private $router: Router
   ) {
     this.loginForm = fb.group({
-      email: ['admin@gmail.com', [Validators.required, ...CustomValidators.email]],
-      password: ['asdfghjkl', CustomValidators.password],
-      remember: [false, Validators.required]
+      email: ['', [Validators.required, ...CustomValidators.email]],
+      password: ['', CustomValidators.password],
+      remember: [false, Validators.required],
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   onPasswordVisibilityHandler(event: MouseEvent) {
     event.stopPropagation();
     if (this.loginForm.enabled) {
@@ -37,18 +36,20 @@ export class LoginComponent implements OnInit {
       const { username, password, remember } = this.loginForm.value;
       // console.log(username, password, remember);
       this.loginForm.disable();
-      this.$public.login({username, password}, remember)
-      .then((status) => {
-        // console.log(status);
-        if (status) {
-          this.$router.navigateByUrl('/');
-        } else {
+      this.$public
+        .login({ username, password }, remember)
+        .then((status) => {
+          // console.log(status);
+          if (status) {
+            this.$router.navigateByUrl('/');
+          } else {
+            this.loginForm.enable();
+          }
+        })
+        .catch((error) => {
           this.loginForm.enable();
-        }
-      }).catch((error) => {
-        this.loginForm.enable();
-        console.log(error);
-      });
+          console.log(error);
+        });
     }
   }
   onForgotPasswordHandler() {

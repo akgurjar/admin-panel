@@ -1,10 +1,12 @@
 <div *ngIf="!!mailSentTo; else formTemplate" class="forgot-seccess__container">
-  <h2 class="auth-seccess__title">Mail Sent</h2>
+  <img height="144" src="assets/images/mail-sent.gif" />
+  <br /><br />
   <p>
     Please check your inbox, password reset link has been sent successfully to
     your email <b>{{ mailSentTo }}</b
     >.
   </p>
+  <br /><br />
   <button mat-raised-button color="primary" (click)="onBackToLoginHandler()">
     Back to login
   </button>
@@ -27,10 +29,11 @@
         formControlName="email"
         autocomplete="off"
         spellcheck="false"
+        (keyup.enter)="onForgotMailHandler()"
       />
-      <mat-icon matPrefix class="form-field-icon">email</mat-icon>
+      <mat-icon matPrefix>email</mat-icon>
       <mat-error>{{
-        forgotForm.controls["email"] | validationError : "Email"
+        emailControl.errors | validationError : "Email"
       }}</mat-error>
     </mat-form-field>
   </form>
@@ -38,6 +41,7 @@
     <button
       mat-button
       mat-stroked-button
+      color="primary"
       (click)="onBackToLoginHandler()"
       [disabled]="forgotForm.disabled"
     >
@@ -48,10 +52,10 @@
       mat-button
       mat-raised-button
       color="primary"
-      [disabled]="forgotForm.disabled || !forgotForm.valid"
+      [disabled]="forgotForm.disabled"
       (click)="onForgotMailHandler()"
     >
-      <mat-icon>send</mat-icon>&nbsp;
+      <mat-icon>send</mat-icon>
       <span>Send</span>
     </button>
   </div>

@@ -1,44 +1,47 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Pipe({
   name: 'validationError',
 })
 export class ValidationErrorPipe implements PipeTransform {
-  transform(control: AbstractControl, fieldName: string = 'Field'): string {
+  transform(
+    errors: ValidationErrors | null,
+    fieldName: string = 'Field'
+  ): string {
+    console.info(errors);
+    if (!errors) {
+      return '';
+    }
     // Custom Error messages
-    if (control.hasError('custom')) {
-      return control.errors?.['custom'];
+    if (errors['custom']) {
+      return errors['custom'];
     }
     // Required Error
-    if (control.hasError('required')) {
+    if (errors['required']) {
       return `${fieldName} is required.`;
     }
 
     // Email Error
-    if (control.hasError('email')) {
+    if (errors['email']) {
       return `${fieldName} is not valid.`;
     }
 
     // Min Length Error
-    if (control.hasError('minlength')) {
-      return `${fieldName} length must be at least ${
-        control.getError('minlength').requiredLength
-      }`;
+    if (errors['minlength']) {
+      return `${fieldName} length must be at least ${errors['minlength'].requiredLength}`;
     }
 
     // Max Length Error
-    if (control.hasError('maxlength')) {
-      return `${fieldName} length must be less than ${
-        control.getError('maxlength').requiredLength
-      }`;
+    if (errors['maxlength']) {
+      return `${fieldName} length must be less than ${errors['maxlength'].requiredLength}`;
     }
 
     // Confirm Password match
     // console.log(control.errors);
-    if (control.hasError('compare')) {
+    if (errors['compare']) {
       let message = null;
-      const error = control.getError('compare');
+      const error = errors['compare'];
       switch (error.type) {
         case 'MATCH': {
           message = `${fieldName} do not match with ${error.field}`;
@@ -61,12 +64,12 @@ export class ValidationErrorPipe implements PipeTransform {
     }
 
     // White space
-    if (control.hasError('whiteSpace')) {
+    if (errors['whiteSpace']) {
       return `${fieldName} contains only white spaces.`;
     }
 
     // valid url
-    if (control.hasError('url')) {
+    if (errors['url']) {
       return `${fieldName} is not a valid url.`;
     }
     return '';

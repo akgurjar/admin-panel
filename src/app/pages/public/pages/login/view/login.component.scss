@@ -5,8 +5,13 @@
   margin: 20px 0 30px;
 }
 
+form {
+  margin-top: 36px;
+}
+
 mat-form-field {
   width: 100%;
+  margin: 7px 0;
 }
 
 mat-slide-toggle {
@@ -14,10 +19,7 @@ mat-slide-toggle {
 }
 
 .form-field-icon {
-  color: rgba(#000, .4);
   vertical-align: bottom;
-  transform: translateY(1px);
-  margin-right: 2px;
   user-select: none;
 }
 

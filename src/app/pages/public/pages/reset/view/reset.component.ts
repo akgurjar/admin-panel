@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PublicService } from '../../../services/public.service';
 import { CustomValidators } from 'src/app/constants/validation.constants';
+import { LOGIN_ROUTE } from '@app/pages/public/constants';
 
 @Component({
   selector: 'app-reset',
@@ -14,22 +15,28 @@ export class ResetComponent implements OnInit {
     password: false,
     confirmPassword: false,
   };
-  resetForm: FormGroup;
+  resetForm = this.$fb.nonNullable.group({
+    password: ['', CustomValidators.password],
+    confirmPassword: [
+      '',
+      CustomValidators.password.concat(CustomValidators.match('password')),
+    ],
+  });
   resetState: 'LOADING' | 'FORM' | 'DONE' = 'LOADING';
   isResetDone = false;
   isTokenValid = true;
+  get pwdControl() {
+    return this.resetForm.controls.password;
+  }
+  get confirmPwdControl() {
+    return this.resetForm.controls.confirmPassword;
+  }
+  readonly loginUrl = LOGIN_ROUTE.url;
   constructor(
-    fb: FormBuilder,
     route: ActivatedRoute,
+    private $fb: FormBuilder,
     private $public: PublicService
   ) {
-    this.resetForm = fb.group({
-      password: [null, CustomValidators.password],
-      confirmPassword: [
-        null,
-        [...CustomValidators.password, CustomValidators.match('password')],
-      ],
-    });
     route.params.subscribe(({ token }) => {
       console.info(token);
       setTimeout(() => {
@@ -54,7 +61,7 @@ export class ResetComponent implements OnInit {
   }
   onResetPasswordHandler() {
     if (this.resetForm.enabled && this.resetForm.valid) {
-      const { password } = this.resetForm.value;
+      const { password } = this.resetForm.getRawValue();
       this.resetForm.disable();
       this.$public
         .reset(password)
@@ -66,6 +73,8 @@ export class ResetComponent implements OnInit {
           this.resetForm.enable();
           console.log(error);
         });
+    } else if (this.resetForm.enabled) {
+      this.resetForm.markAllAsTouched();
     }
   }
 }

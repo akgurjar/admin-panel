@@ -13,7 +13,8 @@ export class PublicService {
     private $http: HttpClient
   ) {}
   async login(
-    { username, password }: LoginCredential,
+    username: string,
+    password: string,
     remember: boolean = false
   ): Promise<boolean> {
     const url = '/admins/authenticate';

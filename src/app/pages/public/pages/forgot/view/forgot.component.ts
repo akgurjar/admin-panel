@@ -10,22 +10,23 @@ import { CustomValidators } from 'src/app/constants/validation.constants';
   styleUrls: ['./forgot.component.scss'],
 })
 export class ForgotComponent implements OnInit {
-  forgotForm!: FormGroup;
+  forgotForm = this.$fb.nonNullable.group({
+    email: ['', [Validators.required, ...CustomValidators.email]],
+  });
   mailSentTo: string = '';
+  get emailControl() {
+    return this.forgotForm.controls.email;
+  }
   constructor(
-    fb: FormBuilder,
+    private $fb: FormBuilder,
     private $public: PublicService,
     private $router: Router
-  ) {
-    this.forgotForm = fb.group({
-      email: [null, [Validators.required, ...CustomValidators.email]],
-    });
-  }
+  ) {}
 
   ngOnInit() {}
   onForgotMailHandler() {
     if (this.forgotForm.valid && this.forgotForm.enabled) {
-      const { email } = this.forgotForm.value;
+      const { email } = this.forgotForm.getRawValue();
       this.forgotForm.disable();
       this.$public
         .forgot(email)
@@ -37,6 +38,8 @@ export class ForgotComponent implements OnInit {
           this.forgotForm.enable();
           // this
         });
+    } else if (this.forgotForm.enabled) {
+      this.forgotForm.markAllAsTouched();
     }
   }
   onBackToLoginHandler() {

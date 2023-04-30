@@ -1,3 +1,7 @@
+form {
+    margin-top: 36px;
+}
+
 .auth-form__actions {
     display: flex;
     flex-direction: row;
@@ -5,15 +9,9 @@
     margin: 20px 0 30px;
 }
 
-// mat-form-field {
-//     width: 100%;
-// }
-.form-field-icon {
-    color: rgba(#000, .4);
-    vertical-align: bottom;
-    transform: translateY(1px);
-    margin-right: 2px;
-    user-select: none;
+mat-form-field {
+    width: 100%;
+    margin: 7px 0;
 }
 
 .form-field-icon--action {
@@ -32,32 +30,6 @@
 
 .reset__verify {
     height: 100%;
-    font-size: 20px;
-
-    &::after {
-        content: "...";
-        animation: loadingText 1s linear infinite;
-    }
-}
-
-@keyframes loadingText {
-    0% {
-        content: ""
-    }
-
-    33% {
-        content: "."
-    }
-
-    66% {
-        content: ".."
-    }
-
-    99% {
-        content: "..."
-    }
-
-    100% {
-        content: ""
-    }
+    padding: 48px 0;
+    box-sizing: border-box;
 }

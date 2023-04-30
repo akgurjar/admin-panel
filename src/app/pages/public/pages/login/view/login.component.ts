@@ -11,18 +11,22 @@ import { CustomValidators } from 'src/app/constants/validation.constants';
 })
 export class LoginComponent implements OnInit {
   isPasswordVisible = false;
-  loginForm: FormGroup;
+  readonly loginForm = this.$fb.nonNullable.group({
+    email: ['', [Validators.required, ...CustomValidators.email]],
+    password: ['', CustomValidators.password],
+    remember: [false, Validators.required],
+  });
+  get emailControl() {
+    return this.loginForm.controls.email;
+  }
+  get pwdControl() {
+    return this.loginForm.controls.password;
+  }
   constructor(
-    fb: FormBuilder,
+    private $fb: FormBuilder,
     private $public: PublicService,
     private $router: Router
-  ) {
-    this.loginForm = fb.group({
-      email: ['', [Validators.required, ...CustomValidators.email]],
-      password: ['', CustomValidators.password],
-      remember: [false, Validators.required],
-    });
-  }
+  ) {}
 
   ngOnInit() {}
   onPasswordVisibilityHandler(event: MouseEvent) {
@@ -33,11 +37,11 @@ export class LoginComponent implements OnInit {
   }
   onLoginHandler() {
     if (this.loginForm.valid && this.loginForm.enabled) {
-      const { username, password, remember } = this.loginForm.value;
+      const { email, password, remember } = this.loginForm.getRawValue();
       // console.log(username, password, remember);
       this.loginForm.disable();
       this.$public
-        .login({ username, password }, remember)
+        .login(email, password, remember)
         .then((status) => {
           // console.log(status);
           if (status) {
@@ -50,6 +54,8 @@ export class LoginComponent implements OnInit {
           this.loginForm.enable();
           console.log(error);
         });
+    } else if (this.loginForm.enabled) {
+      this.loginForm.markAllAsTouched();
     }
   }
   onForgotPasswordHandler() {

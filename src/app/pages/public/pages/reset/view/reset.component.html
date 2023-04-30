@@ -3,7 +3,7 @@
 </div> -->
 <ng-container [ngSwitch]="resetState">
   <div *ngSwitchCase="'LOADING'" class="reset__verify content--center">
-    Verifying Token
+    <img width="100%" src="assets/images/loading.gif" />
   </div>
   <div *ngSwitchCase="'FORM'">
     <h2>Reset Password</h2>
@@ -19,17 +19,18 @@
           formControlName="password"
           autocomplete="off"
           spellcheck="false"
+          (keyup.enter)="onResetPasswordHandler()"
         />
-        <mat-icon matPrefix class="form-field-icon">vpn_key</mat-icon>
+        <mat-icon matPrefix>vpn_key</mat-icon>
         <mat-icon
           matSuffix
           class="form-field-icon form-field-icon--action"
-          [attr.data-disabled]="resetForm.controls['password'].disabled"
+          [attr.data-disabled]="pwdControl.disabled"
           (click)="onVisibilityHandler($event, 'password')"
           >{{ visibility.password ? "visibility_off" : "visibility" }}</mat-icon
         >
         <mat-error>{{
-          resetForm.controls["password"] | validationError : "Password"
+          pwdControl.errors | validationError : "Password"
         }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -42,46 +43,57 @@
           formControlName="confirmPassword"
           autocomplete="off"
           spellcheck="false"
+          (keyup.enter)="onResetPasswordHandler()"
         />
-        <mat-icon matPrefix class="form-field-icon">vpn_key</mat-icon>
+        <mat-icon matPrefix>vpn_key</mat-icon>
         <mat-icon
           matSuffix
           class="form-field-icon form-field-icon--action"
-          [attr.data-disabled]="resetForm.controls['confirmPassword'].disabled"
+          [attr.data-disabled]="confirmPwdControl.disabled"
           (click)="onVisibilityHandler($event, 'confirmPassword')"
           >{{
             visibility.confirmPassword ? "visibility_off" : "visibility"
           }}</mat-icon
         >
         <mat-error>{{
-          resetForm.controls["confirmPassword"]
-            | validationError : "Confirm Password"
+          confirmPwdControl.errors | validationError : "Confirm password"
         }}</mat-error>
       </mat-form-field>
     </form>
     <div class="auth-form__actions">
-      <button mat-button mat-stroked-button routerLink="/auth/login">
+      <button
+        mat-button
+        color="primary"
+        mat-stroked-button
+        [routerLink]="[loginUrl]"
+        [disabled]="resetForm.disabled"
+      >
         <!-- <mat-icon>cancel</mat-icon>&nbsp; -->
-        <span>Cancel</span>
+        <span>Back to Login</span>
       </button>
       <button
         mat-button
         mat-raised-button
         color="primary"
-        [disabled]="resetForm.disabled || !resetForm.valid"
+        [disabled]="resetForm.disabled"
         (click)="onResetPasswordHandler()"
       >
         <!-- <mat-icon>exit_to_app</mat-icon>&nbsp; -->
-        <span>Submit</span>
+        <span>Change Password</span>
       </button>
     </div>
   </div>
   <div *ngSwitchCase="'DONE'" style="text-align: center">
-    <h2 class="auth-seccess__title">Success</h2>
-    <p>Your password has been reset successfully.</p>
-    <button mat-raised-button color="primary" routerLink="../../login">
+    <img height="220" src="assets/images/password-success.gif" />
+    <p>
+      Your password has been reset successfully. You can now login with your new
+      password.
+    </p>
+    <br /><br />
+    <button mat-raised-button color="primary" [routerLink]="[loginUrl]">
       Login Now
     </button>
+    <br /><br /><br /><br />
   </div>
   <div *ngSwitchDefault style="height: 100%" class="content--center">
     link expired

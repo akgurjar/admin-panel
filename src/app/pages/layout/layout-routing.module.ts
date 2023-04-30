@@ -10,6 +10,10 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
+        redirectTo: 'dashboard',
+      },
+      {
+        path: 'dashboard',
         loadChildren: () =>
           import('./pages/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
@@ -25,16 +29,16 @@ export const routes: Routes = [
       //   loadChildren: () =>
       //     import('./pages/users/users.module').then((m) => m.UsersModule),
       // },
-      // {
-      //   path: 'reports',
-      //   loadChildren: () =>
-      //     import('./pages/reports/reports.module').then((m) => m.ReportsModule),
-      // },
-      // {
-      //   path: 'content',
-      //   loadChildren: () =>
-      //     import('./pages/content/content.module').then((m) => m.ContentModule),
-      // },
+      {
+        path: 'reports',
+        loadChildren: () =>
+          import('./pages/reports/reports.module').then((m) => m.ReportsModule),
+      },
+      {
+        path: 'content',
+        loadChildren: () =>
+          import('./pages/content/content.module').then((m) => m.ContentModule),
+      },
     ],
   },
 ];

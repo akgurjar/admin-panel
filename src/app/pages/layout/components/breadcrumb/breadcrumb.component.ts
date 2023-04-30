@@ -31,15 +31,15 @@ export class BreadcrumbComponent implements OnInit {
     // console.log(this._route.snapshot.params);
     this.$routeChange.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.$route.params.subscribe(console.log);
+        // this.$route.params.subscribe(console.log);
         const steps = this._createSteps(event.urlAfterRedirects);
-        let currentUrl = '/dashboard';
+        let currentUrl = '/layout';
         this.routeSteps = steps.reduce(
           (data: RouteStep[], step, index): RouteStep[] => {
-            if (step === 'dashboard') {
+            if (step === 'layout') {
               return data;
             }
-            if (step !== 'dashboard' && step !== this.$baseUrlSteps[index]) {
+            if (step !== 'layout' && step !== this.$baseUrlSteps[index]) {
               currentUrl = `${currentUrl}/${step}`;
               if (this.$changes.has(step)) {
                 step = this.$changes.get(step) || '';

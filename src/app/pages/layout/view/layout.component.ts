@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { MediaQueryService } from '../../../services/media-query/media-query.service';
 
 import { SIDE_MENUS } from '../common/models';
@@ -12,6 +12,7 @@ import { LoaderService } from '@loader';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
+  @HostBinding('class.drawer--opened') isDrawerOpened = true;
   sideMenus = SIDE_MENUS;
   isLoading = false;
   isSideNavOpened: boolean = this.isDesktopDevice;
@@ -24,7 +25,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   get isDesktopDevice(): boolean {
     return this.mediaQuery.getDevice === 'COMPUTER';
   }
-  readonly appVersion = env.appVersion;
+  readonly appVersion = env.appVersion || '0.0.0';
   admin: any = null;
   get adminName() {
     return this.admin ? this.admin.displayName : 'loading...';
@@ -40,13 +41,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {}
-  onSideNavToggleHandler() {
-    this.isSideNavOpened = !this.isSideNavOpened;
-  }
-  onSideNavOpenedChangeHandler(status: boolean) {
-    if (this.isSideNavOpened && !status) {
-      this.isSideNavOpened = false;
-    }
+  onDrawerToggle() {
+    this.isDrawerOpened = !this.isDrawerOpened;
   }
   ngOnDestroy() {}
   onLogoutHandler() {

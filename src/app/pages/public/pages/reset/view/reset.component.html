@@ -21,10 +21,10 @@
           spellcheck="false"
           (keyup.enter)="onResetPasswordHandler()"
         />
-        <mat-icon matPrefix>vpn_key</mat-icon>
+        <mat-icon class="material-symbols-outlined" matPrefix>vpn_key</mat-icon>
         <mat-icon
           matSuffix
-          class="form-field-icon form-field-icon--action"
+          class="material-symbols-outlined form-field-icon form-field-icon--action"
           [attr.data-disabled]="pwdControl.disabled"
           (click)="onVisibilityHandler($event, 'password')"
           >{{ visibility.password ? "visibility_off" : "visibility" }}</mat-icon
@@ -45,10 +45,10 @@
           spellcheck="false"
           (keyup.enter)="onResetPasswordHandler()"
         />
-        <mat-icon matPrefix>vpn_key</mat-icon>
+        <mat-icon class="material-symbols-outlined" matPrefix>vpn_key</mat-icon>
         <mat-icon
           matSuffix
-          class="form-field-icon form-field-icon--action"
+          class="material-symbols-outlined form-field-icon form-field-icon--action"
           [attr.data-disabled]="confirmPwdControl.disabled"
           (click)="onVisibilityHandler($event, 'confirmPassword')"
           >{{

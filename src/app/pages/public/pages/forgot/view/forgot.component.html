@@ -31,7 +31,7 @@
         spellcheck="false"
         (keyup.enter)="onForgotMailHandler()"
       />
-      <mat-icon matPrefix>email</mat-icon>
+      <mat-icon class="material-symbols-outlined" matPrefix>email</mat-icon>
       <mat-error>{{
         emailControl.errors | validationError : "Email"
       }}</mat-error>
@@ -55,7 +55,7 @@
       [disabled]="forgotForm.disabled"
       (click)="onForgotMailHandler()"
     >
-      <mat-icon>send</mat-icon>
+      <mat-icon class="material-symbols-outlined">send</mat-icon>
       <span>Send</span>
     </button>
   </div>

@@ -1,25 +1,25 @@
 export const SIDE_MENUS: SideNav[] = [
   {
-    label: 'Dashboard',
+    label: 'My Dashboard',
     icon: 'dashboard',
-    link: '',
+    link: 'dashboard',
     exact: true,
   },
   {
-    label: 'Users',
+    label: 'User Management',
     icon: 'group',
     link: 'users',
     exact: false,
   },
   {
-    label: 'Reports',
-    icon: 'insert_chart',
+    label: 'Report Management',
+    icon: 'monitoring',
     link: 'reports',
     exact: false,
   },
   {
-    label: 'Manage Content',
-    icon: 'ballot',
+    label: 'Content Management',
+    icon: 'text_snippet',
     link: 'content',
     exact: false,
   },

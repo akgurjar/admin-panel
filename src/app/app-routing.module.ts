@@ -20,8 +20,8 @@ export const routes: Routes = [
   },
   {
     path: LAYOUT_ROUTE.path,
-    canLoad: [LayoutGuard],
-    canActivate: [LayoutGuard],
+    // canLoad: [LayoutGuard],
+    // canActivate: [LayoutGuard],
     loadChildren: () =>
       import('./pages/layout/layout.module').then(
         (modules) => modules.LayoutModule

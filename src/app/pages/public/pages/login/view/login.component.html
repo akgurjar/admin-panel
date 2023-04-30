@@ -13,7 +13,7 @@
       spellcheck="false"
       (keyup.enter)="onLoginHandler()"
     />
-    <mat-icon matPrefix>email</mat-icon>
+    <mat-icon matPrefix class="material-symbols-outlined">email</mat-icon>
     <mat-error>{{ emailControl.errors | validationError : "Email" }}</mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
@@ -31,10 +31,10 @@
     <mat-error>{{
       pwdControl.errors | validationError : "Password"
     }}</mat-error>
-    <mat-icon matPrefix>vpn_key</mat-icon>
+    <mat-icon class="material-symbols-outlined" matPrefix>vpn_key</mat-icon>
     <mat-icon
       matSuffix
-      class="form-field-icon form-field-icon--action"
+      class="form-field-icon form-field-icon--action material-symbols-outlined"
       (click)="onPasswordVisibilityHandler($event)"
       [attr.data-disabled]="pwdControl.disabled"
       >{{ isPasswordVisible ? "visibility" : "visibility_off" }}</mat-icon
@@ -61,7 +61,7 @@
     (click)="onLoginHandler()"
     [disabled]="loginForm.disabled"
   >
-    <mat-icon>exit_to_app</mat-icon>
+    <mat-icon class="material-symbols-outlined">login</mat-icon>
     <span>Login</span>
   </button>
 </div>

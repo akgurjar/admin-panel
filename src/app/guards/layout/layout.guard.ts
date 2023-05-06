@@ -1,14 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  CanLoad,
-  Route,
-  UrlSegment,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router,
-} from '@angular/router';
+import { Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 import { ProfileService } from '@profile';
 import { map, mergeMap, first } from 'rxjs/operators';
@@ -17,7 +8,7 @@ import { PUBLIC_ROUTE } from 'src/app/constants';
 @Injectable({
   providedIn: 'root',
 })
-export class LayoutGuard implements CanActivate, CanLoad {
+export class LayoutGuard  {
   constructor(private $router: Router, private $profile: ProfileService) {}
   canActivate(
     next: ActivatedRouteSnapshot,

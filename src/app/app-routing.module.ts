@@ -11,8 +11,8 @@ export const routes: Routes = [
   },
   {
     path: PUBLIC_ROUTE.path,
-    // canLoad: [PublicGuard],
-    // canActivate: [PublicGuard],
+    canLoad: [PublicGuard],
+    canActivate: [PublicGuard],
     loadChildren: () =>
       import('./pages/public/public.module').then(
         (modules) => modules.PublicModule
@@ -20,8 +20,8 @@ export const routes: Routes = [
   },
   {
     path: LAYOUT_ROUTE.path,
-    // canLoad: [LayoutGuard],
-    // canActivate: [LayoutGuard],
+    canLoad: [LayoutGuard],
+    canActivate: [LayoutGuard],
     loadChildren: () =>
       import('./pages/layout/layout.module').then(
         (modules) => modules.LayoutModule

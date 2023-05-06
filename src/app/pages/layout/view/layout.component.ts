@@ -5,6 +5,7 @@ import { SIDE_MENUS } from '../common/models';
 import { ProfileService } from '@profile';
 import { env } from '@env';
 import { LoaderService } from '@loader';
+import { Profile } from '@app/services/profile/profile.model';
 
 @Component({
   selector: 'app-layout',
@@ -26,9 +27,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
     return this.mediaQuery.getDevice === 'COMPUTER';
   }
   readonly appVersion = env.appVersion || '0.0.0';
-  admin: any = null;
+  admin: Profile = this.$profile.data() as Profile;
   get adminName() {
-    return this.admin ? this.admin.displayName : 'loading...';
+    return this.admin ? this.admin.name : 'loading...';
   }
   constructor(
     loader: LoaderService,
@@ -36,9 +37,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     public mediaQuery: MediaQueryService
   ) {
     loader.changes.subscribe((isLoading) => (this.isLoading = isLoading));
-    $profile.changes.subscribe((admin) => {
-      this.admin = admin;
-    });
   }
   ngOnInit() {}
   onDrawerToggle() {

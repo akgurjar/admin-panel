@@ -37,11 +37,20 @@ export class InterceptorService implements HttpInterceptor {
       return EMPTY;
     }
     this.$loader.markAsLoading();
-    const isApiUrl = req.url.charAt(0) === '~';
+    const isApiUrl = req.url.startsWith('~');
+    const setHeaders: Record<string, string> = {};
+    if (!req.headers.get('Authorization')) {
+      if (this.$token.hasValue) {
+        setHeaders['Authorization'] = this.$token.header('accessToken');
+      } else {
+        setHeaders['Authorization'] = `Basic ${window.btoa('RCC_USR:RCC_PWD')}`;
+      }
+    }
     return next
       .handle(
         req.clone({
-          url: isApiUrl ? `${env.apiBaseUrl}${req.url.substr(1)}` : req.url, // add base url
+          setHeaders,
+          url: isApiUrl ? `${env.apiBaseUrl}${req.url.substring(1)}` : req.url, // add base url
         })
       )
       .pipe(

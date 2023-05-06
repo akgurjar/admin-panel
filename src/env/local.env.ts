@@ -1,7 +1,7 @@
 export const env = {
   isProd: false,
   tokenKey: '',
-  apiBaseUrl: '',
+  apiBaseUrl: 'http://localhost:3001',
   tokenRememberKey: '',
   appVersion: '',
 };

@@ -1,5 +1,11 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Observer } from 'rxjs';
+import {
+  Injectable,
+  Signal,
+  WritableSignal,
+  computed,
+  signal,
+} from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Profile } from './profile.model';
 import { TokenService } from '../token/token.service';
@@ -9,36 +15,32 @@ import { TokenService } from '../token/token.service';
 })
 export class ProfileService {
   isLoaded = false;
-  private $profile = new BehaviorSubject<Profile | null>(null);
-  readonly changes = this.$profile.asObservable();
+  readonly #profile: WritableSignal<Profile | null> = signal(null);
+  readonly data: Signal<Profile | null> = computed(() => this.#profile());
   constructor(private $http: HttpClient, private $token: TokenService) {}
-  query(): Observable<void> {
-    return new Observable<void>((observer) => {
-      // this.$http.get<Api.Response<any>>(`~/profile`).subscribe((resp) => {
-      //   this.isProfileLoaded = true;
-      //   this.$profile.next(resp.result);
-      //   observer.complete();
-      // }, () => {
-      //   console.log('Error');
-      //   this.isProfileLoaded = true;
-      //   observer.complete();
-      // });
-      if (this.$token.get()) {
-        this.$profile.next(
-          Profile.parse({
-            id: 'Guest Admin',
-            name: 'Guest Admin',
-            picture: 'null',
-            email: 'test@yopmail.com',
-          })
-        );
+  async query(): Promise<void> {
+    try {
+      if (!this.$token.hasValue) {
+        this.isLoaded = true;
+        return;
       }
+      const req = this.$http.get<Api.Response<any>>(`~/accounts/profile`);
+      const res = await lastValueFrom(req);
+      this.#profile.set(Profile.parse(res.result));
+    } catch (err) {
+      console.info(err);
+    } finally {
       this.isLoaded = true;
-      observer.complete();
-    });
+    }
   }
-  logout() {
+  async logout() {
+    const req = this.$http.delete<Api.Response<any>>(`~/sessions/logout`, {
+      headers: {
+        Authorization: this.$token.header('refreshToken'),
+      },
+    });
+    await lastValueFrom(req);
     this.$token.clear();
-    this.$profile.next(null);
+    this.#profile.set(null);
   }
 }

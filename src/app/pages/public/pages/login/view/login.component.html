@@ -45,17 +45,16 @@
   >
 </form>
 <div class="auth-form__actions">
-  <button
-    mat-button
+  <a
+    href="#"
     mat-stroked-button
     color="primary"
-    (click)="onForgotPasswordHandler()"
+    [routerLink]="forgetPasswordUrl"
     [disabled]="this.loginForm.disabled"
   >
     Forgot Password
-  </button>
+  </a>
   <button
-    mat-button
     mat-raised-button
     color="primary"
     (click)="onLoginHandler()"

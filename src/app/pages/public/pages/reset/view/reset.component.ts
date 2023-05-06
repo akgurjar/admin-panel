@@ -32,20 +32,15 @@ export class ResetComponent implements OnInit {
     return this.resetForm.controls.confirmPassword;
   }
   readonly loginUrl = LOGIN_ROUTE.url;
+  #token = '';
   constructor(
     route: ActivatedRoute,
     private $fb: FormBuilder,
     private $public: PublicService
   ) {
     route.params.subscribe(({ token }) => {
-      console.info(token);
-      setTimeout(() => {
-        if (token === 'asdfghjkl') {
-          this.resetState = 'FORM';
-        } else {
-          this.resetState = 'FORM';
-        }
-      }, 1000);
+      this.#token = token;
+      this.resetState = 'FORM';
     });
   }
 
@@ -64,14 +59,16 @@ export class ResetComponent implements OnInit {
       const { password } = this.resetForm.getRawValue();
       this.resetForm.disable();
       this.$public
-        .reset(password)
+        .reset(password, this.#token)
         .then(() => {
           this.isResetDone = true;
-          this.resetForm.enable();
+          this.resetState = 'DONE';
         })
         .catch((error) => {
-          this.resetForm.enable();
           console.log(error);
+        })
+        .finally(() => {
+          this.resetForm.enable();
         });
     } else if (this.resetForm.enabled) {
       this.resetForm.markAllAsTouched();

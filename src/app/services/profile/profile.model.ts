@@ -1,7 +1,7 @@
 export class Profile {
   static parse(data: Record<string, string>): Profile {
     const profile = new Profile();
-    profile.id = data['id'];
+    profile.id = data['_id'];
     profile.name = data['name'];
     profile.email = data['email'];
     profile.picture = data['picture'];

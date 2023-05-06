@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PublicService } from '../../../services/public.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { PublicService } from '@app/pages/public/services/public.service';
 import { Router } from '@angular/router';
-import { CustomValidators } from 'src/app/constants/validation.constants';
+import { CustomValidators } from '@app/constants/validation.constants';
+import { FORGOT_ROUTE } from '@app/pages/public/constants';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { CustomValidators } from 'src/app/constants/validation.constants';
 })
 export class LoginComponent implements OnInit {
   isPasswordVisible = false;
+  readonly forgetPasswordUrl = FORGOT_ROUTE.url;
   readonly loginForm = this.$fb.nonNullable.group({
     email: ['', [Validators.required, ...CustomValidators.email]],
     password: ['', CustomValidators.password],
@@ -42,24 +44,14 @@ export class LoginComponent implements OnInit {
       this.loginForm.disable();
       this.$public
         .login(email, password, remember)
-        .then((status) => {
-          // console.log(status);
-          if (status) {
-            this.$router.navigateByUrl('/');
-          } else {
-            this.loginForm.enable();
-          }
-        })
         .catch((error) => {
-          this.loginForm.enable();
           console.log(error);
+        })
+        .finally(() => {
+          this.loginForm.enable();
         });
     } else if (this.loginForm.enabled) {
       this.loginForm.markAllAsTouched();
     }
-  }
-  onForgotPasswordHandler() {
-    const url = this.$router.url;
-    this.$router.navigate([url.substr(0, url.lastIndexOf('/')), 'forgot']);
   }
 }

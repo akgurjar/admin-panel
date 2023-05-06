@@ -7,8 +7,8 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './view/layout.component';
 import { BreadcrumbComponent } from './components';
 import { BreadcrumbService } from './services/breadcrumb';
-import { LayoutService } from './services/layout/layout.service';
-import { ProfileService } from '@app/services/profile/profile.service';
+import { LayoutService } from './services/layout';
+import { ProfileService } from '@profile';
 import { Router } from '@angular/router';
 import { PUBLIC_ROUTE } from '@app/constants';
 

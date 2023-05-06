@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Router, NavigationStart, NavigationCancel, NavigationError, NavigationEnd } from '@angular/router';
+import {
+  Router,
+  NavigationStart,
+  NavigationCancel,
+  NavigationError,
+  NavigationEnd,
+} from '@angular/router';
 import { PopupService } from '@popup';
-import { MESSAGES } from 'src/app/constants';
+import { MESSAGES } from '@constants/index';
 
 let loadingCount = 0;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoaderService {
   private $state: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -36,7 +42,12 @@ export class LoaderService {
       if (event instanceof NavigationStart) {
         this.markAsLoading();
       }
-      if (loadingCount > 0 && (event instanceof NavigationCancel || event instanceof NavigationError || event instanceof NavigationEnd)) {
+      if (
+        loadingCount > 0 &&
+        (event instanceof NavigationCancel ||
+          event instanceof NavigationError ||
+          event instanceof NavigationEnd)
+      ) {
         this.completeLoading();
       }
       if (event instanceof NavigationError) {
@@ -44,7 +55,7 @@ export class LoaderService {
         if (navigator.onLine) {
           message = MESSAGES.ERROR.UNKNOWN;
         }
-        this.$popup.error(message, {duration: 5000});
+        this.$popup.error(message, { duration: 5000 });
       }
     });
   }

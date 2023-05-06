@@ -5,7 +5,7 @@ import { PublicRoutingModule } from './public-routing.module';
 import { PublicComponent } from './view/public.component';
 import { PublicService } from './services/public.service';
 import { PublicSharedModule } from './common';
-import { ProfileService } from '@app/services/profile/profile.service';
+import { ProfileService } from '@profile';
 import { Router } from '@angular/router';
 import { LAYOUT_ROUTE } from '@app/constants';
 

@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PopupService } from 'src/app/common/popup';
-import { Token } from 'src/app/services/token';
-import { LoginCredential } from '../interfaces';
+import { ProfileService } from '@profile';
 import { firstValueFrom } from 'rxjs';
-import { ProfileService } from '@app/services/profile/profile.service';
+import { PopupService } from '@popup';
+import { TokenService } from '@token';
 
 @Injectable()
 export class PublicService {
   constructor(
-    private $token: Token,
+    private $token: TokenService,
     private $popup: PopupService,
     private $http: HttpClient,
     private $profile: ProfileService

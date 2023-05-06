@@ -8,13 +8,12 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, EMPTY } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, EMPTY, tap } from 'rxjs';
 import { PopupService } from '@popup';
 import { LoaderService } from '@loader';
+import { TokenService } from '@token';
 import { env } from '@env';
-import { Token } from '@token';
-import { MESSAGES, PUBLIC_ROUTE } from 'src/app/constants';
+import { MESSAGES, PUBLIC_ROUTE } from '@constants/index';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +22,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor(
     private $loader: LoaderService,
     private $popup: PopupService,
-    private $token: Token,
+    private $token: TokenService,
     private $router: Router
   ) {}
   // intercept all http requests
@@ -40,11 +39,7 @@ export class InterceptorService implements HttpInterceptor {
     const isApiUrl = req.url.startsWith('~');
     const setHeaders: Record<string, string> = {};
     if (!req.headers.get('Authorization')) {
-      if (this.$token.hasValue) {
-        setHeaders['Authorization'] = this.$token.header('accessToken');
-      } else {
-        setHeaders['Authorization'] = `Basic ${window.btoa('RCC_USR:RCC_PWD')}`;
-      }
+      setHeaders['Authorization'] = `Basic ${window.btoa('RCC_USR:RCC_PWD')}`;
     }
     return next
       .handle(
@@ -54,15 +49,15 @@ export class InterceptorService implements HttpInterceptor {
         })
       )
       .pipe(
-        tap(
-          (event) => {
+        tap({
+          next: (event) => {
             if (event instanceof HttpResponse) {
               this.$loader.completeLoading();
               // console.log('response');
             }
             // return throwError(error);
           },
-          (event) => {
+          error: (event) => {
             if (event instanceof HttpErrorResponse) {
               this.$loader.completeLoading();
               if (event.status === 401 && this.$token.hasValue) {
@@ -75,8 +70,8 @@ export class InterceptorService implements HttpInterceptor {
                 this.$popup.error(event.error.message);
               }
             }
-          }
-        )
+          },
+        })
       );
   }
 }

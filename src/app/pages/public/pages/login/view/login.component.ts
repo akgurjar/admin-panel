@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { PublicService } from '@app/pages/public/services/public.service';
-import { Router } from '@angular/router';
-import { CustomValidators } from '@app/constants/validation.constants';
-import { FORGOT_ROUTE } from '@app/pages/public/constants';
+import { PublicService } from '@public/services/public.service';
+import { CustomValidators } from '@constants/validation.constants';
+import { FORGOT_ROUTE } from '@public/constants';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +23,7 @@ export class LoginComponent implements OnInit {
   get pwdControl() {
     return this.loginForm.controls.password;
   }
-  constructor(
-    private $fb: FormBuilder,
-    private $public: PublicService,
-    private $router: Router
-  ) {}
+  constructor(private $fb: FormBuilder, private $public: PublicService) {}
 
   ngOnInit() {}
   onPasswordVisibilityHandler(event: MouseEvent) {

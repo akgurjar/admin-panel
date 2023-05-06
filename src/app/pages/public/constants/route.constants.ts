@@ -1,22 +1,22 @@
-import { PUBLIC_ROUTE } from 'src/app/constants';
+import { PUBLIC_ROUTE } from '@constants/route.constants';
 
 export const LOGIN_ROUTE = {
-    path: 'login',
-    get url(): string {
-        return `${PUBLIC_ROUTE.url}/${this.path}`;
-    }
+  path: 'login',
+  get url(): string {
+    return `${PUBLIC_ROUTE.url}/${this.path}`;
+  },
 };
 
 export const FORGOT_ROUTE = {
-    path: 'forgot',
-    get url(): string {
-        return `${PUBLIC_ROUTE.url}/${this.path}`;
-    }
+  path: 'forgot',
+  get url(): string {
+    return `${PUBLIC_ROUTE.url}/${this.path}`;
+  },
 };
 
 export const RESET_ROUTE = {
-    path: 'reset',
-    get url(): string {
-        return `${PUBLIC_ROUTE.url}/${this.path}`;
-    }
+  path: 'reset',
+  get url(): string {
+    return `${PUBLIC_ROUTE.url}/${this.path}`;
+  },
 };

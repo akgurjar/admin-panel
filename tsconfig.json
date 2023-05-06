@@ -24,12 +24,16 @@
       "@app/*": ["src/app/*"],
       "@env": ["src/env/index"],
       "@types/*": ["src/types/*"],
+      "@services/*": ["src/app/services/*"],
       "@token": ["src/app/services/token/index"],
       "@form-field": ["src/app/pages/common/form-field/index"],
       "@popup": ["src/app/common/popup/index"],
       "@confirm": ["src/app/pages/layout/common/confirm/index"],
       "@profile": ["src/app/services/profile/profile.service"],
-      "@loader": ["src/app/services/loader/loader.service"]
+      "@loader": ["src/app/services/loader/loader.service"],
+      "@constants/*": ["src/app/constants/*"],
+      "@public/*": ["src/app/pages/public/*"],
+      "@layout/*": ["src/app/pages/layout/*"]
     }
   },
   "angularCompilerOptions": {

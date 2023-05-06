@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ConfirmService {
-  constructor(private _dialog: MatDialog) {}
+  constructor(private $dialog: MatDialog) {}
   popup({ title, message }: Options): Observable<boolean> {
-    return this._dialog
+    return this.$dialog
       .open(ConfirmComponent, {
         data: {
           title: title || 'Confirm',

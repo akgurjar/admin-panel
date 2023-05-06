@@ -4,10 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './view/app.component';
-import { SharedModule } from './common/shared/shared.module';
-import { PopupModule } from 'src/app/common/popup';
+import { SharedModule } from './common/shared';
+import { PopupModule } from './common/popup';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { InterceptorService } from './services/interceptor/interceptor.service';
+import { InterceptorService } from './services/interceptor';
 import { ConfirmResetComponent } from './components/confirm-reset';
 
 @NgModule({

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PublicService } from '../../../services/public.service';
-import { CustomValidators } from 'src/app/constants/validation.constants';
-import { LOGIN_ROUTE } from '@app/pages/public/constants';
+import { PublicService } from '@public/services/public.service';
+import { CustomValidators } from '@constants/validation.constants';
+import { LOGIN_ROUTE } from '@public/constants';
 
 @Component({
   selector: 'app-reset',

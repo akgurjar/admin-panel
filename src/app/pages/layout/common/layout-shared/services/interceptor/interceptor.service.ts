@@ -7,56 +7,49 @@ import {
   HttpErrorResponse,
   HttpResponse,
 } from '@angular/common/http';
-import { EMPTY, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { EMPTY, Observable, tap } from 'rxjs';
 
-import { Router } from '@angular/router';
-import { Token } from 'src/app/services/token';
-import { PopupService } from 'src/app/common/popup';
+import { TokenService } from '@token';
+import { PopupService } from '@popup';
+import { ProfileService } from '@profile';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
   constructor(
-    private _token: Token,
-    private _router: Router,
-    private _popup: PopupService
+    private $token: TokenService,
+    private $popup: PopupService,
+    private $profile: ProfileService
   ) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if (this._token.hasValue) {
-      return next
-        .handle(
-          req.clone({
-            headers: req.headers.set(
-              'Authorization',
-              `Bearer ${this._token.get()}`
-            ),
-          })
-        )
-        .pipe(
-          tap(
-            (event) => {
-              if (event instanceof HttpResponse) {
-                //
-              }
-            },
-            (event) => {
-              if (event instanceof HttpErrorResponse) {
-                //
-              }
-            }
-          )
-        );
-    } else {
-      this._popup.open(
-        'Your session is expired, Please login again.',
-        'ERROR',
-        { duration: 300 }
-      );
-      this._router.navigateByUrl('/auth');
+    if (!this.$token.hasValue) {
+      this.$popup.error('Your session is expired, Please login again.');
+      this.$profile.clear();
       return EMPTY;
     }
+    return next
+      .handle(
+        req.clone({
+          setHeaders: {
+            Authorization: this.$token.header('accessToken'),
+          },
+        })
+      )
+      .pipe(
+        tap({
+          next: (event) => {
+            if (event instanceof HttpResponse) {
+              //
+            }
+          },
+          error: (event) => {
+            if (event instanceof HttpErrorResponse) {
+              //
+            }
+          },
+        })
+      );
   }
 }

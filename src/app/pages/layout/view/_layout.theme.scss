@@ -4,19 +4,8 @@
 @mixin layout-theming($theme) {
     @include breadcrumb-theming($theme);
     @include table-theming($theme);
-    
+
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $primary-color: mat-color($primary, 500);
-
-    .sidenav__wrapper {
-        background-color: mat-color($primary);
-    }
-    .toolbar-title,
-    .account__button {
-        color: mat-color($primary);
-    }
-    .sidenav__item--active {
-        color: mat-color($primary) !important;
-    }
 }

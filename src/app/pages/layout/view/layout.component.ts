@@ -13,13 +13,14 @@ import { LayoutService } from '../services';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
-  @HostBinding('class.drawer--opened') isDrawerOpened = true;
+  @HostBinding('class.drawer--opened') isDrawerOpened = false;
   sideMenus = SIDE_MENUS;
   readonly appVersion = env.appVersion || '0.0.0';
   admin: Profile = this.$profile.data() as Profile;
   get adminName() {
     return this.admin ? this.admin.name : 'loading...';
   }
+  title = SIDE_MENUS[0].label;
   constructor(
     private $profile: ProfileService,
     private $layoutService: LayoutService
@@ -27,6 +28,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ngOnInit() {}
   onDrawerToggle() {
     this.isDrawerOpened = !this.isDrawerOpened;
+  }
+  onMenuHandler(menu: SideNav) {
+    this.title = menu.label;
+    this.isDrawerOpened = false;
   }
   ngOnDestroy() {}
   onLogoutHandler() {

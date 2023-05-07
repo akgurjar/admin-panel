@@ -10,6 +10,7 @@
       routerLinkActive="drawer__menu--active"
       [routerLinkActiveOptions]="{ exact: menu.exact }"
       *ngFor="let menu of sideMenus"
+      (click)="onMenuHandler(menu)"
     >
       <mat-icon class="material-symbols-outlined">{{ menu.icon }}</mat-icon
       >&nbsp;&nbsp;&nbsp;
@@ -34,7 +35,7 @@
     >
       <mat-icon class="material-symbols-outlined">menu_open</mat-icon>
     </button>
-    <span class="toolbar__title text--primary">User Management</span>
+    <span class="toolbar__title text--primary">{{ title }}</span>
     <div style="flex: 1"></div>
     <button mat-icon-button color="primary" matTooltip="Notifications">
       <mat-icon
@@ -46,12 +47,17 @@
     </button>
     <button
       mat-icon-button
-      color="warn"
-      (click)="onLogoutHandler()"
-      matTooltip="Logout"
+      color="primary"
+      matTooltip="Account"
+      [matMenuTriggerFor]="accountMenu"
     >
-      <mat-icon class="material-symbols-outlined">logout</mat-icon>
+      <mat-icon class="material-symbols-outlined">person</mat-icon>
     </button>
+    <mat-menu #accountMenu>
+      <button mat-menu-item>Manage Profile</button>
+      <button mat-menu-item>Change Password</button>
+      <button mat-menu-item (click)="onLogoutHandler()">Logout</button>
+    </mat-menu>
   </mat-toolbar>
   <main>
     <app-breadcrumb class="page-header"></app-breadcrumb>

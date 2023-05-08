@@ -9,7 +9,7 @@
       [routerLink]="[menu.link]"
       routerLinkActive="drawer__menu--active"
       [routerLinkActiveOptions]="{ exact: menu.exact }"
-      *ngFor="let menu of sideMenus"
+      *ngFor="let menu of drawerMenus"
       (click)="onMenuHandler(menu)"
     >
       <mat-icon class="material-symbols-outlined">{{ menu.icon }}</mat-icon
@@ -46,12 +46,13 @@
       >
     </button>
     <button
-      mat-icon-button
+      mat-mini-fab
       color="primary"
       matTooltip="Account"
       [matMenuTriggerFor]="accountMenu"
+      style="box-shadow: none"
     >
-      <mat-icon class="material-symbols-outlined">person</mat-icon>
+      <mat-icon class="material-symbols-outlined">account_circle</mat-icon>
     </button>
     <mat-menu #accountMenu>
       <button mat-menu-item>Manage Profile</button>

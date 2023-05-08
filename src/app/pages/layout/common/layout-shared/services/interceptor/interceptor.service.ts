@@ -5,9 +5,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpErrorResponse,
-  HttpResponse,
 } from '@angular/common/http';
-import { EMPTY, Observable, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, from, switchMap } from 'rxjs';
 
 import { TokenService } from '@token';
 import { PopupService } from '@popup';
@@ -29,27 +28,34 @@ export class InterceptorService implements HttpInterceptor {
       this.$profile.clear();
       return EMPTY;
     }
-    return next
-      .handle(
-        req.clone({
-          setHeaders: {
-            Authorization: this.$token.header('accessToken'),
-          },
-        })
-      )
-      .pipe(
-        tap({
-          next: (event) => {
-            if (event instanceof HttpResponse) {
-              //
+    return next.handle(this.clone(req)).pipe(
+      catchError((err, caught) => {
+        console.info(err);
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401 && this.$token.hasValue) {
+            try {
+              return from(this.$token.refresh()).pipe(
+                switchMap(() => next.handle(this.clone(req)))
+              );
+            } catch (err1) {
+              if (err1 instanceof HttpErrorResponse) {
+                if (err1.status === 401) {
+                  this.$profile.clear();
+                }
+              }
+              return caught;
             }
-          },
-          error: (event) => {
-            if (event instanceof HttpErrorResponse) {
-              //
-            }
-          },
-        })
-      );
+          }
+        }
+        return caught;
+      })
+    );
+  }
+  clone(req: HttpRequest<any>) {
+    return req.clone({
+      setHeaders: {
+        Authorization: this.$token.header('accessToken'),
+      },
+    });
   }
 }

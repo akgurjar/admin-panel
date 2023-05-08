@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
-import { MediaQueryService } from '@services/media-query';
 
-import { SIDE_MENUS } from '../common/models';
-import { LoaderService } from '@loader';
+import { DRAWER_MENUS } from '@layout/constants';
 import { Profile, ProfileService } from '@services/profile';
+import { LayoutService } from '@layout/services';
 import { env } from '@env';
-import { LayoutService } from '../services';
 
 @Component({
   selector: 'app-layout',
@@ -14,13 +12,13 @@ import { LayoutService } from '../services';
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   @HostBinding('class.drawer--opened') isDrawerOpened = false;
-  sideMenus = SIDE_MENUS;
+  readonly drawerMenus = DRAWER_MENUS;
   readonly appVersion = env.appVersion || '0.0.0';
   admin: Profile = this.$profile.data() as Profile;
   get adminName() {
     return this.admin ? this.admin.name : 'loading...';
   }
-  title = SIDE_MENUS[0].label;
+  title = DRAWER_MENUS[0].label;
   constructor(
     private $profile: ProfileService,
     private $layoutService: LayoutService
@@ -29,7 +27,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   onDrawerToggle() {
     this.isDrawerOpened = !this.isDrawerOpened;
   }
-  onMenuHandler(menu: SideNav) {
+  onMenuHandler(menu: DrawerMenu) {
     this.title = menu.label;
     this.isDrawerOpened = false;
   }

@@ -1,4 +1,4 @@
-declare interface SideNav {
+declare interface DrawerMenu {
   label: string;
   icon: string;
   link: string;

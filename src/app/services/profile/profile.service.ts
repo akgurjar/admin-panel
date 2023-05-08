@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Profile } from './profile.model';
 import { TokenService } from '../token/token.service';
 
@@ -30,7 +30,21 @@ export class ProfileService {
       const res = await lastValueFrom(req);
       this.#profile.set(Profile.parse(res.result));
     } catch (err) {
-      console.info(err);
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          try {
+            await this.$token.refresh();
+            await this.query();
+          } catch (err1) {
+            if (err1 instanceof HttpErrorResponse) {
+              if (err1.status === 401) {
+                this.clear();
+              }
+            }
+            await Promise.reject(err1);
+          }
+        }
+      }
     } finally {
       this.isLoaded = true;
     }

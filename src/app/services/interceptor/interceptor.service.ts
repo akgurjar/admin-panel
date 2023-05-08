@@ -7,34 +7,27 @@ import {
   HttpResponse,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Observable, EMPTY, tap } from 'rxjs';
 import { PopupService } from '@popup';
 import { LoaderService } from '@loader';
-import { TokenService } from '@token';
+import { MESSAGES } from '@constants/index';
 import { env } from '@env';
-import { MESSAGES, PUBLIC_ROUTE } from '@constants/index';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InterceptorService implements HttpInterceptor {
-  constructor(
-    private $loader: LoaderService,
-    private $popup: PopupService,
-    private $token: TokenService,
-    private $router: Router
-  ) {}
+  constructor(private $loader: LoaderService, private $popup: PopupService) {}
   // intercept all http requests
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // check internet connectivity
-    if (!navigator.onLine) {
-      this.$popup.error(MESSAGES.OFFLINE, { duration: 4000 });
-      return EMPTY;
-    }
+    // if (!navigator.onLine) {
+    //   this.$popup.error(MESSAGES.OFFLINE, { duration: 4000 });
+    //   return EMPTY;
+    // }
     this.$loader.markAsLoading();
     const isApiUrl = req.url.startsWith('~');
     const setHeaders: Record<string, string> = {};
@@ -60,13 +53,9 @@ export class InterceptorService implements HttpInterceptor {
           error: (event) => {
             if (event instanceof HttpErrorResponse) {
               this.$loader.completeLoading();
-              if (event.status === 401 && this.$token.hasValue) {
-                this.$token.clear();
-                this.$router.navigateByUrl(PUBLIC_ROUTE.url);
-                this.$popup.error(MESSAGES.ERROR.$401);
-              } else if (event.status === 504) {
+              if (event.status === 504) {
                 this.$popup.error(MESSAGES.ERROR.$504);
-              } else {
+              } else if (event.status !== 401) {
                 this.$popup.error(event.error.message);
               }
             }

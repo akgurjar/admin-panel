@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileUpdateComponent } from './profile-update.component';
+import { ProfileUpdateComponent } from './view/profile-update.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfileUpdateComponent
-  }
+    component: ProfileUpdateComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProfileUpdateRoutingModule { }
+export class ProfileUpdateRoutingModule {}

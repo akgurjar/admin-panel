@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from './view/profile.component';
 
 const routes: Routes = [
   {
@@ -10,26 +10,35 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'details'
+        redirectTo: 'details',
       },
       {
         path: 'details',
-        loadChildren: './profile-details/profile-details.module#ProfileDetailsModule'
+        loadChildren: () =>
+          import('./pages/profile-details/profile-details.module').then(
+            (m) => m.ProfileDetailsModule
+          ),
       },
       {
         path: 'update',
-        loadChildren: './profile-update/profile-update.module#ProfileUpdateModule'
+        loadChildren: () =>
+          import('./pages/profile-update/profile-update.module').then(
+            (m) => m.ProfileUpdateModule
+          ),
       },
       {
         path: 'password',
-        loadChildren: './profile-password/profile-password.module#ProfilePasswordModule'
-      }
-    ]
-  }
+        loadChildren: () =>
+          import('./pages/profile-password/profile-password.module').then(
+            (m) => m.ProfilePasswordModule
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProfileRoutingModule { }
+export class ProfileRoutingModule {}

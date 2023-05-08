@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './view/layout.component';
+import { CONTENT_ROUTE, DASHBOARD_ROUTE, REPORTS_ROUTE } from './constants';
 
 export const routes: Routes = [
   {
@@ -10,32 +11,32 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'dashboard',
+        redirectTo: DASHBOARD_ROUTE.path,
       },
       {
-        path: 'dashboard',
+        path: DASHBOARD_ROUTE.path,
         loadChildren: () =>
           import('./pages/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
           ),
       },
-      // {
-      //   path: 'profile',
-      //   loadChildren: () =>
-      //     import('./pages/profile/profile.module').then((m) => m.ProfileModule),
-      // },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./pages/profile/profile.module').then((m) => m.ProfileModule),
+      },
       // {
       //   path: 'users',
       //   loadChildren: () =>
       //     import('./pages/users/users.module').then((m) => m.UsersModule),
       // },
       {
-        path: 'reports',
+        path: REPORTS_ROUTE.path,
         loadChildren: () =>
           import('./pages/reports/reports.module').then((m) => m.ReportsModule),
       },
       {
-        path: 'content',
+        path: CONTENT_ROUTE.path,
         loadChildren: () =>
           import('./pages/content/content.module').then((m) => m.ContentModule),
       },

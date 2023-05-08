@@ -55,9 +55,17 @@
       <mat-icon class="material-symbols-outlined">account_circle</mat-icon>
     </button>
     <mat-menu #accountMenu>
-      <button mat-menu-item>Manage Profile</button>
-      <button mat-menu-item>Change Password</button>
-      <button mat-menu-item (click)="onLogoutHandler()">Logout</button>
+      <button mat-menu-item>
+        <mat-icon class="action-button material-symbols-outlined"
+          >person</mat-icon
+        >
+        Profile
+      </button>
+      <button mat-menu-item (click)="onLogoutHandler()">
+        <mat-icon class="action-button material-symbols-outlined"
+          >logout</mat-icon
+        >Logout
+      </button>
     </mat-menu>
   </mat-toolbar>
   <main>

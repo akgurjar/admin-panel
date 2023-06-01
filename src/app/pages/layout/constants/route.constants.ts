@@ -8,9 +8,23 @@ export const DASHBOARD_ROUTE = {
 };
 
 export const ADMINS_ROUTE = {
-  path: 'admins',
+  path: 'sub-admins',
   get url(): string {
     return `${LAYOUT_ROUTE.url}/${this.path}`;
+  },
+};
+
+export const PERMISSIONS_ROUTE = {
+  path: 'permissions',
+  get url(): string {
+    return `${ADMINS_ROUTE.url}/${this.path}`;
+  },
+};
+
+export const ROLES_ROUTE = {
+  path: 'roles',
+  get url(): string {
+    return `${ADMINS_ROUTE.url}/${this.path}`;
   },
 };
 

@@ -3,18 +3,13 @@
   <app-drawer (change)="title = $event"></app-drawer>
 </div>
 <div class="drawer__content">
-  <mat-toolbar class="mat-elevation-z1">
-    <button
-      class="drawer__btn"
-      mat-icon-button
-      color="primary"
-      (click)="onDrawerToggle()"
-    >
+  <mat-toolbar class="mat-elevation-z1" color="primary">
+    <button class="drawer__btn" mat-icon-button (click)="onDrawerToggle()">
       <mat-icon class="material-symbols-outlined">menu_open</mat-icon>
     </button>
-    <span class="toolbar__title text--primary">{{ title }}</span>
+    <span>{{ title }}</span>
     <div style="flex: 1"></div>
-    <button mat-icon-button color="primary" matTooltip="Notifications">
+    <button mat-icon-button matTooltip="Notifications">
       <mat-icon
         class="material-symbols-outlined"
         matBadge="7"
@@ -22,10 +17,10 @@
         >notifications</mat-icon
       >
     </button>
-    <button mat-icon-button color="primary" matTooltip="Logout">
+    <button mat-icon-button matTooltip="Logout">
       <mat-icon class="material-symbols-outlined">logout</mat-icon>
     </button>
-    <mat-menu #accountMenu>
+    <!-- <mat-menu #accountMenu>
       <a href="#" [routerLink]="profileUrl" mat-menu-item>
         <mat-icon class="action-button material-symbols-outlined"
           >person</mat-icon
@@ -37,7 +32,7 @@
           >logout</mat-icon
         >Logout
       </button>
-    </mat-menu>
+    </mat-menu> -->
   </mat-toolbar>
   <main>
     <app-breadcrumb class="page-header">

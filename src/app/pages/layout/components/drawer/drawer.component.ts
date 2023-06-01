@@ -15,6 +15,12 @@ export class DrawerComponent implements OnInit {
     this.onMenuHandler(DRAWER_MENUS[0]);
   }
   onMenuHandler(menu: DrawerMenu) {
+    menu.isOpened = true;
     this.change.emit(menu.label);
+  }
+  onToggleHandler(menu: DrawerMenu, e: MouseEvent) {
+    menu.isOpened = !menu.isOpened;
+    e.preventDefault();
+    e.stopImmediatePropagation();
   }
 }

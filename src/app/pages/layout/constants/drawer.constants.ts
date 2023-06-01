@@ -5,6 +5,8 @@ import {
   CONTENT_ROUTE,
   FACILITIES_ROUTE,
   ORGANIZATIONS_ROUTE,
+  PERMISSIONS_ROUTE,
+  ROLES_ROUTE,
 } from './route.constants';
 
 export const DRAWER_MENUS: DrawerMenu[] = [
@@ -21,21 +23,21 @@ export const DRAWER_MENUS: DrawerMenu[] = [
     exact: false,
     children: [
       {
-        label: 'Permissions',
-        icon: 'security',
+        label: 'Accounts',
+        icon: '',
         link: ADMINS_ROUTE.url,
-        exact: false,
+        exact: true,
       },
       {
         label: 'Admin Roles',
-        icon: 'shield_person',
-        link: ADMINS_ROUTE.url,
+        icon: '',
+        link: ROLES_ROUTE.url,
         exact: false,
       },
       {
-        label: 'Accounts',
-        icon: 'shield_person',
-        link: ADMINS_ROUTE.url,
+        label: 'Permissions',
+        icon: '',
+        link: PERMISSIONS_ROUTE.url,
         exact: false,
       },
     ],
@@ -54,7 +56,13 @@ export const DRAWER_MENUS: DrawerMenu[] = [
     children: [
       {
         label: 'Parameters',
-        icon: 'where_to_vote',
+        icon: '',
+        link: REPORTS_ROUTE.url,
+        exact: false,
+      },
+      {
+        label: 'Locations',
+        icon: '',
         link: REPORTS_ROUTE.url,
         exact: false,
       },

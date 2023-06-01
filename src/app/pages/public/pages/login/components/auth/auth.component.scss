@@ -1,0 +1,37 @@
+.auth-form__actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 0 30px;
+}
+
+.title {
+  font-weight: 500;
+}
+
+form {
+  margin-top: 36px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: 7px 0;
+}
+
+mat-slide-toggle {
+  margin: 5px 0;
+}
+
+.form-field-icon {
+  vertical-align: bottom;
+  user-select: none;
+}
+
+.form-field-icon--action {
+  cursor: pointer;
+
+  &[data-disabled=true] {
+    color: rgba(#000, .2);
+    cursor: default;
+  }
+}

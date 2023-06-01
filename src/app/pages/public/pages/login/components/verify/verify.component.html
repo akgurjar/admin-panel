@@ -1,0 +1,13 @@
+<h2 class="title">Verify OTP</h2>
+<p>Please enter the code from your authenticator app</p>
+<img class="logo" src="/assets/images/gauth.svg" />
+<app-otp [length]="6" [control]="otpControl"></app-otp>
+
+<div class="actions">
+  <button mat-stroked-button color="primary">
+    <mat-icon class="material-symbols-outlined">arrow_back</mat-icon> Login
+  </button>
+  <button mat-flat-button color="primary">
+    <mat-icon class="material-symbols-outlined">verified</mat-icon> Verify
+  </button>
+</div>

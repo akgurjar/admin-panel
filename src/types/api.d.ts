@@ -1,4 +1,4 @@
-declare namespace Api {
+declare namespace IApi {
   export interface Response<Result> {
     errorCode?: number;
     message: string;
@@ -11,8 +11,4 @@ declare namespace Api {
     data: T[];
   }
   export type List<T = unknown> = Response<ListResult<T>>;
-  export type Login = Response<{
-    accessToken: string;
-    refreshToken: string;
-  }>;
 }

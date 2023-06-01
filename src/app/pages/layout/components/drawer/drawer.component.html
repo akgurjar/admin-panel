@@ -1,23 +1,39 @@
 <h2 class="drawer__brand">Appinventiv</h2>
-<a
-  *ngFor="let menu of drawerMenus"
-  matRipple
-  matRippleColor="rgba(255, 255, 255, .1)"
-  [routerLink]="[menu.link]"
-  routerLinkActive="drawer__menu--active"
-  [routerLinkActiveOptions]="{ exact: menu.exact }"
-  (click)="onMenuHandler(menu)"
-  class="drawer__menu"
->
-  <mat-icon class="material-symbols-outlined">{{ menu.icon }}</mat-icon
-  >&nbsp;&nbsp;&nbsp;
-  <span>{{ menu.label }}</span>
-  <div style="flex: 1"></div>
-  <mat-icon class="material-symbols-outlined" *ngIf="menu.children?.length"
-    >expand_more</mat-icon
+<ng-template ngFor [ngForOf]="drawerMenus" let-menu>
+  <a
+    matRipple
+    class="drawer__menu"
+    [routerLink]="[menu.link]"
+    routerLinkActive="drawer__menu--active text--primary"
+    [routerLinkActiveOptions]="{ exact: menu.exact }"
+    (click)="onMenuHandler(menu)"
   >
-  <div *ngIf=""></div>
-</a>
+    <mat-icon class="material-symbols-outlined">{{ menu.icon }}</mat-icon
+    >&nbsp;&nbsp;&nbsp;
+    <span>{{ menu.label }}</span>
+    <div style="flex: 1"></div>
+    <button mat-icon-button (click)="onToggleHandler(menu, $event)">
+      <mat-icon class="material-symbols-outlined" *ngIf="menu.children?.length"
+        >expand_more</mat-icon
+      >
+    </button>
+  </a>
+  <div *ngIf="menu.children?.length && menu.isOpened">
+    <a
+      matRipple
+      class="drawer__menu"
+      [routerLink]="[subMenu.link]"
+      routerLinkActive="text--primary"
+      [routerLinkActiveOptions]="{ exact: menu.exact }"
+      (click)="onMenuHandler(subMenu)"
+      *ngFor="let subMenu of menu.children"
+    >
+      <mat-icon class="material-symbols-outlined">{{ subMenu.icon }}</mat-icon
+      >&nbsp;&nbsp;&nbsp;
+      <span>{{ subMenu.label }}</span>
+    </a>
+  </div>
+</ng-template>
 <div style="flex: 1"></div>
 <span class="drawer__menu drawer__menu--version">
   <mat-icon class="material-symbols-outlined">info</mat-icon>&nbsp;&nbsp;&nbsp;

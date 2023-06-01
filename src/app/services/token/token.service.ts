@@ -45,7 +45,7 @@ export class TokenService {
     return !!this.get();
   }
   async refresh(): Promise<void> {
-    const req = this.$http.get<Api.Response<any>>(`~/sessions/refresh`, {
+    const req = this.$http.get<IApi.Response<any>>(`~/sessions/refresh`, {
       headers: {
         Authorization: this.header('refreshToken'),
       },

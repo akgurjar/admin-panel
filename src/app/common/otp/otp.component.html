@@ -1,0 +1,9 @@
+<ng-template ngFor [ngForOf]="list" let-item let-i="index">
+  <input
+    type="tel"
+    maxlength="1"
+    (input)="onInputHandler($event)"
+    (keydown)="onKeyUpHandler($event)"
+    (paste)="onPasteHandler($event)"
+  />
+</ng-template>

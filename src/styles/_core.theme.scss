@@ -21,7 +21,7 @@
     }
 
     .text--primary {
-        color: mat.get-color-from-palette($primary);
+        color: mat.get-color-from-palette($primary) !important;
     }
 
     .text--accent {

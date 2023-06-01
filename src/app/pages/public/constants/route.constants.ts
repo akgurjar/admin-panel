@@ -7,6 +7,20 @@ export const LOGIN_ROUTE = {
   },
 };
 
+export const MFA_SETUP_ROUTE = {
+  path: 'setup',
+  get url(): string {
+    return `${LOGIN_ROUTE.url}/${this.path}`;
+  },
+};
+
+export const MFA_VERIFY_ROUTE = {
+  path: 'verify',
+  get url(): string {
+    return `${LOGIN_ROUTE.url}/${this.path}`;
+  },
+};
+
 export const FORGOT_ROUTE = {
   path: 'forgot',
   get url(): string {

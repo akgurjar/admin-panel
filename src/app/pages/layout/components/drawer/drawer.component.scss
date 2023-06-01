@@ -10,10 +10,6 @@
   margin-left: 24px;
 }
 
-.drawer__content {
-  width: calc(100% - var(--drawer-container-width));
-}
-
 
 .drawer__menu {
   position: relative;
@@ -22,7 +18,7 @@
   align-items: center;
   height: 48px;
   width: calc(100% - 12px);
-  padding: 0 0 0 12px;
+  padding: 0 2px 0 12px;
   margin: 1px 6px;
   font-size: 16px;
   outline: none;
@@ -35,12 +31,14 @@
   font-weight: 500;
   border-right: 2px solid transparent;
 
-  mat-icon {
-    margin: 0 5px;
-  }
-
   &:hover {
     background-color: #F3F3F3;
+  }
+
+  button {
+    height: 30px;
+    width: 30px;
+    padding: 4px;
   }
 }
 

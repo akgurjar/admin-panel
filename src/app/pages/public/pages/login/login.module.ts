@@ -9,6 +9,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { SetupComponent } from './components/setup/setup.component';
 import { OtpModule } from '@app/common/otp/otp.module';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { OtpModule } from '@app/common/otp/otp.module';
     PublicSharedModule,
     MatSlideToggleModule,
     OtpModule,
+    MatSelectModule,
   ],
 })
 export class LoginModule {}

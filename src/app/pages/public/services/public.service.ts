@@ -49,6 +49,19 @@ export class PublicService {
       });
     }
   }
+  async verify(
+    payload: Record<string, string>,
+    token: string,
+    remember = false
+  ): Promise<void> {
+    const url = '~/accounts/login';
+    const req = this.$http.put<ILogin.VerifyResp>(url, payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const { result } = await firstValueFrom(req);
+    this.$token.set(result.accessToken, result.refreshToken, remember);
+    this.$profile.query();
+  }
   async forgot(email: string): Promise<boolean> {
     const req = this.$http.post<IApi.Response<unknown>>('~/passwords', {
       email,

@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { LOGIN_ROUTE } from '@app/pages/public/constants';
+import { PLATFORMS } from '@app/pages/public/constants/platform.constants';
+import { PublicService } from '@app/pages/public/services/public.service';
 // import { ActivatedRoute } from '@angular/router';
 // import { PublicService } from '@public/services/public.service';
 // import { CustomValidators } from '@constants/validation.constants';
@@ -11,16 +15,55 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./verify.component.scss'],
 })
 export class VerifyComponent implements OnInit {
+  loginUrl = LOGIN_ROUTE.url;
+  platformLogo?: string = '';
+  @Input() token!: string;
   @Input() platform?: string;
-  @Input() token?: string;
-  @Input() remember?: string;
-  otpControl = new FormControl();
-  constructor() {
+  @Input() remember?: boolean;
+  otpControl = this.$fb.nonNullable.control('', [
+    Validators.required,
+    Validators.minLength(6),
+  ]);
+  constructor(
+    private $fb: FormBuilder,
+    private $publicService: PublicService,
+    route: ActivatedRoute
+  ) {
+    route.queryParams.subscribe((params) => {
+      this.remember = params['remember'];
+      this.token = params['token'];
+      this.platform = params['platform'];
+      this.platformLogo = PLATFORMS.find(
+        (p) => p.value === this.platform
+      )?.logo;
+    });
     this.otpControl.valueChanges.subscribe(console.info);
   }
   ngOnInit(): void {
     setTimeout(() => {
       console.info(this.platform, this.token, this.remember);
     }, 1000);
+  }
+  onVerifyHandler() {
+    if (this.otpControl.valid && this.otpControl.enabled) {
+      const payload: Record<string, string> = {
+        otp: this.otpControl.value as string,
+      };
+      if (this.platform) {
+        payload['platform'] = this.platform;
+      }
+      this.otpControl.disable();
+      this.$publicService
+        .verify(payload, this.token, this.remember ?? false)
+        .then(() => {
+          //
+        })
+        .catch(() => {
+          //
+        })
+        .finally(() => {
+          this.otpControl.enable();
+        });
+    }
   }
 }

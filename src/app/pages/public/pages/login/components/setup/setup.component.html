@@ -1,1 +1,21 @@
-<p>setup works!</p>
+<h2 class="title">Mobile App Authentication</h2>
+<p>Secure your account with TOTP two-factor authentication</p>
+<img [src]="qrUrl" alt="QR Code" />
+<mat-form-field appearance="outline">
+  <mat-label>Mobile App</mat-label>
+  <mat-select [formControl]="platformControl">
+    <mat-option [value]="platform.value" *ngFor="let platform of platforms">
+      <div class="option">
+        <img height="30" [src]="platform.logo" />{{ platform.name }}
+      </div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div class="actions">
+  <a href="#" [routerLink]="loginUrl" mat-stroked-button color="primary">
+    <mat-icon class="material-symbols-outlined">arrow_back</mat-icon> Login
+  </a>
+  <button mat-flat-button color="primary" (click)="onNextHandler()">
+    <mat-icon class="material-symbols-outlined">navigate_next</mat-icon> Next
+  </button>
+</div>

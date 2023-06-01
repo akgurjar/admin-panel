@@ -27,3 +27,8 @@ export interface AuthDoneResult {
 export type AuthResult = AuthSetupResult | AuthVerifyResult | AuthDoneResult;
 
 export type AuthResp = IApi.Response<AuthResult>;
+
+export type VerifyResp = IApi.Response<{
+  refreshToken: string;
+  accessToken: string;
+}>;

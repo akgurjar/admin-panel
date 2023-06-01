@@ -1,32 +1,9 @@
-<div class="drawer__container">
-  <div class="drawer__shadow" (click)="isDrawerOpened = false"></div>
-  <div class="drawer__wrapper fill--primary">
-    <h2 class="drawer__brand">Appinventiv</h2>
-    <a
-      class="drawer__menu"
-      matRipple
-      matRippleColor="rgba(255, 255, 255, .1)"
-      [routerLink]="[menu.link]"
-      routerLinkActive="drawer__menu--active"
-      [routerLinkActiveOptions]="{ exact: menu.exact }"
-      *ngFor="let menu of drawerMenus"
-      (click)="onMenuHandler(menu)"
-    >
-      <mat-icon class="material-symbols-outlined">{{ menu.icon }}</mat-icon
-      >&nbsp;&nbsp;&nbsp;
-      <span>{{ menu.label }}</span>
-    </a>
-    <div style="flex: 1"></div>
-    <span class="drawer__menu drawer__menu--version">
-      <mat-icon class="material-symbols-outlined">info</mat-icon
-      >&nbsp;&nbsp;&nbsp;
-      <span>v</span>
-      <span style="font-weight: bold">{{ appVersion }}</span>
-    </span>
-  </div>
+<div class="drawer__container mat-elevation-z1">
+  <div class="drawer__shadow" (click)="onDrawerToggle()"></div>
+  <app-drawer (change)="title = $event"></app-drawer>
 </div>
 <div class="drawer__content">
-  <mat-toolbar style="border-bottom: 1px solid #ddd">
+  <mat-toolbar class="mat-elevation-z1">
     <button
       class="drawer__btn"
       mat-icon-button
@@ -45,22 +22,16 @@
         >notifications</mat-icon
       >
     </button>
-    <button
-      mat-mini-fab
-      color="primary"
-      matTooltip="Account"
-      [matMenuTriggerFor]="accountMenu"
-      style="box-shadow: none"
-    >
-      <mat-icon class="material-symbols-outlined">account_circle</mat-icon>
+    <button mat-icon-button color="primary" matTooltip="Logout">
+      <mat-icon class="material-symbols-outlined">logout</mat-icon>
     </button>
     <mat-menu #accountMenu>
-      <button mat-menu-item>
+      <a href="#" [routerLink]="profileUrl" mat-menu-item>
         <mat-icon class="action-button material-symbols-outlined"
           >person</mat-icon
         >
         Profile
-      </button>
+      </a>
       <button mat-menu-item (click)="onLogoutHandler()">
         <mat-icon class="action-button material-symbols-outlined"
           >logout</mat-icon
@@ -69,7 +40,23 @@
     </mat-menu>
   </mat-toolbar>
   <main>
-    <app-breadcrumb class="page-header"></app-breadcrumb>
+    <app-breadcrumb class="page-header">
+      <button mat-icon-button color="primary">
+        <mat-icon class="action-button material-symbols-outlined"
+          >search</mat-icon
+        >
+      </button>
+      <button mat-icon-button color="primary">
+        <mat-icon class="action-button material-symbols-outlined"
+          >filter_alt</mat-icon
+        >
+      </button>
+      <button mat-icon-button color="primary">
+        <mat-icon class="action-button material-symbols-outlined"
+          >person_add</mat-icon
+        >
+      </button>
+    </app-breadcrumb>
     <router-outlet #route="outlet"></router-outlet>
   </main>
 </div>

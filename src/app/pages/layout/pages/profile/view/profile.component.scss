@@ -8,7 +8,25 @@
         box-sizing: border-box;
         width: calc(50% - 4px);
         background-color: white;
-        padding: 12px;
         border-radius: 6px;
+        padding: 12px 24px;
+    }
+}
+
+.details_wrapper {
+    max-width: 380px;
+}
+
+.details_item {
+    display: flex;
+    align-items: center;
+    margin: 14px 0;
+
+    mat-icon {
+        margin-right: 12px;
+    }
+
+    span {
+        font-size: 18px;
     }
 }

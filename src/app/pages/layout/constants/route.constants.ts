@@ -7,8 +7,22 @@ export const DASHBOARD_ROUTE = {
   },
 };
 
-export const USERS_ROUTE = {
-  path: 'users',
+export const ADMINS_ROUTE = {
+  path: 'admins',
+  get url(): string {
+    return `${LAYOUT_ROUTE.url}/${this.path}`;
+  },
+};
+
+export const ORGANIZATIONS_ROUTE = {
+  path: 'organizations',
+  get url(): string {
+    return `${LAYOUT_ROUTE.url}/${this.path}`;
+  },
+};
+
+export const FACILITIES_ROUTE = {
+  path: 'facilities',
   get url(): string {
     return `${LAYOUT_ROUTE.url}/${this.path}`;
   },

@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { ContentRoutingModule } from './content-routing.module';
 import { ContentComponent } from './content.component';
-import { LayoutSharedModule } from '../../common/layout-shared';
+import { SharedModule } from '@layout/common/shared';
 
 @NgModule({
   declarations: [ContentComponent],
-  imports: [CommonModule, ContentRoutingModule, LayoutSharedModule],
+  imports: [CommonModule, ContentRoutingModule, SharedModule],
 })
 export class ContentModule {}

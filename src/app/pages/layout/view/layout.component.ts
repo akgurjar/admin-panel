@@ -1,9 +1,14 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  HostBinding,
+  effect,
+} from '@angular/core';
 
-import { DRAWER_MENUS } from '@layout/constants';
-import { Profile, ProfileService } from '@services/profile';
+import { DRAWER_MENUS, PROFILE_ROUTE } from '@layout/constants';
 import { LayoutService } from '@layout/services';
-import { env } from '@env';
+import { DeviceService } from '@services/device';
 
 @Component({
   selector: 'app-layout',
@@ -11,25 +16,26 @@ import { env } from '@env';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
-  @HostBinding('class.drawer--opened') isDrawerOpened = false;
-  readonly drawerMenus = DRAWER_MENUS;
-  readonly appVersion = env.appVersion || '0.0.0';
-  admin: Profile = this.$profile.data() as Profile;
-  get adminName() {
-    return this.admin ? this.admin.name : 'loading...';
+  #isDesktopDevice = false;
+  #isDrawerOpened = false;
+  @HostBinding('class.drawer--opened')
+  get isDrawerOpened() {
+    return this.#isDesktopDevice || this.#isDrawerOpened;
   }
-  title = DRAWER_MENUS[0].label;
+
+  title = '';
+  readonly profileUrl = PROFILE_ROUTE.url;
   constructor(
-    private $profile: ProfileService,
-    private $layoutService: LayoutService
-  ) {}
+    private $layoutService: LayoutService,
+    private $deviceService: DeviceService
+  ) {
+    effect(() => {
+      this.#isDesktopDevice = this.$deviceService.isDesktop();
+    });
+  }
   ngOnInit() {}
   onDrawerToggle() {
-    this.isDrawerOpened = !this.isDrawerOpened;
-  }
-  onMenuHandler(menu: DrawerMenu) {
-    this.title = menu.label;
-    this.isDrawerOpened = false;
+    this.#isDrawerOpened = !this.#isDrawerOpened;
   }
   ngOnDestroy() {}
   onLogoutHandler() {

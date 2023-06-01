@@ -8,6 +8,7 @@ import { ProfileService } from '@profile';
 })
 export class ProfileComponent implements OnInit {
   profileName = 'loading...';
+  lastLogin: Date = new Date();
   constructor(profileService: ProfileService) {}
 
   ngOnInit() {}

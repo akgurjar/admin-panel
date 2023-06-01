@@ -3,4 +3,5 @@ declare interface DrawerMenu {
   icon: string;
   link: string;
   exact: boolean;
+  children?: DrawerMenu[];
 }

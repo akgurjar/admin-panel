@@ -24,9 +24,12 @@ export class ProfileService {
         this.isLoaded = true;
         return;
       }
-      const req = this.$http.get<Api.Response<any>>(`~/accounts/profile`, {
-        headers: { Authorization: this.$token.header('accessToken') },
-      });
+      const req = this.$http.get<Api.Response<any>>(
+        `http://localhost:3002/admins/profile`,
+        {
+          headers: { Authorization: this.$token.header('accessToken') },
+        }
+      );
       const res = await lastValueFrom(req);
       this.#profile.set(Profile.parse(res.result));
     } catch (err) {

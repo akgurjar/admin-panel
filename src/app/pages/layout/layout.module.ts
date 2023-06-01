@@ -1,7 +1,7 @@
 import { NgModule, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LayoutSharedModule } from './common/layout-shared';
+import { SharedModule } from './common/shared';
 import { LayoutRoutingModule } from './layout-routing.module';
 
 import { LayoutComponent } from './view/layout.component';
@@ -11,10 +11,12 @@ import { LayoutService } from './services/layout';
 import { ProfileService } from '@profile';
 import { Router } from '@angular/router';
 import { PUBLIC_ROUTE } from '@app/constants';
+import { MenuDirective } from './directives/menu.directive';
+import { DrawerComponent } from './components/drawer/drawer.component';
 
 @NgModule({
-  declarations: [LayoutComponent, BreadcrumbComponent],
-  imports: [CommonModule, LayoutRoutingModule, LayoutSharedModule],
+  declarations: [LayoutComponent, BreadcrumbComponent, MenuDirective, DrawerComponent],
+  imports: [CommonModule, LayoutRoutingModule, SharedModule],
   providers: [LayoutService, BreadcrumbService],
 })
 export class LayoutModule {

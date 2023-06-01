@@ -8,19 +8,20 @@
     position: relative;
 }
 
-// :host-context(.drawer--opened) {
-//     .drawer__brand {
-//         visibility: visible;
-//     }
+:host-context(.drawer--opened) {
+    .drawer__brand {
+        visibility: visible;
+    }
+}
 
-//     .drawer__btn {
-//         left: -24px;
-//     }
+app-drawer {
+    height: 100%;
+    width: var(--drawer-wrapper-width);
+}
 
-//     .toolbar__title {
-//         margin-left: 24px;
-//     }
-// }
+.drawer__content {
+    width: calc(100% - var(--drawer-container-width));
+}
 
 .drawer__container {
     position: relative;
@@ -40,74 +41,17 @@
     background-color: rgba(#000, .6);
 }
 
-.drawer__wrapper {
-    position: relative;
-    width: 280px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    color: #444;
-    width: var(--drawer-wrapper-width);
-}
 
-.drawer__brand {
-    color: #FFF;
-    margin-left: 24px;
-}
-
-.drawer__content {
-    width: calc(100% - var(--drawer-container-width));
-}
 
 mat-toolbar {
     background-color: #FFF;
     position: relative;
+    border-radius: 54px;
+    padding: 0 9px;
+    margin: 6px;
+    width: calc(100% - 12px);
 }
 
-.drawer__menu {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 48px;
-    width: calc(100% - 4px);
-    padding: 0 12px;
-    margin: 1px 0 1px 4px;
-    font-size: 18px;
-    outline: none;
-    background-color: transparent;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: inherit;
-    transition: all .1s linear;
-    border-radius: 40px 0 0 40px;
-    font-weight: 500;
-
-    mat-icon {
-        margin: 0 5px;
-    }
-
-    &:hover {
-        background-color: #F3F3F3;
-    }
-}
-
-.drawer__menu--active {
-    background-color: #F3F3F3;
-}
-
-.drawer__menu--version {
-    cursor: default;
-    border-top: 1px solid rgba(#000, .3);
-    border-radius: 0;
-    margin: 0;
-    width: 100%;
-    padding: 0 0 0 16px;
-
-    &:hover {
-        background-color: transparent;
-    }
-}
 
 .page-header {
     margin-bottom: 10px;
@@ -160,26 +104,10 @@ main {
             visibility: visible;
         }
 
-        .drawer__btn {
-            left: -24px;
-        }
-
-        .toolbar__title {
-            margin-left: 12px;
-        }
     }
 
     .drawer__brand {
         visibility: hidden;
-    }
-
-    .drawer__btn {
-        position: absolute;
-        left: -56px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 2;
-        background-color: #FFF;
     }
 
     .toolbar__title {

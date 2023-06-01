@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './view/layout.component';
-import { CONTENT_ROUTE, DASHBOARD_ROUTE, REPORTS_ROUTE } from './constants';
+import {
+  CONTENT_ROUTE,
+  DASHBOARD_ROUTE,
+  PROFILE_ROUTE,
+  REPORTS_ROUTE,
+  ADMINS_ROUTE,
+} from './constants';
 
 export const routes: Routes = [
   {
@@ -21,15 +27,15 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'profile',
+        path: PROFILE_ROUTE.path,
         loadChildren: () =>
           import('./pages/profile/profile.module').then((m) => m.ProfileModule),
       },
-      // {
-      //   path: 'users',
-      //   loadChildren: () =>
-      //     import('./pages/users/users.module').then((m) => m.UsersModule),
-      // },
+      {
+        path: ADMINS_ROUTE.path,
+        loadChildren: () =>
+          import('./pages/admins/admins.module').then((m) => m.AdminsModule),
+      },
       {
         path: REPORTS_ROUTE.path,
         loadChildren: () =>

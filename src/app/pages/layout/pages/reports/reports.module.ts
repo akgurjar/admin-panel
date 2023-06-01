@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ReportsComponent } from './reports.component';
-import { LayoutSharedModule } from '../../common/layout-shared';
+import { SharedModule } from '@layout/common/shared';
 
 @NgModule({
   declarations: [ReportsComponent],
-  imports: [CommonModule, ReportsRoutingModule, LayoutSharedModule],
+  imports: [CommonModule, ReportsRoutingModule, SharedModule],
 })
 export class ReportsModule {}

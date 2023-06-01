@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: PUBLIC_ROUTE.url,
+    redirectTo: LAYOUT_ROUTE.url,
   },
   {
     path: PUBLIC_ROUTE.path,

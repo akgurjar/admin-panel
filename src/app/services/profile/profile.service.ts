@@ -24,12 +24,9 @@ export class ProfileService {
         this.isLoaded = true;
         return;
       }
-      const req = this.$http.get<IApi.Response<any>>(
-        `http://localhost:3002/admins/profile`,
-        {
-          headers: { Authorization: this.$token.header('accessToken') },
-        }
-      );
+      const req = this.$http.get<IApi.Response<any>>(`$user/admins/profile`, {
+        headers: { Authorization: this.$token.header('accessToken') },
+      });
       const res = await lastValueFrom(req);
       this.#profile.set(Profile.parse(res.result));
     } catch (err) {
@@ -53,7 +50,7 @@ export class ProfileService {
     }
   }
   async logout() {
-    const req = this.$http.delete<IApi.Response<any>>(`~/sessions/logout`, {
+    const req = this.$http.delete<IApi.Response<any>>(`$auth/sessions/logout`, {
       headers: {
         Authorization: this.$token.header('refreshToken'),
       },

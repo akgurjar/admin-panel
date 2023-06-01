@@ -9,7 +9,6 @@ import {
 } from '@angular/common/http';
 import { Observable, EMPTY, tap } from 'rxjs';
 import { PopupService } from '@popup';
-import { LoaderService } from '@loader';
 import { MESSAGES } from '@constants/index';
 import { env } from '@env';
 
@@ -17,7 +16,7 @@ import { env } from '@env';
   providedIn: 'root',
 })
 export class InterceptorService implements HttpInterceptor {
-  constructor(private $loader: LoaderService, private $popup: PopupService) {}
+  constructor(private $popup: PopupService) {}
   // intercept all http requests
   intercept(
     req: HttpRequest<any>,
@@ -28,8 +27,7 @@ export class InterceptorService implements HttpInterceptor {
     //   this.$popup.error(MESSAGES.OFFLINE, { duration: 4000 });
     //   return EMPTY;
     // }
-    this.$loader.markAsLoading();
-    const isApiUrl = req.url.startsWith('~');
+
     const setHeaders: Record<string, string> = {};
     if (!req.headers.get('Authorization')) {
       setHeaders['Authorization'] = `Basic ${window.btoa('RCC_USR:RCC_PWD')}`;
@@ -38,21 +36,19 @@ export class InterceptorService implements HttpInterceptor {
       .handle(
         req.clone({
           setHeaders,
-          url: isApiUrl ? `${env.apiBaseUrl}${req.url.substring(1)}` : req.url, // add base url
+          url: this.formatUrl(req.url), // add base url
         })
       )
       .pipe(
         tap({
           next: (event) => {
             if (event instanceof HttpResponse) {
-              this.$loader.completeLoading();
               // console.log('response');
             }
             // return throwError(error);
           },
           error: (event) => {
             if (event instanceof HttpErrorResponse) {
-              this.$loader.completeLoading();
               if (event.status === 504) {
                 this.$popup.error(MESSAGES.ERROR.$504);
               } else if (event.status !== 401) {
@@ -62,5 +58,13 @@ export class InterceptorService implements HttpInterceptor {
           },
         })
       );
+  }
+  formatUrl(url: string) {
+    if (url.startsWith('$auth/')) {
+      return url.replace(/^\$auth\//, env.apiBaseUrl.authService);
+    } else if (url.startsWith('$user/')) {
+      return url.replace(/^\$user\//, env.apiBaseUrl.userService);
+    }
+    return url;
   }
 }

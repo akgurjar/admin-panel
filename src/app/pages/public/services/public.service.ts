@@ -22,7 +22,7 @@ export class PublicService {
     password: string,
     remember: boolean = false
   ): Promise<void> {
-    const url = '~/accounts/login';
+    const url = '$auth/accounts/login';
     const req = this.$http.post<ILogin.AuthResp>(url, {
       email,
       password,
@@ -54,7 +54,7 @@ export class PublicService {
     token: string,
     remember = false
   ): Promise<void> {
-    const url = '~/accounts/login';
+    const url = '$auth/accounts/login';
     const req = this.$http.put<ILogin.VerifyResp>(url, payload, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -63,7 +63,7 @@ export class PublicService {
     this.$profile.query();
   }
   async forgot(email: string): Promise<boolean> {
-    const req = this.$http.post<IApi.Response<unknown>>('~/passwords', {
+    const req = this.$http.post<IApi.Response<unknown>>('$auth/passwords', {
       email,
     });
     const res = await firstValueFrom(req);
@@ -72,7 +72,7 @@ export class PublicService {
   }
   async reset(password: string, token: string): Promise<boolean> {
     const req = this.$http.put<IApi.Response<unknown>>(
-      '~/passwords',
+      '$auth/passwords',
       { password },
       {
         headers: {

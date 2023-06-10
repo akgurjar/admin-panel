@@ -1,43 +1,60 @@
-<div class="dialog-header fill--primary">
-  <span class="title">All Details</span>
-  <button mat-icon-button>
+<mat-toolbar color="primary" class="mat-elevation-z1">
+  <div class="toolbar-title">
+    <span>{{ result.title }}</span>
+    <span>{{ result.id }}</span>
+  </div>
+  <div style="flex: 1"></div>
+  <button mat-icon-button mat-dialog-close>
     <mat-icon class="material-symbols-outlined">close</mat-icon>
   </button>
-</div>
+</mat-toolbar>
 
-<div class="table-row">
-  <span>Unique ID</span>
-  <span>PERMISSIONS</span>
-</div>
-<div class="table-row">
-  <span>Title</span>
-  <span>Permission Management</span>
-</div>
+<div class="table">
+  <div class="table-row">
+    <span>Created At</span>
+    <span>{{ result.createdAt | date : "short" }}</span>
+  </div>
 
-<div class="table-row">
-  <span>Created At</span>
-  <span>July 12, 2023</span>
-</div>
-
-<div class="table-row">
-  <span>Updated At</span>
-  <span>July 12, 2023</span>
+  <div class="table-row">
+    <span>Updated At</span>
+    <span>{{ result.updatedAt | date : "short" }}</span>
+  </div>
 </div>
 
 <div class="p-card">
-  <span class="title text--primary">System User</span>
-  <span class="chip fill--primary">Add</span>
-  <span class="chip fill--primary">View</span>
-  <span class="chip fill--primary">Edit</span>
-  <span class="chip fill--primary">Status</span>
-  <span class="chip fill--primary">Delete</span>
+  <h2 class="title">System User</h2>
+  <div class="chip text--primary">
+    <mat-icon class="material-symbols-outlined">add_box</mat-icon>ADD
+  </div>
+  <div class="chip text--primary" style="color: #2ecc71 !important">
+    <mat-icon class="material-symbols-outlined">preview</mat-icon>VIEW
+  </div>
+  <div class="chip text--primary" style="color: #34495e !important">
+    <mat-icon class="material-symbols-outlined">edit</mat-icon>EDIT
+  </div>
+  <div class="chip text--accent">
+    <mat-icon class="material-symbols-outlined">block</mat-icon>STATUS
+  </div>
+  <div class="chip text--warn">
+    <mat-icon class="material-symbols-outlined">delete</mat-icon>DELETE
+  </div>
 </div>
 
 <div class="p-card">
-  <span class="title text--primary">Organization User</span>
-  <span class="chip fill--primary">Add</span>
-  <span class="chip fill--primary">View</span>
-  <span class="chip fill--primary">Edit</span>
-  <span class="chip fill--primary">Status</span>
-  <span class="chip fill--primary">Delete</span>
+  <h2 class="title">Organization User</h2>
+  <div class="chip text--primary">
+    <mat-icon class="material-symbols-outlined">add_box</mat-icon>ADD
+  </div>
+  <div class="chip text--primary" style="color: #2ecc71 !important">
+    <mat-icon class="material-symbols-outlined">preview</mat-icon>VIEW
+  </div>
+  <div class="chip text--primary" style="color: #34495e !important">
+    <mat-icon class="material-symbols-outlined">edit</mat-icon>EDIT
+  </div>
+  <div class="chip text--accent">
+    <mat-icon class="material-symbols-outlined">block</mat-icon>STATUS
+  </div>
+  <div class="chip text--warn">
+    <mat-icon class="material-symbols-outlined">delete</mat-icon>DELETE
+  </div>
 </div>

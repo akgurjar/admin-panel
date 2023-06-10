@@ -23,4 +23,12 @@ export class AdminService {
     console.info(res.result);
     return res.result;
   }
+  async permissionById(id: string) {
+    const req = this.$http.get<IApi.Response<object>>(
+      `$user/permissions/${id}`
+    );
+    const res = await lastValueFrom(req);
+    console.info(res.result);
+    return res.result;
+  }
 }

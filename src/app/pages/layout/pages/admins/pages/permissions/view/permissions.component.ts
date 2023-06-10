@@ -24,9 +24,10 @@ export class PermissionsComponent {
     adminService.permissions().then((result) => {
       this.dataSource = result.data;
     });
-    this.openDialog();
+    // this.openDialog();
   }
-  openDialog() {
+  openDialog(id: string) {
+    console.info(id);
     this.dialog
       .open(DetailComponent, {
         maxWidth: '420px',
@@ -35,7 +36,8 @@ export class PermissionsComponent {
         position: {
           right: '0px',
         },
-        // scrollStrategy: null,
+        data: id,
+        autoFocus: false,
       })
       .afterClosed()
       .subscribe(() => {

@@ -1,28 +1,47 @@
-.dialog-header {
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 6px;
-  margin-bottom: 16px;
+:host {
+  display: block;
+  min-height: 100%;
+  background-color: #EEE !important;
+}
 
-  .title {
-    font-size: 20px;
-    margin-left: 12px;
+mat-toolbar {
+  padding-right: 4px;
+}
+
+.toolbar-title {
+  display: flex;
+  flex-direction: column;
+
+  span:last-child {
+    font-size: 18px;
+    line-height: 18px;
   }
+
+  span:last-child {
+    font-size: 14px;
+    line-height: 14px;
+    opacity: .7;
+  }
+}
+
+.table {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 12px;
 }
 
 .table-row {
   display: inline-flex;
   flex-direction: column;
   padding: 12px;
-  width: 50%;
+  width: calc(50% - 2px);
   height: 72px;
   justify-content: space-between;
   box-sizing: border-box;
+  background-color: white;
+  border-radius: 6px;
 
   span {
-
     &:first-child {
       opacity: .5;
     }
@@ -30,22 +49,37 @@
 }
 
 .p-card {
-  margin: 24px 12px;
-  border: 1px solid rgba(#000, .1);
+  margin: 16px 12px;
+  background-color: #FFF;
+  overflow: hidden;
+  border-radius: 6px;
 
   .title {
     display: flex;
     align-items: center;
     height: 36px;
-    padding: 0 12px;
-    background-color: rgba(#000, .1);
+    padding: 6px 12px;
+    margin: 0;
     font-weight: 500;
+    border-bottom: 2px solid #EEE;
   }
 
   .chip {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin: 12px 9px;
-    padding: 4px 12px;
+    padding: 4px 11px;
     border-radius: 24px;
+    border: 2px solid currentColor;
+    font-weight: 500;
+    font-size: 16px;
+    box-sizing: border-box;
+
+    mat-icon {
+      font-size: 22px;
+      height: 22px;
+      width: 22px;
+      margin-right: 4px;
+    }
   }
 }

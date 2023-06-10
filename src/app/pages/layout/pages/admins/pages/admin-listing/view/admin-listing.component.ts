@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AdminService } from '../../../services/admin.service';
 
 export interface PeriodicElement {
   name: string;
@@ -26,7 +27,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./admin-listing.component.scss'],
 })
 export class AdminListingComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-  constructor() {}
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'email',
+    'role',
+    'createdAt',
+    'blockedAt',
+    'actions',
+  ];
+  dataSource: unknown[] = [];
+  constructor(adminService: AdminService) {
+    adminService.accounts().then((result) => {
+      this.dataSource = result.data;
+    });
+  }
 }

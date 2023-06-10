@@ -8,7 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ConfirmModule } from '../confirm';
 import { InterceptorService } from './services';
 
@@ -22,11 +22,11 @@ const Modules = [
   MatBadgeModule,
   MatCardModule,
   MatProgressBarModule,
+  HttpClientModule,
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, ...Modules],
+  imports: [...Modules],
   exports: [...Modules],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

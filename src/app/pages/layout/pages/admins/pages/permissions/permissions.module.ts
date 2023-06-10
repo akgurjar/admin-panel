@@ -1,0 +1,21 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { PermissionsRoutingModule } from './permissions-routing.module';
+import { PermissionsComponent } from './view/permissions.component';
+import { SharedModule } from '@layout/common/shared';
+import { MatTableModule } from '@angular/material/table';
+import { DetailComponent, UpdateComponent } from './components';
+import { MatDialogModule } from '@angular/material/dialog';
+
+@NgModule({
+  declarations: [PermissionsComponent, DetailComponent, UpdateComponent],
+  imports: [
+    CommonModule,
+    PermissionsRoutingModule,
+    SharedModule,
+    MatTableModule,
+    MatDialogModule,
+  ],
+})
+export class PermissionsModule {}

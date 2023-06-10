@@ -36,20 +36,21 @@
   </mat-toolbar>
   <main>
     <app-breadcrumb class="page-header">
-      <button mat-icon-button color="primary">
+      <button mat-icon-button color="accent">
         <mat-icon class="action-button material-symbols-outlined"
           >search</mat-icon
         >
       </button>
-      <button mat-icon-button color="primary">
+      <button mat-icon-button color="accent">
         <mat-icon class="action-button material-symbols-outlined"
           >filter_alt</mat-icon
         >
       </button>
-      <button mat-icon-button color="primary">
+      <button mat-flat-button color="accent">
         <mat-icon class="action-button material-symbols-outlined"
           >person_add</mat-icon
         >
+        Add
       </button>
     </app-breadcrumb>
     <router-outlet #route="outlet"></router-outlet>

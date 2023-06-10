@@ -17,7 +17,7 @@ export const DRAWER_MENUS: DrawerMenu[] = [
     exact: true,
   },
   {
-    label: 'Sub Admins',
+    label: 'Admins',
     icon: 'group',
     link: ADMINS_ROUTE.url,
     exact: false,

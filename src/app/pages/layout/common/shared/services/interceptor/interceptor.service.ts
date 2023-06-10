@@ -11,6 +11,7 @@ import { EMPTY, Observable, catchError, from, switchMap } from 'rxjs';
 import { TokenService } from '@token';
 import { PopupService } from '@popup';
 import { ProfileService } from '@profile';
+import { env } from '@env';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
@@ -53,9 +54,18 @@ export class InterceptorService implements HttpInterceptor {
   }
   clone(req: HttpRequest<any>) {
     return req.clone({
+      url: this.formatUrl(req.url),
       setHeaders: {
         Authorization: this.$token.header('accessToken'),
       },
     });
+  }
+  formatUrl(url: string) {
+    if (url.startsWith('$auth/')) {
+      return url.replace(/^\$auth\//, env.apiBaseUrl.authService);
+    } else if (url.startsWith('$user/')) {
+      return url.replace(/^\$user\//, env.apiBaseUrl.userService);
+    }
+    return url;
   }
 }

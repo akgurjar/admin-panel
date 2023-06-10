@@ -1,0 +1,51 @@
+.dialog-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  margin-bottom: 16px;
+
+  .title {
+    font-size: 20px;
+    margin-left: 12px;
+  }
+}
+
+.table-row {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 12px;
+  width: 50%;
+  height: 72px;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  span {
+
+    &:first-child {
+      opacity: .5;
+    }
+  }
+}
+
+.p-card {
+  margin: 24px 12px;
+  border: 1px solid rgba(#000, .1);
+
+  .title {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 12px;
+    background-color: rgba(#000, .1);
+    font-weight: 500;
+  }
+
+  .chip {
+    display: inline-block;
+    margin: 12px 9px;
+    padding: 4px 12px;
+    border-radius: 24px;
+  }
+}

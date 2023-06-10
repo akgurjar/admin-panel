@@ -2,39 +2,27 @@
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Position Column -->
+  <!-- ID Column -->
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Admin ID</th>
+    <th mat-header-cell *matHeaderCellDef>Unique ID</th>
     <td mat-cell *matCellDef="let element">{{ element.id }}</td>
   </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.name.first }} {{ element.name.last }}
+      {{ element.title }}
     </td>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef>Role</th>
-    <td mat-cell *matCellDef="let element">{{ element.role.title }}</td>
-  </ng-container>
-
-  <!-- Symbol Column -->
+  <!-- CreateAt Column -->
   <ng-container matColumnDef="createdAt">
     <th mat-header-cell *matHeaderCellDef>Created At</th>
     <td mat-cell *matCellDef="let element">{{ element.createdAt | date }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- BlockedAt Column -->
   <ng-container matColumnDef="blockedAt">
     <th mat-header-cell *matHeaderCellDef>Status</th>
     <td mat-cell *matCellDef="let element">
@@ -42,11 +30,11 @@
     </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- Actions Column -->
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button>
+      <button mat-icon-button [matMenuTriggerFor]="actionMenu">
         <mat-icon class="material-symbols-outlined">more_vert</mat-icon>
       </button>
     </td>
@@ -55,3 +43,9 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<mat-menu #actionMenu="matMenu">
+  <button mat-menu-item (click)="openDialog()">View</button>
+  <button mat-menu-item>Edit</button>
+  <button mat-menu-item>Delete</button>
+</mat-menu>

@@ -8,7 +8,7 @@ export const DASHBOARD_ROUTE = {
 };
 
 export const ADMINS_ROUTE = {
-  path: 'sub-admins',
+  path: 'admins',
   get url(): string {
     return `${LAYOUT_ROUTE.url}/${this.path}`;
   },
@@ -16,6 +16,13 @@ export const ADMINS_ROUTE = {
 
 export const PERMISSIONS_ROUTE = {
   path: 'permissions',
+  get url(): string {
+    return `${ADMINS_ROUTE.url}/${this.path}`;
+  },
+};
+
+export const ACCOUNTS_ROUTE = {
+  path: 'accounts',
   get url(): string {
     return `${ADMINS_ROUTE.url}/${this.path}`;
   },

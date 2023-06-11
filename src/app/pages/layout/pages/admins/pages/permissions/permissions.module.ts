@@ -7,6 +7,9 @@ import { SharedModule } from '@layout/common/shared';
 import { MatTableModule } from '@angular/material/table';
 import { DetailComponent, UpdateComponent } from './components';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [PermissionsComponent, DetailComponent, UpdateComponent],
@@ -16,6 +19,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedModule,
     MatTableModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
   ],
 })
 export class PermissionsModule {}

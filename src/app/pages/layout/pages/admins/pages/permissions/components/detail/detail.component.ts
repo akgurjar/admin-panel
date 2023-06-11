@@ -1,13 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AdminService } from '@layout/pages/admins/services/admin.service';
-
-interface Permission {
-  id?: string;
-  title?: string;
-  updatedAt?: Date;
-  createdAt?: Date;
-}
+import { Permission } from '../../models/permission.model';
 
 @Component({
   selector: 'app-detail',
@@ -15,11 +9,11 @@ interface Permission {
   styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent {
-  result: Permission = {};
+  result: Permission = new Permission();
   constructor(@Inject(MAT_DIALOG_DATA) id: string, adminService: AdminService) {
     adminService.permissionById(id).then((result) => {
       console.info(result);
-      this.result = result as Permission;
+      this.result = Permission.parse(result as Permission);
     });
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import { Permission } from '../pages/permissions/models/permission.model';
 
 @Injectable()
 export class AdminService {
@@ -23,12 +24,11 @@ export class AdminService {
     console.info(res.result);
     return res.result;
   }
-  async permissionById(id: string) {
-    const req = this.$http.get<IApi.Response<object>>(
+  async permissionById(id: string): Promise<Permission> {
+    const req = this.$http.get<IApi.Response<Permission>>(
       `$user/permissions/${id}`
     );
     const res = await lastValueFrom(req);
-    console.info(res.result);
-    return res.result;
+    return Permission.parse(res.result);
   }
 }

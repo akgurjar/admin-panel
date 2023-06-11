@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DetailComponent } from '../components';
+import { DetailComponent, UpdateComponent } from '../components';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-permissions',
@@ -23,25 +24,35 @@ export class PermissionsComponent {
   ) {
     adminService.permissions().then((result) => {
       this.dataSource = result.data;
+      this.onEditHandler(
+        (result.data[0] as Record<string, string>)?.['id'] ?? ''
+      );
     });
     // this.openDialog();
   }
-  openDialog(id: string) {
+  async openDialog(Component: any, data: unknown) {
+    const dialog = this.dialog.open(Component, {
+      maxWidth: '420px',
+      width: '100%',
+      height: '100%',
+      position: {
+        right: '0px',
+      },
+      data,
+      autoFocus: false,
+    });
+    return lastValueFrom(dialog.afterClosed());
+  }
+  onViewHandler(id: string) {
     console.info(id);
-    this.dialog
-      .open(DetailComponent, {
-        maxWidth: '420px',
-        width: '100%',
-        height: '100%',
-        position: {
-          right: '0px',
-        },
-        data: id,
-        autoFocus: false,
-      })
-      .afterClosed()
-      .subscribe(() => {
-        //
-      });
+    this.openDialog(DetailComponent, id);
+  }
+  onEditHandler(id: string) {
+    console.info(id);
+    this.openDialog(UpdateComponent, id);
+  }
+  onDeleteHandler(id: string) {
+    console.info(id);
+    this.openDialog(UpdateComponent, id);
   }
 }

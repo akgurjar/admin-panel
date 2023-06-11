@@ -21,40 +21,29 @@
   </div>
 </div>
 
-<div class="p-card">
-  <h2 class="title">System User</h2>
-  <div class="chip text--primary">
+<div class="p-card" *ngFor="let access of result.access">
+  <h2 class="title">{{ access.title }}</h2>
+  <div class="chip text--primary" *ngIf="access.isAdd">
     <mat-icon class="material-symbols-outlined">add_box</mat-icon>ADD
   </div>
-  <div class="chip text--primary" style="color: #2ecc71 !important">
+  <div
+    class="chip text--primary"
+    *ngIf="access.isView"
+    style="color: #2ecc71 !important"
+  >
     <mat-icon class="material-symbols-outlined">preview</mat-icon>VIEW
   </div>
-  <div class="chip text--primary" style="color: #34495e !important">
+  <div
+    class="chip text--primary"
+    *ngIf="access.isEdit"
+    style="color: #34495e !important"
+  >
     <mat-icon class="material-symbols-outlined">edit</mat-icon>EDIT
   </div>
-  <div class="chip text--accent">
+  <div class="chip text--accent" *ngIf="access.isStatus">
     <mat-icon class="material-symbols-outlined">block</mat-icon>STATUS
   </div>
-  <div class="chip text--warn">
-    <mat-icon class="material-symbols-outlined">delete</mat-icon>DELETE
-  </div>
-</div>
-
-<div class="p-card">
-  <h2 class="title">Organization User</h2>
-  <div class="chip text--primary">
-    <mat-icon class="material-symbols-outlined">add_box</mat-icon>ADD
-  </div>
-  <div class="chip text--primary" style="color: #2ecc71 !important">
-    <mat-icon class="material-symbols-outlined">preview</mat-icon>VIEW
-  </div>
-  <div class="chip text--primary" style="color: #34495e !important">
-    <mat-icon class="material-symbols-outlined">edit</mat-icon>EDIT
-  </div>
-  <div class="chip text--accent">
-    <mat-icon class="material-symbols-outlined">block</mat-icon>STATUS
-  </div>
-  <div class="chip text--warn">
+  <div class="chip text--warn" *ngIf="access.isDelete">
     <mat-icon class="material-symbols-outlined">delete</mat-icon>DELETE
   </div>
 </div>

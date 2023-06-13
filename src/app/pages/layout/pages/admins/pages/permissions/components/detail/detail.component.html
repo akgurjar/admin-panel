@@ -10,40 +10,33 @@
 </mat-toolbar>
 
 <div class="table">
-  <div class="table-row">
+  <div class="table-row fill-light--primary">
+    <span>Description</span>
+    <span>{{ result.description }}</span>
+  </div>
+
+  <div class="table-row fill-light--primary">
     <span>Created At</span>
     <span>{{ result.createdAt | date : "short" }}</span>
   </div>
 
-  <div class="table-row">
+  <div class="table-row fill-light--primary">
     <span>Updated At</span>
     <span>{{ result.updatedAt | date : "short" }}</span>
   </div>
 </div>
 
-<div class="p-card" *ngFor="let access of result.access">
-  <h2 class="title">{{ access.title }}</h2>
-  <div class="chip text--primary" *ngIf="access.isAdd">
-    <mat-icon class="material-symbols-outlined">add_box</mat-icon>ADD
-  </div>
-  <div
-    class="chip text--primary"
-    *ngIf="access.isView"
-    style="color: #2ecc71 !important"
-  >
-    <mat-icon class="material-symbols-outlined">preview</mat-icon>VIEW
-  </div>
-  <div
-    class="chip text--primary"
-    *ngIf="access.isEdit"
-    style="color: #34495e !important"
-  >
-    <mat-icon class="material-symbols-outlined">edit</mat-icon>EDIT
-  </div>
-  <div class="chip text--accent" *ngIf="access.isStatus">
-    <mat-icon class="material-symbols-outlined">block</mat-icon>STATUS
-  </div>
-  <div class="chip text--warn" *ngIf="access.isDelete">
-    <mat-icon class="material-symbols-outlined">delete</mat-icon>DELETE
+<div class="p-card border-light--primary" *ngFor="let access of result.access">
+  <h2 class="title text--primary fill-light--primary">{{ access.title }}</h2>
+  <div class="p-card__wrapper">
+    <span *ngIf="!access.actions?.length">No Action Allowed</span>
+    <div
+      class="chip"
+      [style.color]="colors[action]"
+      *ngFor="let action of access.actions"
+    >
+      <mat-icon class="material-symbols-outlined">{{ icons[action] }}</mat-icon
+      >{{ action }}
+    </div>
   </div>
 </div>

@@ -24,6 +24,11 @@ export class AdminService {
     console.info(res.result);
     return res.result;
   }
+  async updatePermissionById(changes: object, id: string): Promise<void> {
+    const req = this.$http.patch(`$user/permissions/${id}`, changes);
+    const res = await lastValueFrom(req);
+    console.info(res);
+  }
   async permissionById(id: string): Promise<Permission> {
     const req = this.$http.get<IApi.Response<Permission>>(
       `$user/permissions/${id}`

@@ -36,6 +36,14 @@
         background-color: mat.get-color-from-palette($primary);
     }
 
+    .fill-light--primary {
+        background-color: mat.get-color-from-palette($primary, 50);
+    }
+
+    .border-light--primary {
+        border-color: mat.get-color-from-palette($primary, 50);
+    }
+
     .fill--accent {
         background-color: mat.get-color-from-palette($accent);
     }

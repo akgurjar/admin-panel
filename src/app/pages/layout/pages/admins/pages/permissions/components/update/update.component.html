@@ -9,21 +9,40 @@
   </button>
 </mat-toolbar>
 
-<div class="fields">
+<form class="fields" [formGroup]="form">
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input matInput type="text" placeholder="Enter" [value]="result.title" />
-    <!-- <mat-hint>This is mandatory</mat-hint> -->
+    <input matInput type="text" formControlName="title" placeholder="Enter" />
   </mat-form-field>
-  <mat-form-field *ngFor="let access of result.access">
-    <mat-label>Actions</mat-label>
-    <mat-select multiple [value]="access.actions">
-      <mat-option value="ADD">Add</mat-option>
-      <mat-option value="VIEW">View</mat-option>
-      <mat-option value="EDIT">Edit</mat-option>
-      <mat-option value="STATUS">Status</mat-option>
-      <mat-option value="Delete">Delete</mat-option>
-    </mat-select>
-    <mat-hint>Allowed actions for {{ access.title }}</mat-hint>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Enter"
+    ></textarea>
   </mat-form-field>
-</div>
+  <ng-container formGroupName="access">
+    <mat-form-field *ngFor="let access of result.access">
+      <mat-label>{{ access.title }} Actions</mat-label>
+      <mat-select multiple [formControlName]="access.scope">
+        <mat-option value="ADD">Add</mat-option>
+        <mat-option value="VIEW">View</mat-option>
+        <mat-option value="EDIT">Edit</mat-option>
+        <mat-option value="STATUS">Status</mat-option>
+        <mat-option value="DELETE">Delete</mat-option>
+      </mat-select>
+      <mat-hint>Please select allowed actions</mat-hint>
+    </mat-form-field>
+  </ng-container>
+</form>
+
+<button
+  mat-raised-button
+  class="action"
+  color="primary"
+  [disabled]="form.disabled"
+  (click)="onSaveHandler()"
+>
+  <mat-icon class="material-symbols-outlined">backup</mat-icon>Save Changes
+</button>

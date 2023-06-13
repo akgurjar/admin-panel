@@ -1,7 +1,6 @@
 :host {
   display: block;
   min-height: 100%;
-  background-color: #DDD !important;
 }
 
 mat-toolbar {
@@ -26,6 +25,7 @@ mat-toolbar {
 
 .table {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 16px 12px;
 }
@@ -34,12 +34,16 @@ mat-toolbar {
   display: inline-flex;
   flex-direction: column;
   padding: 12px;
-  width: calc(50% - 2px);
-  height: 72px;
+  width: calc(50% - 8px);
+  min-height: 68px;
   justify-content: space-between;
   box-sizing: border-box;
-  background-color: white;
   border-radius: 6px;
+
+  &:first-child {
+    width: 100%;
+    margin-bottom: 16px;
+  }
 
   span {
     &:first-child {
@@ -53,6 +57,8 @@ mat-toolbar {
   background-color: #FFF;
   overflow: hidden;
   border-radius: 6px;
+  border-width: 2px;
+  border-style: solid;
 
   .title {
     display: flex;
@@ -61,13 +67,20 @@ mat-toolbar {
     padding: 6px 12px;
     margin: 0;
     font-weight: 500;
-    border-bottom: 2px solid #EEE;
+    // border-bottom: 2px solid #EEE;
+  }
+
+  .p-card__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 9px;
   }
 
   .chip {
     display: inline-flex;
     align-items: center;
-    margin: 12px 9px;
+    margin: 6px;
     padding: 4px 11px;
     border-radius: 24px;
     border: 2px solid currentColor;

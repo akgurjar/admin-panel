@@ -1,7 +1,11 @@
 <h2 class="title">Verify OTP</h2>
 <p>Please enter the code from your authenticator app</p>
 <img class="logo" [src]="platformLogo" />
-<app-otp [length]="6" [control]="otpControl"></app-otp>
+<app-otp
+  [length]="6"
+  [control]="otpControl"
+  (fill)="onVerifyHandler()"
+></app-otp>
 
 <div class="actions">
   <a href="#" [routerLink]="loginUrl" mat-stroked-button color="primary">

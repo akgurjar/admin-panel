@@ -45,13 +45,18 @@ export class TokenService {
     return !!this.get();
   }
   async refresh(): Promise<void> {
-    const req = this.$http.get<IApi.Response<any>>(`$auth/sessions/refresh`, {
-      headers: {
-        Authorization: this.header('refreshToken'),
-      },
-    });
-    const res = await lastValueFrom(req);
-    this.setAccessToken(res.result);
+    try {
+      const req = this.$http.get<IApi.Response<any>>(`$auth/sessions/refresh`, {
+        headers: {
+          Authorization: this.header('refreshToken'),
+        },
+      });
+      const res = await lastValueFrom(req);
+      this.setAccessToken(res.result);
+    } catch (err) {
+      this.clear();
+      return Promise.reject(err);
+    }
   }
   clear() {
     localStorage.removeItem(this.#accessKey);

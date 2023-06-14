@@ -6,7 +6,14 @@ import {
   HttpEvent,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { EMPTY, Observable, catchError, from, switchMap } from 'rxjs';
+import {
+  EMPTY,
+  Observable,
+  catchError,
+  from,
+  switchMap,
+  throwError,
+} from 'rxjs';
 
 import { TokenService } from '@token';
 import { PopupService } from '@popup';
@@ -44,11 +51,11 @@ export class InterceptorService implements HttpInterceptor {
                   this.$profile.clear();
                 }
               }
-              return caught;
+              return throwError(() => err);
             }
           }
         }
-        return caught;
+        return throwError(() => err);
       })
     );
   }

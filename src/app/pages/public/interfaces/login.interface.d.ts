@@ -30,5 +30,5 @@ export type AuthResp = IApi.Response<AuthResult>;
 
 export type VerifyResp = IApi.Response<{
   refreshToken: string;
-  accessToken: string;
+  authToken: string;
 }>;

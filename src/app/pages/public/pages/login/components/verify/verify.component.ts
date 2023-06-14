@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LOGIN_ROUTE } from '@app/pages/public/constants';
@@ -37,13 +37,16 @@ export class VerifyComponent implements OnInit {
         (p) => p.value === this.platform
       )?.logo;
     });
-    this.otpControl.valueChanges.subscribe(console.info);
+    // this.otpControl.valueChanges.subscribe(() => {
+    //   setTimeout(() => {
+    //     if (this.otpControl.valid && this.otpControl.enabled) {
+    //       console.info('Hitting Request');
+    //       // this.onVerifyHandler();
+    //     }
+    //   });
+    // });
   }
-  ngOnInit(): void {
-    setTimeout(() => {
-      console.info(this.platform, this.token, this.remember);
-    }, 1000);
-  }
+  ngOnInit(): void {}
   onVerifyHandler() {
     if (this.otpControl.valid && this.otpControl.enabled) {
       const payload: Record<string, string> = {
@@ -55,13 +58,7 @@ export class VerifyComponent implements OnInit {
       this.otpControl.disable();
       this.$publicService
         .verify(payload, this.token, this.remember ?? false)
-        .then(() => {
-          //
-        })
         .catch(() => {
-          //
-        })
-        .finally(() => {
           this.otpControl.enable();
         });
     }

@@ -59,7 +59,7 @@ export class PublicService {
       headers: { Authorization: `Bearer ${token}` },
     });
     const { result } = await firstValueFrom(req);
-    this.$token.set(result.accessToken, result.refreshToken, remember);
+    this.$token.set(result.authToken, result.refreshToken, remember);
     this.$profile.query();
   }
   async forgot(email: string): Promise<boolean> {

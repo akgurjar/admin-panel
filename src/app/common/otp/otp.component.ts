@@ -1,4 +1,12 @@
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +14,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './otp.component.html',
   styleUrls: ['./otp.component.scss'],
 })
-export class OtpComponent {
+export class OtpComponent implements AfterViewInit {
   list: string[] = [];
   @Input()
   set length(val: number) {
@@ -16,6 +24,12 @@ export class OtpComponent {
     }
   }
   @Input() control!: FormControl<string>;
+  @Output() fill: EventEmitter<string> = new EventEmitter();
+  constructor(private elRef: ElementRef) {}
+  ngAfterViewInit(): void {
+    const parent = this.elRef.nativeElement as HTMLElement;
+    this.focus(parent.children.item(0) as HTMLInputElement);
+  }
   onKeyUpHandler(e: KeyboardEvent) {
     const target = e.target as HTMLInputElement;
     // console.info(e);
@@ -54,6 +68,11 @@ export class OtpComponent {
     if (this.control) {
       this.control.setValue(this.getValue(target.parentElement as HTMLElement));
     }
+    setTimeout(() => {
+      if (this.control && this.control?.valid) {
+        this.fill.emit(this.control.value);
+      }
+    });
   }
   onPasteHandler(e: ClipboardEvent) {
     const data = e.clipboardData?.getData('text/plain');
@@ -85,5 +104,15 @@ export class OtpComponent {
   focus(el: HTMLInputElement) {
     el.setSelectionRange(-1, -1);
     setTimeout(() => el.focus());
+  }
+  onBlurHandler(event: FocusEvent) {
+    setTimeout(() => {
+      const target = event.target as HTMLInputElement;
+      const parent = target.parentElement;
+      const active = document.activeElement;
+      if (!active || !parent?.isSameNode(active.parentElement)) {
+        this.focus(target);
+      }
+    });
   }
 }

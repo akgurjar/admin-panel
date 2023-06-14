@@ -8,9 +8,14 @@ export class AdminService {
   constructor(private $http: HttpClient) {}
   async accounts() {
     const req = this.$http.get<IApi.List>('$user/admins');
-    const res = await lastValueFrom(req);
-    console.info(res.result);
-    return res.result;
+    req.subscribe((res) => {
+      console.info(res);
+    });
+    // const res = await lastValueFrom(req);
+    // console.info(res.result);
+    return {
+      data: [],
+    };
   }
   async roles() {
     const req = this.$http.get<IApi.List>('$user/roles');

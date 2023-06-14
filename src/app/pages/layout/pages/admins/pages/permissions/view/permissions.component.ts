@@ -1,7 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { AdminService } from '../../../services/admin.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DetailComponent, UpdateComponent } from '../components';
+import {
+  CreateComponent,
+  DetailComponent,
+  UpdateComponent,
+} from '../components';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -24,13 +28,11 @@ export class PermissionsComponent {
   ) {
     adminService.permissions().then((result) => {
       this.dataSource = result.data;
-      this.onEditHandler(
-        (result.data[0] as Record<string, string>)?.['id'] ?? ''
-      );
+      this.onCreateHandler();
     });
     // this.openDialog();
   }
-  async openDialog(Component: any, data: unknown) {
+  async openDialog(Component: any, data?: unknown) {
     const dialog = this.dialog.open(Component, {
       maxWidth: '420px',
       width: '100%',
@@ -43,16 +45,16 @@ export class PermissionsComponent {
     });
     return lastValueFrom(dialog.afterClosed());
   }
+  onCreateHandler() {
+    this.openDialog(CreateComponent);
+  }
   onViewHandler(id: string) {
-    console.info(id);
     this.openDialog(DetailComponent, id);
   }
   onEditHandler(id: string) {
-    console.info(id);
     this.openDialog(UpdateComponent, id);
   }
   onDeleteHandler(id: string) {
-    console.info(id);
     this.openDialog(UpdateComponent, id);
   }
 }

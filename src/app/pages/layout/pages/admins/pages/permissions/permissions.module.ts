@@ -10,9 +10,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { CreateComponent } from './components/create/create.component';
 
 @NgModule({
-  declarations: [PermissionsComponent, DetailComponent, UpdateComponent],
+  declarations: [PermissionsComponent, DetailComponent, UpdateComponent, CreateComponent],
   imports: [
     CommonModule,
     PermissionsRoutingModule,

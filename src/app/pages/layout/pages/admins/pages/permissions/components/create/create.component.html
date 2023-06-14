@@ -1,0 +1,49 @@
+<mat-toolbar color="primary" class="mat-elevation-z1">
+  <span>Create Permission</span>
+  <div style="flex: 1"></div>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon class="material-symbols-outlined">close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form class="fields" [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Unique ID</mat-label>
+    <input matInput type="text" formControlName="id" placeholder="Enter" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput type="text" formControlName="title" placeholder="Enter" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Enter"
+    ></textarea>
+  </mat-form-field>
+  <ng-container formGroupName="access">
+    <mat-form-field *ngFor="let user of userTypes">
+      <mat-label>{{ user[0] }} Actions</mat-label>
+      <mat-select multiple [formControlName]="user[1]">
+        <mat-option value="ADD">Add</mat-option>
+        <mat-option value="VIEW">View</mat-option>
+        <mat-option value="EDIT">Edit</mat-option>
+        <mat-option value="STATUS">Status</mat-option>
+        <mat-option value="DELETE">Delete</mat-option>
+      </mat-select>
+      <mat-hint>Please select allowed actions</mat-hint>
+    </mat-form-field>
+  </ng-container>
+</form>
+
+<button
+  mat-raised-button
+  class="action"
+  color="primary"
+  [disabled]="form.disabled"
+  (click)="onSaveHandler()"
+>
+  <mat-icon class="material-symbols-outlined">add_box</mat-icon>Create
+</button>
